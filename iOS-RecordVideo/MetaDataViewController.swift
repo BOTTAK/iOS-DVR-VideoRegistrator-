@@ -1,20 +1,21 @@
 //
-//  ViewController.swift
+//  MetaDataViewController.swift
 //  iOS-RecordVideo
 //
-//  Created by BOTTAK on 6/19/19.
+//  Created by BOTTAK on 6/20/19.
 //  Copyright © 2019 BOTTAK. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class MetaDataViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
+    
 
 
 }
-

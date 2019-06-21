@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Record Video View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="RecordVideoViewController" customModule="iOS_RecordVideo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVl-pd-fwl">
+                                <rect key="frame" x="107" y="329" width="200" height="48"/>
+                                <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Record video">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="recordVideoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wqc-dv-nI2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jq8-Qb-eVa">
+                                <rect key="frame" x="107" y="432" width="200" height="48"/>
+                                <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Play video">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="playVideoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Ix-zA-AHU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rVl-pd-fwl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="107" id="665-vV-9hN"/>
+                            <constraint firstItem="Jq8-Qb-eVa" firstAttribute="top" secondItem="rVl-pd-fwl" secondAttribute="bottom" constant="55" id="Ayx-sl-TuT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rVl-pd-fwl" secondAttribute="trailing" constant="107" id="F8I-W5-jyJ"/>
+                            <constraint firstItem="Jq8-Qb-eVa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="107" id="Fhs-hg-s2T"/>
+                            <constraint firstItem="rVl-pd-fwl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="285" id="KoC-YK-4eW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jq8-Qb-eVa" secondAttribute="trailing" constant="107" id="ejQ-iA-vUk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="recordVideoButtonDidTap" destination="rVl-pd-fwl" id="oUr-kP-Q0y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="96" y="21"/>
+        </scene>
+        <!--Camera Frame View Controller-->
+        <scene sceneID="dCG-Wg-eRG">
+            <objects>
+                <viewController id="sQt-XW-QlR" customClass="CameraFrameViewController" customModule="iOS_RecordVideo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TCg-P2-fW6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vd7-9v-JbM">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vd7-9v-JbM" firstAttribute="leading" secondItem="3Jx-86-7LL" secondAttribute="leading" id="Ajz-Sr-cz6"/>
+                            <constraint firstItem="vd7-9v-JbM" firstAttribute="top" secondItem="3Jx-86-7LL" secondAttribute="top" id="iXQ-jf-U99"/>
+                            <constraint firstItem="3Jx-86-7LL" firstAttribute="trailing" secondItem="vd7-9v-JbM" secondAttribute="trailing" id="onM-UW-v8n"/>
+                            <constraint firstItem="3Jx-86-7LL" firstAttribute="bottom" secondItem="vd7-9v-JbM" secondAttribute="bottom" id="t7B-ZQ-YKw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3Jx-86-7LL"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J76-R5-FBq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1078" y="21"/>
+        </scene>
+    </scenes>
+</document>
