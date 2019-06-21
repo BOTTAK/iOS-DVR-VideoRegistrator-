@@ -10,6 +10,9 @@ import UIKit
 
 class MetaDataViewController: UIViewController {
 
+    let staticvar : String = "" 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
