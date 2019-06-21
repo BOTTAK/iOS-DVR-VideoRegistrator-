@@ -17,6 +17,7 @@
 		FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F222BA802E004AE55D /* Main.storyboard */; };
 		FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F522BA802F004AE55D /* Assets.xcassets */; };
 		FAD0A8F922BA802F004AE55D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
+		FAD29DFC22BD0F09000573CA /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD29DFB22BD0F09000573CA /* FileManager.swift */; };
 		FAF9A4F422BC07C200FF8D88 /* CameraFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9A4F322BC07C200FF8D88 /* CameraFrameViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		FAD0A8F522BA802F004AE55D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAD0A8F822BA802F004AE55D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAD0A8FA22BA802F004AE55D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAD29DFB22BD0F09000573CA /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		FAF9A4F322BC07C200FF8D88 /* CameraFrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFrameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,7 +58,6 @@
 				0E9B97B6A41461205D579242 /* Pods-iOS-RecordVideo.debug.xcconfig */,
 				217CDFF7A60164ED25B37DF8 /* Pods-iOS-RecordVideo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -91,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				FA32309A22BC119F00725FCA /* ApiManager.swift */,
+				FAD29DFB22BD0F09000573CA /* FileManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -285,6 +287,7 @@
 				FAD0A8EF22BA802E004AE55D /* AppDelegate.swift in Sources */,
 				FA32309F22BC120900725FCA /* UIView+CoreKit.swift in Sources */,
 				FA32309322BC0F4C00725FCA /* MetaDataViewController.swift in Sources */,
+				FAD29DFC22BD0F09000573CA /* FileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
