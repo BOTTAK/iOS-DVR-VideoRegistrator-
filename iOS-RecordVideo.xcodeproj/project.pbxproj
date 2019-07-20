@@ -12,6 +12,13 @@
 		FA32309B22BC119F00725FCA /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32309A22BC119F00725FCA /* ApiManager.swift */; };
 		FA32309D22BC11C700725FCA /* UIViewController+CoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */; };
 		FA32309F22BC120900725FCA /* UIView+CoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32309E22BC120900725FCA /* UIView+CoreKit.swift */; };
+		FA62FCD322BD1F8400F5D4EB /* FileManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */; };
+		FA8E8DC822DDD056001B780D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DC722DDD056001B780D /* CameraViewController.swift */; };
+		FA8E8DCA22DDD080001B780D /* MovieConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DC922DDD080001B780D /* MovieConverter.swift */; };
+		FA8E8DCC22DDE12E001B780D /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCB22DDE12E001B780D /* CameraModel.swift */; };
+		FA8E8DCE22DDF3FA001B780D /* CVPixelBuffer+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */; };
+		FA8E8DD022DDF72C001B780D /* PhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */; };
+		FAAD8D4822C336C0007A47BA /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAD8D4722C336C0007A47BA /* VideoManager.swift */; };
 		FAD0A8EF22BA802E004AE55D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0A8EE22BA802E004AE55D /* AppDelegate.swift */; };
 		FAD0A8F122BA802E004AE55D /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */; };
 		FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F222BA802E004AE55D /* Main.storyboard */; };
@@ -29,6 +36,13 @@
 		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
 		FA32309E22BC120900725FCA /* UIView+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CoreKit.swift"; sourceTree = "<group>"; };
+		FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerViewController.swift; sourceTree = "<group>"; };
+		FA8E8DC722DDD056001B780D /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		FA8E8DC922DDD080001B780D /* MovieConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieConverter.swift; sourceTree = "<group>"; };
+		FA8E8DCB22DDE12E001B780D /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Copy.swift"; sourceTree = "<group>"; };
+		FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbum.swift; sourceTree = "<group>"; };
+		FAAD8D4722C336C0007A47BA /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		FAD0A8EB22BA802E004AE55D /* iOS-RecordVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-RecordVideo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD0A8EE22BA802E004AE55D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +89,8 @@
 				FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */,
 				FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */,
 				FAF9A4F322BC07C200FF8D88 /* CameraFrameViewController.swift */,
+				FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */,
+				FA8E8DC722DDD056001B780D /* CameraViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -93,6 +109,10 @@
 			children = (
 				FA32309A22BC119F00725FCA /* ApiManager.swift */,
 				FAD29DFB22BD0F09000573CA /* FileManager.swift */,
+				FAAD8D4722C336C0007A47BA /* VideoManager.swift */,
+				FA8E8DC922DDD080001B780D /* MovieConverter.swift */,
+				FA8E8DCB22DDE12E001B780D /* CameraModel.swift */,
+				FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -117,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */,
+				FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -165,7 +186,7 @@
 				FAD0A8E722BA802E004AE55D /* Sources */,
 				FAD0A8E822BA802E004AE55D /* Frameworks */,
 				FAD0A8E922BA802E004AE55D /* Resources */,
-				5F02DBE7187F3BC4A32439B7 /* [CP] Embed Pods Frameworks */,
+				FBA8D1973CBE49A7C036E95E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -223,34 +244,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5F02DBE7187F3BC4A32439B7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AB4C085D46DA24002F4CF323 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -273,6 +266,38 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FBA8D1973CBE49A7C036E95E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/LFLiveKit/LFLiveKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftVideoGenerator/SwiftVideoGenerator.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLiveKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftVideoGenerator.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -280,14 +305,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA8E8DCC22DDE12E001B780D /* CameraModel.swift in Sources */,
+				FA8E8DC822DDD056001B780D /* CameraViewController.swift in Sources */,
 				FAD0A8F122BA802E004AE55D /* RecordVideoViewController.swift in Sources */,
 				FAF9A4F422BC07C200FF8D88 /* CameraFrameViewController.swift in Sources */,
 				FA32309D22BC11C700725FCA /* UIViewController+CoreKit.swift in Sources */,
+				FA62FCD322BD1F8400F5D4EB /* FileManagerViewController.swift in Sources */,
 				FA32309B22BC119F00725FCA /* ApiManager.swift in Sources */,
 				FAD0A8EF22BA802E004AE55D /* AppDelegate.swift in Sources */,
 				FA32309F22BC120900725FCA /* UIView+CoreKit.swift in Sources */,
+				FAAD8D4822C336C0007A47BA /* VideoManager.swift in Sources */,
 				FA32309322BC0F4C00725FCA /* MetaDataViewController.swift in Sources */,
+				FA8E8DD022DDF72C001B780D /* PhotoAlbum.swift in Sources */,
 				FAD29DFC22BD0F09000573CA /* FileManager.swift in Sources */,
+				FA8E8DCE22DDF3FA001B780D /* CVPixelBuffer+Copy.swift in Sources */,
+				FA8E8DCA22DDD080001B780D /* MovieConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,7 +473,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo";
+				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -460,7 +492,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo";
+				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -8,10 +8,15 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
-class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class CameraFrameViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
+    
+    
+    //MARK: - Outlets
     @IBOutlet weak var cameraPreview: UIView!
+//    @IBOutlet weak var frameImageView: UIImageView!
     
     
     var videoDataOutput: AVCaptureVideoDataOutput!
@@ -20,14 +25,33 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var captureDevice : AVCaptureDevice!
     let session = AVCaptureSession()
     let context = CIContext()
+    var imageArray: [UIImage] = []
+    var imageArray20: [[UIImage]] = [[]]
+    var finalImageArray: [[UIImage]] = [[]]
+
     
     
+    
+    //MARK: - Lifecylce
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        FileManagerCreateAndSave.instance.createDirectory()
         
-        view.addSubview(cameraPreview)
-        self.setUpAVCapture()
+
+        // Do any additional setup after loading the view, typically from a nib.
+        if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == .notDetermined {
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) in
+                if granted {
+                    print("granted")
+                    self.setUpAVCapture()
+                }
+                else {
+                    print("not granted")
+                }
+            })
+        } else {
+            self.setUpAVCapture()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -38,12 +62,81 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     // To add the layer of your preview
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.previewLayer.frame = self.cameraPreview.layer.bounds
+        self.previewLayer?.frame = self.cameraPreview.layer.bounds
     }
+    
+    //MARK: - Actions
+    @IBAction func swipeHandle(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .right {
+            func captureOutputRight(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+                // do stuff here
+                print("Got a frame")
+                DispatchQueue.global(qos: .background).async { [unowned self] in
+                    guard let uiImage = self.imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return  }
+                    if self.imageArray.count < 125 {
+                        self.imageArray.append(uiImage)
+
+                    } else {
+                        FileManagerCreateAndSave.instance.removeFromTempFolder()
+                        for image in self.imageArray {
+                            FileManagerCreateAndSave.instance.saveImageToDirectory(image)
+                        }
+                        VideoManager.instance.buildVideoFromImageArray(self.imageArray)
+                        self.imageArray.removeAll()
+                    }
+                }
+                
+            }
+        } else if sender.direction == .left {
+            func captureOutputLeft(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+                // do stuff here
+                print("Got a frame")
+                DispatchQueue.main.async (qos: .background) { [unowned self] in
+                    guard let uiImage = self.imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return  }
+                    if self.imageArray.count < 125 {
+                        self.imageArray.append(uiImage)
+
+                    } else {
+                       FileManagerCreateAndSave.instance.removeFromTempFolder()
+                        for image in self.imageArray {
+                           FileManagerCreateAndSave.instance.saveImageToDirectory(image)
+                        }
+                        self.imageArray.removeAll()
+                    }
+
+                }
+                
+            }
+            
+        } else if sender.direction == .up{
+           
+        } else if sender.direction == .down{
+            func captureOutputDown(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+                // do stuff here
+                print("Got a frame")
+                DispatchQueue.main.async { [unowned self] in
+                    guard let uiImage = self.imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return  }
+                    if self.imageArray.count < 125 {
+                        self.imageArray.append(uiImage)
+
+                    } else {
+                       FileManagerCreateAndSave.instance.removeFromTempFolder()
+                        for image in self.imageArray {
+                           FileManagerCreateAndSave.instance.saveImageToDirectory(image)
+                        }
+                        self.imageArray.removeAll()
+                    }
+ 
+                }
+                
+            }
+        }
+    }
+    
     
     // To set the camera and its position to capture
     func setUpAVCapture() {
-        session.sessionPreset = AVCaptureSession.Preset.vga640x480
+        session.sessionPreset = AVCaptureSession.Preset.hd1280x720
         guard let device = AVCaptureDevice
             .default(AVCaptureDevice.DeviceType.builtInWideAngleCamera,
                      for: .video,
@@ -98,13 +191,38 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         // do stuff here
         print("Got a frame")
-        DispatchQueue.main.async { [unowned self] in
-            guard let uiImage = self.imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
+        DispatchQueue.main.async(qos: .default ) { [unowned self] in
+
+            guard let uiImage = self.imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return  }
+            if self.imageArray.count < 125 {
+                self.imageArray.append(uiImage)
+                
+            } else {
+                for image in self.imageArray {
+                }
+                self.imageArray.removeAll()
+            }
             
+//
+//            while self.imageArray20.count < 4 {
+//                if self.imageArray.count < 125 {
+//                    self.imageArray.append(uiImage)
+//
+//                } else if self.imageArray.count == 125 {
+//                    FileManagerCreateAndSave.instance.removeFromTempFolder()
+//                    for image in self.imageArray {
+//                       FileManagerCreateAndSave.instance.saveImageToDirectory(image)
+//                    }
+//                    self.imageArray.removeAll()
+//                }
+//            }
             
         }
         
     }
+    
+    
+    
     
     // Function to process the buffer and return UIImage to be used
     func imageFromSampleBuffer(sampleBuffer : CMSampleBuffer) -> UIImage? {
@@ -117,6 +235,13 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
         
         return UIImage(cgImage: cgImage)
+    }
+    
+    @IBAction func openDirectory(_ sender: Any) {
+  
+            
+//        NSIG.shared.selectFile(nil, inFileViewerRootedAtPath: "/temp/")
+        
     }
     
     // To stop the session
