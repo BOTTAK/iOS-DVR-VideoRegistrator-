@@ -10,12 +10,33 @@ import UIKit
 
 class SwipeNotificationLabel: UILabel {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        sharedInit()
     }
-    */
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        sharedInit()
+    }
+    
+    private func sharedInit() {
+        textAlignment = .center
+        textColor = .white
+        alpha = 0.0
+    }
+    
+    open func changeTextAndAnimate(text: String) {
+        self.text = text
+        showAndHideLabel()
+    }
+    
+    open func showAndHideLabel() {
+        UIView.animate(withDuration: 0.8, delay: 0, options: .allowUserInteraction, animations: {
+            self.alpha = 1.0
+            self.alpha = 0.0
+        }, completion: nil)
+    }
 }
