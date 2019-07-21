@@ -11,7 +11,7 @@ import MobileCoreServices
 
 class MainViewController: UIViewController {
     
-    var imagePicker: UIImagePickerController!
+    var imagePicker: CustomPickerViewController!
     var timer: Timer?
 
     override func viewDidAppear(_ animated: Bool) {
@@ -31,8 +31,9 @@ class MainViewController: UIViewController {
     }
     
     private func setupImagePicker() {
-        imagePicker = UIImagePickerController()
+        imagePicker = CustomPickerViewController()
         imagePicker.delegate = self
+        imagePicker.swipeDelegate = self
         imagePicker.sourceType = .camera
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
@@ -54,8 +55,23 @@ class MainViewController: UIViewController {
 
     @objc func timerRepeat() {
         imagePicker.stopVideoCapture()
-        print("timer cycle")
     }
+}
+
+extension MainViewController: CustomPickerControllerDelegate {
+    func userDidSwapLeft() {
+        
+    }
+    
+    func userDidSwapRight() {
+        
+    }
+    
+    func userDidSwapDown() {
+        
+    }
+    
+    
 }
 
 extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
