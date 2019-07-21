@@ -14,7 +14,6 @@ class MainViewController: UIViewController {
     var imagePicker: CustomPickerViewController!
     var timer: Timer?
     let buffer = Buffer()
-//    var SecondsOfVideo = 16
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
