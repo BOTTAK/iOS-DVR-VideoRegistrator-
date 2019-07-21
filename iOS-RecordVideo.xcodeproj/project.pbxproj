@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,8 @@
 		7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */; };
 		7E16F5F722E388F1008B158C /* UIViewController+CoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */; };
 		7E16F5F822E388F1008B158C /* CVPixelBuffer+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */; };
+		7E16F5FC22E4521C008B158C /* CustomPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */; };
+		7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */; };
 		FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F222BA802E004AE55D /* Main.storyboard */; };
 		FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F522BA802F004AE55D /* Assets.xcassets */; };
 		FAD0A8F922BA802F004AE55D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
@@ -30,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		7E16F5E122E38762008B158C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerViewController.swift; sourceTree = "<group>"; };
+		7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNotificationLabel.swift; sourceTree = "<group>"; };
 		FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataViewController.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				7E16F5E122E38762008B158C /* MainViewController.swift */,
+				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
+				7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */,
 				FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */,
 				FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */,
 				FAF9A4F322BC07C200FF8D88 /* CameraFrameViewController.swift */,
@@ -241,6 +247,7 @@
 				7E16F5EA22E388F1008B158C /* CameraViewController.swift in Sources */,
 				7E16F5EC22E388F1008B158C /* MainViewController.swift in Sources */,
 				7E16F5EE22E388F1008B158C /* UIView+CoreKit.swift in Sources */,
+				7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */,
 				7E16F5EF22E388F1008B158C /* ApiManager.swift in Sources */,
 				7E16F5F022E388F1008B158C /* FileManager.swift in Sources */,
 				7E16F5F122E388F1008B158C /* VideoManager.swift in Sources */,
@@ -248,6 +255,7 @@
 				7E16F5F322E388F1008B158C /* CameraModel.swift in Sources */,
 				7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */,
 				7E16F5F722E388F1008B158C /* UIViewController+CoreKit.swift in Sources */,
+				7E16F5FC22E4521C008B158C /* CustomPickerViewController.swift in Sources */,
 				7E16F5F822E388F1008B158C /* CVPixelBuffer+Copy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
