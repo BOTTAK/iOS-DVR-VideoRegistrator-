@@ -15,12 +15,14 @@ import PhotosUI
 import ImageIO
 import CoreMotion
 import CoreImage
+import AVFoundation
 
 
 class FileManagerCreateAndSave: CameraFrameViewController {
 
     
 
+    var movieOutput: AVCaptureMovieFileOutput?
     static var instance = FileManagerCreateAndSave()
     
     func createDirectory() {
@@ -95,7 +97,7 @@ class FileManagerCreateAndSave: CameraFrameViewController {
     
     //MARK: - Private
     
-    fileprivate func findAlbum(name: String) -> PHAssetCollection? {
+    func findAlbum(name: String) -> PHAssetCollection? {
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "title = %@", name)
         let fetchResult : PHFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
@@ -106,7 +108,6 @@ class FileManagerCreateAndSave: CameraFrameViewController {
     }
     
     
-
     
     
 }
