@@ -12,14 +12,15 @@ class Buffer {
     
     public let size = 1.0
     private var videoPartsArray: [NSData] = []
-    let dateFormatter = DateFormatter()
-    var imageName: String {
+    private let dateFormatter = DateFormatter()
+    private var imageName: String {
         let date = Date()
+        dateFormatter.dateFormat = "H:m:ss.SSSS"
         return dateFormatter.string(from: date)
     }
     
     open func addVideoFragment(_ fragment: NSData) {
-        if videoPartsArray.count < 16 {
+        if videoPartsArray.count < 120 {
             videoPartsArray.append(fragment)
             saveFragment()
         } else {
