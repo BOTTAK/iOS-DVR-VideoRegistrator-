@@ -25,6 +25,7 @@
 		7E16F5F822E388F1008B158C /* CVPixelBuffer+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */; };
 		7E16F5FC22E4521C008B158C /* CustomPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */; };
 		7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */; };
+		7E87045622E460460055ECE4 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E87045522E460460055ECE4 /* Buffer.swift */; };
 		FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F222BA802E004AE55D /* Main.storyboard */; };
 		FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F522BA802F004AE55D /* Assets.xcassets */; };
 		FAD0A8F922BA802F004AE55D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
@@ -34,6 +35,7 @@
 		7E16F5E122E38762008B158C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerViewController.swift; sourceTree = "<group>"; };
 		7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNotificationLabel.swift; sourceTree = "<group>"; };
+		7E87045522E460460055ECE4 /* Buffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataViewController.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				7E16F5E122E38762008B158C /* MainViewController.swift */,
+				7E87045522E460460055ECE4 /* Buffer.swift */,
 				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
 				7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */,
 				FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */,
@@ -243,6 +246,7 @@
 				7E16F5E622E388F1008B158C /* MetaDataViewController.swift in Sources */,
 				7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */,
 				7E16F5E822E388F1008B158C /* CameraFrameViewController.swift in Sources */,
+				7E87045622E460460055ECE4 /* Buffer.swift in Sources */,
 				7E16F5E922E388F1008B158C /* FileManagerViewController.swift in Sources */,
 				7E16F5EA22E388F1008B158C /* CameraViewController.swift in Sources */,
 				7E16F5EC22E388F1008B158C /* MainViewController.swift in Sources */,

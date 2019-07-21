@@ -32,9 +32,8 @@ class CustomPickerViewController: UIImagePickerController {
         gesture.direction = .down
         return gesture
     }
-    
+
     var notificationLabel = SwipeNotificationLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    
     weak var swipeDelegate: CustomPickerControllerDelegate?
 
     override func viewDidLoad() {
