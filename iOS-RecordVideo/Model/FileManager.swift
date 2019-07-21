@@ -107,6 +107,17 @@ class FileManagerCreateAndSave: CameraFrameViewController {
         return photoAlbum
     }
     
+    func selectedVideoInLibrary() {
+        
+        let imagePickerController = UIImagePickerController()
+        var videoURL: NSURL?
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePickerController.mediaTypes = ["public.image", "public.movie"]
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
     
     
     
