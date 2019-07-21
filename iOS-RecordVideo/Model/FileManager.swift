@@ -10,9 +10,16 @@ import Foundation
 import UIKit
 import MobileCoreServices
 import CoreLocation
+import Photos
+import PhotosUI
+import ImageIO
+import CoreMotion
+import CoreImage
 
 
 class FileManagerCreateAndSave: CameraFrameViewController {
+
+    
 
     static var instance = FileManagerCreateAndSave()
     
@@ -85,4 +92,21 @@ class FileManagerCreateAndSave: CameraFrameViewController {
             print("Could not clear temp folder: \(error)")
         }
     }
+    
+    //MARK: - Private
+    
+    fileprivate func findAlbum(name: String) -> PHAssetCollection? {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", name)
+        let fetchResult : PHFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        guard let photoAlbum = fetchResult.firstObject else {
+            return nil
+        }
+        return photoAlbum
+    }
+    
+    
+
+    
+    
 }
