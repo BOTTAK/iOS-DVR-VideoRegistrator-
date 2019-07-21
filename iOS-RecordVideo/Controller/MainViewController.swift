@@ -13,6 +13,8 @@ class MainViewController: UIViewController {
     
     var imagePicker: CustomPickerViewController!
     var timer: Timer?
+    let buffer = Buffer()
+//    var SecondsOfVideo = 16
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -38,7 +40,6 @@ class MainViewController: UIViewController {
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
         imagePicker.mediaTypes = [kUTTypeMovie as String]
-        imagePicker.videoMaximumDuration = TimeInterval(5.0)
         present(imagePicker, animated: false) {
             self.startRecording()
         }
@@ -50,7 +51,7 @@ class MainViewController: UIViewController {
     }
     
     private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(timerRepeat), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: buffer.size, target: self, selector: #selector(timerRepeat), userInfo: nil, repeats: true)
     }
 
     @objc func timerRepeat() {
@@ -70,25 +71,27 @@ extension MainViewController: CustomPickerControllerDelegate {
     func userDidSwapDown() {
         
     }
-    
-    
 }
 
 extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        guard let mediaType = info[.mediaType] as? String,
-            mediaType == (kUTTypeMovie as String),
-            let url = info[.mediaURL] as? URL,
-            UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path)
-            else { return }
-        
-        // Handle a movie capture
-        UISaveVideoAtPathToSavedPhotosAlbum(url.path,
-                                            self,
-                                            #selector(video(_:didFinishSavingWithError:contextInfo:)),
-                                            nil)
+//        guard let mediaType = info[.mediaType] as? String,
+//            mediaType == (kUTTypeMovie as String),
+//            let url = info[.mediaURL] as? URL,
+//            UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path)
+//            else { return }
+//
+//        // Handle a movie capture
+//        UISaveVideoAtPathToSavedPhotosAlbum(url.path,
+//                                            self,
+//                                            #selector(video(_:didFinishSavingWithError:contextInfo:)),
+//                                            nil)
+        imagePicker.startVideoCapture()
+        let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as! NSURL
+        let videoData = NSData(contentsOf: videoURL as URL)
+        buffer.addVideoFragment(videoData!)
     }
     
     @objc func video(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
@@ -103,5 +106,4 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         imagePicker.present(alert, animated: true, completion: nil)
     }
-    
 }
