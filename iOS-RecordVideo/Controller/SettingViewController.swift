@@ -95,10 +95,20 @@ class SettingViewController: UIViewController {
     }
     @IBAction func microphoneSegmented(_ sender: UISegmentedControl) {
         if microphoneSegment.selectedSegmentIndex == 0 {
-            
+            settingMicrophone = CustomPickerViewController()
+            settingMicrophone.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            settingMicrophone.sourceType = .camera
+            settingMicrophone.cameraFlashMode = .off
+            settingMicrophone.showsCameraControls = false
+            settingMicrophone.mediaTypes = [kUTTypeMovie as String]
         } else {
             if microphoneSegment.selectedSegmentIndex == 1 {
-                
+                settingMicrophone = CustomPickerViewController()
+                settingMicrophone.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+                settingMicrophone.sourceType = .camera
+                settingMicrophone.cameraFlashMode = .off
+                settingMicrophone.showsCameraControls = false
+                settingMicrophone.mediaTypes = [kUTTypeVideo as String]
             }
         }
         
