@@ -10,8 +10,9 @@ import UIKit
 
 class Buffer {
     
-    public let size = 1.0
+    public let size = 5.0
     private var videoPartsArray: [NSData] = []
+    private var videoURLArray: [URL] = []
     private let dateFormatter = DateFormatter()
     private var imageName: String {
         let date = Date()
@@ -19,29 +20,19 @@ class Buffer {
         return dateFormatter.string(from: date)
     }
     
-    open func addVideoFragment(_ fragment: NSData) {
-        if videoPartsArray.count < 120 {
-            videoPartsArray.append(fragment)
-            saveFragment()
+    open func saveURLToArray(_ URL: URL) {
+        if videoURLArray.count < 10 {
+            videoURLArray.append(URL)
         } else {
-            videoPartsArray.removeFirst()
-            videoPartsArray.append(fragment)
-            saveFragment()
+            videoURLArray.removeFirst()
+            videoURLArray.append(URL)
         }
+        print("saved")
     }
     
-    private func saveFragment() {
-        let path = try! FileManager.default.url(for: FileManager.SearchPathDirectory.documentDirectory,
-                                                in: FileManager.SearchPathDomainMask.userDomainMask,
-                                                appropriateFor: nil,
-                                                create: false)
-        let newPath = path.appendingPathComponent("/\(imageName).mp4")
-        do {
-            try videoPartsArray.last?.write(to: newPath)
-            print("saved \(newPath)")
-        } catch {
-            print("error saving \(error.localizedDescription)")
-        }
+    open func returnArrayElements(numberOfElements: Int) -> [URL] {
+        print("returned \(videoURLArray.suffix(numberOfElements))")
+        return videoURLArray.suffix(numberOfElements)
+        
     }
-    
 }
