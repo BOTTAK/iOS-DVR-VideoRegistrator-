@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,7 @@
 		7E16F5F822E388F1008B158C /* CVPixelBuffer+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */; };
 		7E16F5FC22E4521C008B158C /* CustomPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */; };
 		7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */; };
+		7E4DA9EA22E6379100D6AB50 /* VideoMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4DA9E922E6379100D6AB50 /* VideoMerger.swift */; };
 		7E87045622E460460055ECE4 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E87045522E460460055ECE4 /* Buffer.swift */; };
 		FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F222BA802E004AE55D /* Main.storyboard */; };
 		FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F522BA802F004AE55D /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		7E16F5E122E38762008B158C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerViewController.swift; sourceTree = "<group>"; };
 		7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNotificationLabel.swift; sourceTree = "<group>"; };
+		7E4DA9E922E6379100D6AB50 /* VideoMerger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMerger.swift; sourceTree = "<group>"; };
 		7E87045522E460460055ECE4 /* Buffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataViewController.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
@@ -80,8 +82,9 @@
 			isa = PBXGroup;
 			children = (
 				7E16F5E122E38762008B158C /* MainViewController.swift */,
-				7E87045522E460460055ECE4 /* Buffer.swift */,
 				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
+				7E87045522E460460055ECE4 /* Buffer.swift */,
+				7E4DA9E922E6379100D6AB50 /* VideoMerger.swift */,
 				7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */,
 				FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */,
 				FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */,
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E16F5E522E388F1008B158C /* AppDelegate.swift in Sources */,
+				7E4DA9EA22E6379100D6AB50 /* VideoMerger.swift in Sources */,
 				7E16F5E622E388F1008B158C /* MetaDataViewController.swift in Sources */,
 				7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */,
 				7E16F5E822E388F1008B158C /* CameraFrameViewController.swift in Sources */,
