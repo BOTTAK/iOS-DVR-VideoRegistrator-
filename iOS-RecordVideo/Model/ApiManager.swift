@@ -9,4 +9,22 @@
 import Foundation
 //import Alamofire
 
-
+class ApiManager {
+    
+    static var instance = ApiManager()
+    
+    private enum Constants {
+        static let baseURL = ""
+        
+    }
+    
+    private enum EndPoints {
+        static let uploads = ""
+    }
+    
+    func uploadVideoToServer(onComplete: @escaping ([MainViewController]) -> Void) {
+        
+    }
+    
+    
+}
