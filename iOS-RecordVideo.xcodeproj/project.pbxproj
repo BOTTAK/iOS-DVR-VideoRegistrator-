@@ -27,6 +27,8 @@
 		7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */; };
 		7E4DA9EA22E6379100D6AB50 /* VideoMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4DA9E922E6379100D6AB50 /* VideoMerger.swift */; };
 		7E87045622E460460055ECE4 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E87045522E460460055ECE4 /* Buffer.swift */; };
+		FACC768922E5B88E00AC7ED5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768822E5B88E00AC7ED5 /* SettingViewController.swift */; };
+		FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */; };
 		FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F222BA802E004AE55D /* Main.storyboard */; };
 		FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F522BA802F004AE55D /* Assets.xcassets */; };
 		FAD0A8F922BA802F004AE55D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
@@ -49,6 +51,8 @@
 		FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Copy.swift"; sourceTree = "<group>"; };
 		FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbum.swift; sourceTree = "<group>"; };
 		FAAD8D4722C336C0007A47BA /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
+		FACC768822E5B88E00AC7ED5 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FAD0A8EB22BA802E004AE55D /* iOS-RecordVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-RecordVideo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD0A8EE22BA802E004AE55D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 				FAF9A4F322BC07C200FF8D88 /* CameraFrameViewController.swift */,
 				FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */,
 				FA8E8DC722DDD056001B780D /* CameraViewController.swift */,
+				FACC768822E5B88E00AC7ED5 /* SettingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -104,6 +109,7 @@
 				FA8E8DC922DDD080001B780D /* MovieConverter.swift */,
 				FA8E8DCB22DDE12E001B780D /* CameraModel.swift */,
 				FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */,
+				FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,7 +267,9 @@
 				7E16F5F122E388F1008B158C /* VideoManager.swift in Sources */,
 				7E16F5F222E388F1008B158C /* MovieConverter.swift in Sources */,
 				7E16F5F322E388F1008B158C /* CameraModel.swift in Sources */,
+				FACC768922E5B88E00AC7ED5 /* SettingViewController.swift in Sources */,
 				7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */,
+				FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */,
 				7E16F5F722E388F1008B158C /* UIViewController+CoreKit.swift in Sources */,
 				7E16F5FC22E4521C008B158C /* CustomPickerViewController.swift in Sources */,
 				7E16F5F822E388F1008B158C /* CVPixelBuffer+Copy.swift in Sources */,
@@ -411,13 +419,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 29UN6WTSCZ;
+				DEVELOPMENT_TEAM = ZZH8QX82PA;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo0.Brejcha";
+				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo0.BOTTAK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -429,13 +437,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 29UN6WTSCZ;
+				DEVELOPMENT_TEAM = ZZH8QX82PA;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo0.Brejcha";
+				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo0.BOTTAK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

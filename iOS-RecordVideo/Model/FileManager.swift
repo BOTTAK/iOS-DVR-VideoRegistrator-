@@ -10,10 +10,19 @@ import Foundation
 import UIKit
 import MobileCoreServices
 import CoreLocation
+import Photos
+import PhotosUI
+import ImageIO
+import CoreMotion
+import CoreImage
+import AVFoundation
 
 
 class FileManagerCreateAndSave: CameraFrameViewController {
 
+    
+
+    var movieOutput: AVCaptureMovieFileOutput?
     static var instance = FileManagerCreateAndSave()
     
     func createDirectory() {
@@ -85,4 +94,31 @@ class FileManagerCreateAndSave: CameraFrameViewController {
             print("Could not clear temp folder: \(error)")
         }
     }
+    
+    //MARK: - Private
+    
+    func findAlbum(name: String) -> PHAssetCollection? {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", name)
+        let fetchResult : PHFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        guard let photoAlbum = fetchResult.firstObject else {
+            return nil
+        }
+        return photoAlbum
+    }
+    
+    func selectedVideoInLibrary() {
+        
+        let imagePickerController = UIImagePickerController()
+        var videoURL: NSURL?
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePickerController.mediaTypes = ["public.image", "public.movie"]
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    
+    
 }
