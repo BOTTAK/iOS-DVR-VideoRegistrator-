@@ -15,5 +15,6 @@ target 'iOS-RecordVideo' do
   pod 'SwiftVideoGenerator'
   pod 'LFLiveKit'
   pod 'DPVideoMerger-Swift'
+  pod 'SwiftVideoGenerator'
 
 end
