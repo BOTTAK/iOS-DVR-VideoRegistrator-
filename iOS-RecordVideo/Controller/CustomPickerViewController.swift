@@ -30,6 +30,20 @@ class CustomPickerViewController: UIImagePickerController {
     var timer: Timer?
     let buffer = Buffer()
     let videoMerger = DPVideoMerger()
+    let expectedNumberOfFragments = 4
+    
+    var settingsButton: UIButton {
+        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 100, height: 50))
+        button.setTitle("Settings", for: .normal)
+        button.addTarget(self, action: #selector(settingsButtonTouch(sender:)), for: .touchUpInside)
+        return button
+    }
+    
+    @objc func settingsButtonTouch(sender: UIButton) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let settingsController = storyBoard.instantiateViewController(withIdentifier: "SettingViewController")
+        present(settingsController, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +53,7 @@ class CustomPickerViewController: UIImagePickerController {
         view.addGestureRecognizer(swipeDownRecognizer)
         
         delegate = self
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,6 +64,8 @@ class CustomPickerViewController: UIImagePickerController {
         
         startRecording()
         
+        let window = UIApplication.shared.keyWindow!
+        window.addSubview(settingsButton)
     }
     
     private func startRecording() {
@@ -66,13 +83,12 @@ class CustomPickerViewController: UIImagePickerController {
     
     @objc func swipeLeft() {
         notificationLabel.changeTextAndAnimate(text: "Left")
-        let expectedNumberOfFragments = 4
         if buffer.returnArrayElements(numberOfElements: expectedNumberOfFragments).count < expectedNumberOfFragments {
             let alert =  UIAlertController(title: "Ошибка", message: "Недостаточно данных для сохранения", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ок", style: UIAlertAction.Style.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         } else {
-            videoMerger.mergeVideos(withFileURLs: buffer.returnArrayElements(numberOfElements: 2)) { (mergedVideo, error) in
+            videoMerger.mergeVideos(withFileURLs: buffer.returnArrayElements(numberOfElements: expectedNumberOfFragments)) { (mergedVideo, error) in
                 if error != nil {
                     let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
                     let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
@@ -90,13 +106,67 @@ class CustomPickerViewController: UIImagePickerController {
     }
     
     @objc func swipeRight() {
-        
         notificationLabel.changeTextAndAnimate(text: "Right")
+        
+        Timer.scheduledTimer(timeInterval: TimeInterval(expectedNumberOfFragments * 6) , target: self, selector: #selector(swipeRightTimerSelector), userInfo: nil, repeats: false)
     }
     
+    @objc func swipeRightTimerSelector() {
+        videoMerger.mergeVideos(withFileURLs: buffer.returnArrayElements(numberOfElements: 4)) { (mergedVideo, error) in
+            if error != nil {
+                let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
+                let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                self.present(alert, animated: true) {() -> Void in }
+                return
+            }
+            
+            // Handle a movie saving
+            UISaveVideoAtPathToSavedPhotosAlbum(mergedVideo!.path,
+                                                self,
+                                                #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
+                                                nil)
+        }
+    }
+    
+    
     @objc func swipeDown() {
-        
         notificationLabel.changeTextAndAnimate(text: "Down")
+        let pastURLArray: [URL] = buffer.returnArrayElements(numberOfElements: 2)
+        
+        Timer.scheduledTimer(timeInterval: Double(expectedNumberOfFragments) * 3, target: self, selector: #selector(swipeDownTimerSelector), userInfo: pastURLArray, repeats: false)
+    }
+    
+    @objc func swipeDownTimerSelector(timer: Timer) {
+        guard var userInfo = timer.userInfo as? [URL] else {
+            let alert =  UIAlertController(title: "Ошибка", message: "Данные не обнаружены", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: UIAlertAction.Style.cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        guard userInfo.count == 2 else {
+            print(userInfo.count)
+            let alert =  UIAlertController(title: "Ошибка", message: "Недостаточно данных для сохранения", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: UIAlertAction.Style.cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        userInfo.append(contentsOf: buffer.returnArrayElements(numberOfElements: 2))
+        
+        videoMerger.mergeVideos(withFileURLs: userInfo) { (mergedVideo, error) in
+            if error != nil {
+                let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
+                let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                self.present(alert, animated: true) {() -> Void in }
+                return
+            }
+            
+            // Handle a movie saving
+            UISaveVideoAtPathToSavedPhotosAlbum(mergedVideo!.path,
+                                                self,
+                                                #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
+                                                nil)
+        }
     }
 }
 extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
