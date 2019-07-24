@@ -27,11 +27,48 @@ class CustomPickerViewController: UIImagePickerController {
     }
     
     var notificationLabel = SwipeNotificationLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    var timer: Timer?
-    let buffer = Buffer()
-    let videoMerger = DPVideoMerger()
-    let expectedNumberOfFragments = 4
     
+    var timer: Timer?
+    
+    var buffer = Buffer()
+    let videoMerger = DPVideoMerger()
+    
+    open var bufferSize = 5 // duration of video fragments in seconds
+    open var fullVideoDuration = 20 // expected video file duration after montage in seconds
+    private var expectedNumberOfFragments: Int { // returns number of fragments depending on configuration
+        return fullVideoDuration / bufferSize
+    }
+    
+    // MARK: LifeCycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addRecognizers()
+        setupAndAddSubviews()
+        delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        startRecording()
+    }
+    
+    // MARK: View setup
+    fileprivate func addRecognizers() {
+        view.addGestureRecognizer(swipeLeftRecognizer)
+        view.addGestureRecognizer(swipeRightRecognizer)
+        view.addGestureRecognizer(swipeDownRecognizer)
+    }
+    
+    fileprivate func setupAndAddSubviews() {
+        notificationLabel.center = view.center
+        view.addSubview(notificationLabel)
+        let window = UIApplication.shared.keyWindow!
+        window.addSubview(settingsButton)
+    }
+    
+    // MARK: Settings button setup
     var settingsButton: UIButton {
         let button = UIButton(frame: CGRect(x: 50, y: 50, width: 100, height: 50))
         button.setTitle("Settings", for: .normal)
@@ -39,42 +76,21 @@ class CustomPickerViewController: UIImagePickerController {
         return button
     }
     
+    
     @objc func settingsButtonTouch(sender: UIButton) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let settingsController = storyBoard.instantiateViewController(withIdentifier: "SettingViewController")
         present(settingsController, animated: true, completion: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.addGestureRecognizer(swipeLeftRecognizer)
-        view.addGestureRecognizer(swipeRightRecognizer)
-        view.addGestureRecognizer(swipeDownRecognizer)
-        
-        delegate = self
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        notificationLabel.center = view.center
-        view.addSubview(notificationLabel)
-        
-        startRecording()
-        
-        let window = UIApplication.shared.keyWindow!
-        window.addSubview(settingsButton)
-    }
-    
+    // MARK: Recording
     private func startRecording() {
         startVideoCapture()
         startTimer()
     }
     
     private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: buffer.size, target: self, selector: #selector(timerRepeat), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(bufferSize), target: self, selector: #selector(timerRepeat), userInfo: nil, repeats: true)
     }
     
     @objc func timerRepeat() {
@@ -172,7 +188,6 @@ class CustomPickerViewController: UIImagePickerController {
 extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         
         startVideoCapture()
         let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as! NSURL

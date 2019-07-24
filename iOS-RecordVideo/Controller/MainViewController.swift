@@ -11,7 +11,7 @@ import MobileCoreServices
 
 class MainViewController: UIViewController {
     
-    var imagePicker: CustomPickerViewController!
+    var imagePicker = CustomPickerViewController()
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -24,13 +24,13 @@ class MainViewController: UIViewController {
             print("source type available")
             setupImagePicker()
         } else {
-            print("source type unavailable")
-            
+            let alert =  UIAlertController(title: "Ошибка", message: "Камера недоступна", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: UIAlertAction.Style.cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
     }
     
     private func setupImagePicker() {
-        imagePicker = CustomPickerViewController()
         imagePicker.sourceType = .camera
         imagePicker.cameraDevice = .rear
         imagePicker.mediaTypes = [kUTTypeMovie as String]

@@ -10,7 +10,6 @@ import UIKit
 
 class Buffer {
     
-    public let size = 5.0
     private var videoPartsArray: [NSData] = []
     private var videoURLArray: [URL] = []
     private let dateFormatter = DateFormatter()
