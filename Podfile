@@ -9,12 +9,7 @@ target 'iOS-RecordVideo' do
   use_frameworks!
 
   pod 'Alamofire'
-  pod 'RealmSwift'
   pod 'Kingfisher'
-  pod 'RealmSwift'
-  pod 'SwiftVideoGenerator'
   pod 'LFLiveKit'
-  pod 'DPVideoMerger-Swift'
-  pod 'SwiftVideoGenerator'
 
 end
