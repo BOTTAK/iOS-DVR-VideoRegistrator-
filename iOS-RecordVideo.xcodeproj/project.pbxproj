@@ -216,7 +216,7 @@
 				};
 			};
 			buildConfigurationList = FAD0A8E622BA802E004AE55D /* Build configuration list for PBXProject "iOS-RecordVideo" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
