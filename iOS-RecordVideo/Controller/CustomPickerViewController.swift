@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class CustomPickerViewController: UIImagePickerController {
     
@@ -27,87 +28,91 @@ class CustomPickerViewController: UIImagePickerController {
     }
     
     var notificationLabel = SwipeNotificationLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    var timer: Timer?
-    let buffer = Buffer()
-    let videoMerger = DPVideoMerger()
     
+    let videoTrimmer = VideoTrimmer()
+    
+    open var fullVideoDuration = 5 // expected video file duration after montage in seconds
+
+    
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addGestureRecognizer(swipeLeftRecognizer)
-        view.addGestureRecognizer(swipeRightRecognizer)
-        view.addGestureRecognizer(swipeDownRecognizer)
-        
+        addRecognizers()
+        setupAndAddSubviews()
         delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        startVideoCapture()
+    }
+    
+    // MARK: View setup
+    fileprivate func addRecognizers() {
+        view.addGestureRecognizer(swipeLeftRecognizer)
+        view.addGestureRecognizer(swipeRightRecognizer)
+        view.addGestureRecognizer(swipeDownRecognizer)
+    }
+    
+    fileprivate func setupAndAddSubviews() {
         notificationLabel.center = view.center
         view.addSubview(notificationLabel)
-        
-        startRecording()
-        
+        let window = UIApplication.shared.keyWindow!
+        window.addSubview(settingsButton)
     }
     
-    private func startRecording() {
-        startVideoCapture()
-        startTimer()
+    // MARK: Settings button setup
+    var settingsButton: UIButton {
+        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 100, height: 50))
+        button.setTitle("Settings", for: .normal)
+        button.addTarget(self, action: #selector(settingsButtonTouch(sender:)), for: .touchUpInside)
+        return button
     }
     
-    private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: buffer.size, target: self, selector: #selector(timerRepeat), userInfo: nil, repeats: true)
+    @objc func settingsButtonTouch(sender: UIButton) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let settingsController = storyBoard.instantiateViewController(withIdentifier: "SettingViewController")
+        present(settingsController, animated: true, completion: nil)
     }
     
-    @objc func timerRepeat() {
+    // MARK: Recording
+    @objc func swipeLeft() {
+        notificationLabel.changeTextAndAnimate(text: "Left")
         stopVideoCapture()
     }
     
-    @objc func swipeLeft() {
-        notificationLabel.changeTextAndAnimate(text: "Left")
-        let expectedNumberOfFragments = 4
-        if buffer.returnArrayElements(numberOfElements: expectedNumberOfFragments).count < expectedNumberOfFragments {
-            let alert =  UIAlertController(title: "Ошибка", message: "Недостаточно данных для сохранения", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ок", style: UIAlertAction.Style.cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
-        } else {
-            videoMerger.mergeVideos(withFileURLs: buffer.returnArrayElements(numberOfElements: 2)) { (mergedVideo, error) in
-                if error != nil {
-                    let errorMessage = "Could not merge videos: \(error?.localizedDescription ?? "error")"
-                    let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-                    self.present(alert, animated: true) {() -> Void in }
-                    return
-                }
-                
-                // Handle a movie saving
-                UISaveVideoAtPathToSavedPhotosAlbum(mergedVideo!.path,
-                                                    self,
-                                                    #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
-                                                    nil)
-            }
-        }
-    }
-    
     @objc func swipeRight() {
-        
         notificationLabel.changeTextAndAnimate(text: "Right")
     }
     
     @objc func swipeDown() {
-        
         notificationLabel.changeTextAndAnimate(text: "Down")
     }
+    
 }
 extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        
-        startVideoCapture()
         let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as! NSURL
         let actualURL = videoURL.absoluteURL
-        buffer.saveURLToArray(actualURL!)
+        
+        
+        let startTime = CMTime(seconds: 1, preferredTimescale: 1000)
+        let endTime = CMTime(seconds: 3, preferredTimescale: 1000)
+        
+        videoTrimmer.trimVideo(sourceURL: actualURL!,
+                               trimPoints: [(startTime, endTime)]) { (newFileUrl, error) in
+                                if error != nil {
+                                    print("error \(error?.localizedDescription)")
+                                } else {
+                                    UISaveVideoAtPathToSavedPhotosAlbum(newFileUrl!.path,
+                                                                        self,
+                                                                        #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
+                                                                        nil)
+                                }
+        }
     }
     
     @objc func video(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
@@ -121,3 +126,4 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
         present(alert, animated: true, completion: nil)
     }
 }
+
