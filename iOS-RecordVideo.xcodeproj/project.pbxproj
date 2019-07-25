@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,8 +25,8 @@
 		7E16F5F822E388F1008B158C /* CVPixelBuffer+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */; };
 		7E16F5FC22E4521C008B158C /* CustomPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */; };
 		7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */; };
-		7E4DA9EA22E6379100D6AB50 /* VideoMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4DA9E922E6379100D6AB50 /* VideoMerger.swift */; };
-		7E87045622E460460055ECE4 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E87045522E460460055ECE4 /* Buffer.swift */; };
+		7E8E8D9E22E9B50A00707D76 /* VideoTrimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9D22E9B50A00707D76 /* VideoTrimmer.swift */; };
+		7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */; };
 		FACC768922E5B88E00AC7ED5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768822E5B88E00AC7ED5 /* SettingViewController.swift */; };
 		FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */; };
 		FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F222BA802E004AE55D /* Main.storyboard */; };
@@ -38,8 +38,8 @@
 		7E16F5E122E38762008B158C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerViewController.swift; sourceTree = "<group>"; };
 		7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNotificationLabel.swift; sourceTree = "<group>"; };
-		7E4DA9E922E6379100D6AB50 /* VideoMerger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMerger.swift; sourceTree = "<group>"; };
-		7E87045522E460460055ECE4 /* Buffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
+		7E8E8D9D22E9B50A00707D76 /* VideoTrimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTrimmer.swift; sourceTree = "<group>"; };
+		7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameGenerator.swift; sourceTree = "<group>"; };
 		FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataViewController.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
@@ -87,8 +87,8 @@
 			children = (
 				7E16F5E122E38762008B158C /* MainViewController.swift */,
 				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
-				7E87045522E460460055ECE4 /* Buffer.swift */,
-				7E4DA9E922E6379100D6AB50 /* VideoMerger.swift */,
+				7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */,
+				7E8E8D9D22E9B50A00707D76 /* VideoTrimmer.swift */,
 				7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */,
 				FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */,
 				FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */,
@@ -252,14 +252,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E16F5E522E388F1008B158C /* AppDelegate.swift in Sources */,
-				7E4DA9EA22E6379100D6AB50 /* VideoMerger.swift in Sources */,
 				7E16F5E622E388F1008B158C /* MetaDataViewController.swift in Sources */,
 				7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */,
 				7E16F5E822E388F1008B158C /* CameraFrameViewController.swift in Sources */,
-				7E87045622E460460055ECE4 /* Buffer.swift in Sources */,
+				7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */,
 				7E16F5E922E388F1008B158C /* FileManagerViewController.swift in Sources */,
 				7E16F5EA22E388F1008B158C /* CameraViewController.swift in Sources */,
 				7E16F5EC22E388F1008B158C /* MainViewController.swift in Sources */,
+				7E8E8D9E22E9B50A00707D76 /* VideoTrimmer.swift in Sources */,
 				7E16F5EE22E388F1008B158C /* UIView+CoreKit.swift in Sources */,
 				7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */,
 				7E16F5EF22E388F1008B158C /* ApiManager.swift in Sources */,
@@ -418,6 +418,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29UN6WTSCZ;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
@@ -425,8 +426,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo0.Vladimir";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-RecordVladimir";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -436,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29UN6WTSCZ;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
@@ -443,8 +446,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "VP.iOS-RecordVideo0.Vladimir";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-RecordVladimir";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
