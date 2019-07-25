@@ -109,7 +109,6 @@ class SettingViewController: UIViewController {
                 settingMicrophone.cameraFlashMode = .off
                 settingMicrophone.showsCameraControls = false
                 settingMicrophone.mediaTypes = [kUTTypeVideo as String]
-                print("Hello")
             }
         }
         
