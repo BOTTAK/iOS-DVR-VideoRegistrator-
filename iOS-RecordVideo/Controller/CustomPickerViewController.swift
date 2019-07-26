@@ -33,7 +33,7 @@ class CustomPickerViewController: UIImagePickerController {
     
     let videoTrimmer = VideoTrimmer()
     
-    open var fullVideoDuration = 5.0 // expected video file duration after montage in seconds
+    open var fullVideoDuration = 20.0 // expected video file duration after montage in seconds
 
     
     // MARK: LifeCycle
@@ -97,23 +97,22 @@ class CustomPickerViewController: UIImagePickerController {
 extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as! NSURL
-        let actualURL = videoURL.absoluteURL
+        guard let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL else {
+            print("Error parsing info for an URL")
+            return
+        }
         
-        let trimTime: TrimTime = (start: fullVideoDuration, end: 0.0)
-        
-
-        
-        videoTrimmer.trimVideo(sourceURL: actualURL!,
-                               trimPoints: trimTime) { (newFileUrl, error) in
-                                if error != nil {
-                                    print("error \(error?.localizedDescription)")
-                                } else {
-                                    UISaveVideoAtPathToSavedPhotosAlbum(newFileUrl!.path,
-                                                                        self,
-                                                                        #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
-                                                                        nil)
-                                }
+        videoTrimmer.trimVideo(sourceURL: videoURL, duration: fullVideoDuration) { (newFileURL, error) in
+            
+            guard let trimmedVideoURL = newFileURL else {
+                print("Error creating URL - \(error?.localizedDescription ?? "No error")")
+                return
+            }
+            
+            UISaveVideoAtPathToSavedPhotosAlbum(trimmedVideoURL.path,
+                                                self,
+                                                #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
+                                                nil)
         }
     }
     

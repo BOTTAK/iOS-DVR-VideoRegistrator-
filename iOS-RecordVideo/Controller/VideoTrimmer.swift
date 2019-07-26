@@ -44,7 +44,7 @@ class VideoTrimmer: NSObject {
         return filePath
     }
     
-    func trimVideo(sourceURL: URL, trimPoints: TrimTime, completion: TrimCompletion?) {
+    func trimVideo(sourceURL: URL, duration: Double, completion: TrimCompletion?) {
         
         let filePath = createNewFilePath(fileName: videoName)
         
@@ -53,70 +53,38 @@ class VideoTrimmer: NSObject {
         
         let asset = AVURLAsset(url: sourceURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
         
-        let firstTime = CMTime(seconds: trimPoints.start, preferredTimescale: 600)
-        let startTime = asset.duration - firstTime
-        let endTime = CMTime(seconds: trimPoints.end, preferredTimescale: 600)
-        let trimComposition: TrimPoints = [(startTime, endTime)]
-        
         let preferredPreset = AVAssetExportPresetPassthrough
         
-        if  verifyPresetForAsset(preset: preferredPreset, asset: asset) {
-            
-            let composition = AVMutableComposition()
-            let videoCompTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: CMPersistentTrackID())
-            let audioCompTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: CMPersistentTrackID())
-            
-            guard let assetVideoTrack: AVAssetTrack = asset.tracks(withMediaType: .video).first else { return }
-            guard let assetAudioTrack: AVAssetTrack = asset.tracks(withMediaType: .audio).first else { return }
-            
-            videoCompTrack!.preferredTransform = assetVideoTrack.preferredTransform
-            
-            var accumulatedTime = CMTime.zero
-            for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimComposition {
-                let durationOfCurrentSlice = CMTimeSubtract(endTimeForCurrentSlice, startTimeForCurrentSlice)
-                let timeRangeForCurrentSlice = CMTimeRangeMake(start: startTimeForCurrentSlice, duration: durationOfCurrentSlice)
-                
-                do {
-                    try videoCompTrack!.insertTimeRange(timeRangeForCurrentSlice, of: assetVideoTrack, at: accumulatedTime)
-                    try audioCompTrack!.insertTimeRange(timeRangeForCurrentSlice, of: assetAudioTrack, at: accumulatedTime)
-                    accumulatedTime = CMTimeAdd(accumulatedTime, durationOfCurrentSlice)
-                }
-                catch let compError {
-                    print("TrimVideo: error during composition: \(compError)")
-                    completion?(nil, compError)
-                }
+        let startTime = asset.duration - CMTime(seconds: duration, preferredTimescale: 600)
+        let endTime = asset.duration
+        
+        guard let exportSession = AVAssetExportSession(asset: asset, presetName: preferredPreset) else { fatalError() }
+        
+        let range = CMTimeRangeMake(start: startTime, duration: endTime)
+        
+        exportSession.timeRange = range
+        exportSession.outputURL = filePath
+        exportSession.outputFileType = AVFileType.mp4
+        exportSession.shouldOptimizeForNetworkUse = true
+        
+        removeFileAtURLIfExists(url: filePath as URL)
+        
+        exportSession.exportAsynchronously(completionHandler: {() -> Void in
+            switch exportSession.status {
+            case .failed:
+                print(exportSession.error ?? "NO ERROR")
+                completion?(nil, exportSession.error)
+            case .cancelled:
+                print("Export canceled")
+                completion?(nil, nil)
+            case .completed:
+                //Video conversion finished
+                print("Successful!")
+                print(exportSession.outputURL ?? "NO OUTPUT URL")
+                completion?(exportSession.outputURL, nil)
+            default:
+                break
             }
-            
-            guard let exportSession = AVAssetExportSession(asset: composition, presetName: preferredPreset) else { return }
-            
-            exportSession.outputURL = filePath
-            exportSession.outputFileType = AVFileType.mp4
-            exportSession.shouldOptimizeForNetworkUse = true
-            
-            removeFileAtURLIfExists(url: filePath as URL)
-            
-            exportSession.exportAsynchronously(completionHandler: {() -> Void in
-                switch exportSession.status {
-                case .failed:
-                    print(exportSession.error ?? "NO ERROR")
-                    completion?(nil, exportSession.error)
-                case .cancelled:
-                    print("Export canceled")
-                    completion?(nil, nil)
-                case .completed:
-                    //Video conversion finished
-                    print("Successful!")
-                    print(exportSession.outputURL ?? "NO OUTPUT URL")
-                    completion?(exportSession.outputURL, nil)
-                default:
-                    break
-                }
-            })
-        }
-        else {
-            print("TrimVideo - Could not find a suitable export preset for the input video")
-            let error = NSError(domain: "com.VideoApp.ios", code: -1, userInfo: nil)
-            completion?(nil, error)
-        }
+        })
     }
 }
