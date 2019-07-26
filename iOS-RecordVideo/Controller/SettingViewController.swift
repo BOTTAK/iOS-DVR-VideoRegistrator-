@@ -11,6 +11,10 @@ import AVKit
 import AVFoundation
 import MobileCoreServices
 
+protocol SettingFromCustomView {
+    func settingFromCustomViewController()
+}
+
 class SettingViewController: UIViewController {
     
     
