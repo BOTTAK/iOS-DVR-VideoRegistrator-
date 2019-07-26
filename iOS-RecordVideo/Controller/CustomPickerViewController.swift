@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 
+typealias TrimTime = (start: Double, end: Double)
+
 class CustomPickerViewController: UIImagePickerController {
     
     var swipeLeftRecognizer: UISwipeGestureRecognizer {
@@ -31,7 +33,7 @@ class CustomPickerViewController: UIImagePickerController {
     
     let videoTrimmer = VideoTrimmer()
     
-    open var fullVideoDuration = 5 // expected video file duration after montage in seconds
+    open var fullVideoDuration = 5.0 // expected video file duration after montage in seconds
 
     
     // MARK: LifeCycle
@@ -98,12 +100,12 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
         let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as! NSURL
         let actualURL = videoURL.absoluteURL
         
+        let trimTime: TrimTime = (start: fullVideoDuration, end: 0.0)
         
-        let startTime = CMTime(seconds: 1, preferredTimescale: 1000)
-        let endTime = CMTime(seconds: 3, preferredTimescale: 1000)
+
         
         videoTrimmer.trimVideo(sourceURL: actualURL!,
-                               trimPoints: [(startTime, endTime)]) { (newFileUrl, error) in
+                               trimPoints: trimTime) { (newFileUrl, error) in
                                 if error != nil {
                                     print("error \(error?.localizedDescription)")
                                 } else {

@@ -44,7 +44,7 @@ class VideoTrimmer: NSObject {
         return filePath
     }
     
-    func trimVideo(sourceURL: URL, trimPoints: TrimPoints, completion: TrimCompletion?) {
+    func trimVideo(sourceURL: URL, trimPoints: TrimTime, completion: TrimCompletion?) {
         
         let filePath = createNewFilePath(fileName: videoName)
         
@@ -53,9 +53,11 @@ class VideoTrimmer: NSObject {
         
         let asset = AVURLAsset(url: sourceURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
         
-        let startDate = Date()
+        let firstTime = CMTime(seconds: trimPoints.start, preferredTimescale: 600)
+        let startTime = asset.duration - firstTime
+        let endTime = CMTime(seconds: trimPoints.end, preferredTimescale: 600)
+        let trimComposition: TrimPoints = [(startTime, endTime)]
         
-
         let preferredPreset = AVAssetExportPresetPassthrough
         
         if  verifyPresetForAsset(preset: preferredPreset, asset: asset) {
@@ -70,7 +72,7 @@ class VideoTrimmer: NSObject {
             videoCompTrack!.preferredTransform = assetVideoTrack.preferredTransform
             
             var accumulatedTime = CMTime.zero
-            for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimPoints {
+            for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimComposition {
                 let durationOfCurrentSlice = CMTimeSubtract(endTimeForCurrentSlice, startTimeForCurrentSlice)
                 let timeRangeForCurrentSlice = CMTimeRangeMake(start: startTimeForCurrentSlice, duration: durationOfCurrentSlice)
                 
@@ -103,9 +105,6 @@ class VideoTrimmer: NSObject {
                     completion?(nil, nil)
                 case .completed:
                     //Video conversion finished
-                    let endDate = Date()
-                    let time = endDate.timeIntervalSince(startDate)
-                    print(time)
                     print("Successful!")
                     print(exportSession.outputURL ?? "NO OUTPUT URL")
                     completion?(exportSession.outputURL, nil)
@@ -116,7 +115,7 @@ class VideoTrimmer: NSObject {
         }
         else {
             print("TrimVideo - Could not find a suitable export preset for the input video")
-            let error = NSError(domain: "com.bighug.ios", code: -1, userInfo: nil)
+            let error = NSError(domain: "com.VideoApp.ios", code: -1, userInfo: nil)
             completion?(nil, error)
         }
     }
