@@ -34,6 +34,10 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+*iOS-RecordVideo.xcworkspace/xcuserdata/vladimirbrejcha.xcuserdatad/UserInterfaceState.xcuserstate
+*xcworkspace/xcuserdata/*
+*xcworkspace/xcuserdatad/*
+*.xcuserdata
 
 ## Obj-C/Swift specific
 *.hmap
