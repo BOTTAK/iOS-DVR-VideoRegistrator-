@@ -79,7 +79,7 @@ class CustomPickerViewController: UIImagePickerController {
         present(settingsController, animated: true, completion: nil)
     }
     
-    // MARK: Recording
+    // MARK: Swipe handling
     @objc func swipeLeft() {
         notificationLabel.changeTextAndAnimate(text: "Left")
         stopVideoCapture()
@@ -87,10 +87,32 @@ class CustomPickerViewController: UIImagePickerController {
     
     @objc func swipeRight() {
         notificationLabel.changeTextAndAnimate(text: "Right")
+        notificationLabel.showTimer(seconds: Int(fullVideoDuration))
+        Timer.scheduledTimer(timeInterval: fullVideoDuration,
+                             target: self,
+                             selector: #selector(swipeRightTimerAction),
+                             userInfo: nil, repeats: false)
+        view.isUserInteractionEnabled = false
+    }
+    
+    @objc func swipeRightTimerAction() {
+        stopVideoCapture()
+        view.isUserInteractionEnabled = true
     }
     
     @objc func swipeDown() {
         notificationLabel.changeTextAndAnimate(text: "Down")
+        notificationLabel.showTimer(seconds: Int(fullVideoDuration / 2))
+        Timer.scheduledTimer(timeInterval: fullVideoDuration / 2,
+                             target: self,
+                             selector: #selector(swipeDownTimerAction),
+                             userInfo: nil, repeats: false)
+        view.isUserInteractionEnabled = false
+    }
+    
+    @objc func swipeDownTimerAction() {
+        stopVideoCapture()
+        view.isUserInteractionEnabled = true
     }
     
 }
