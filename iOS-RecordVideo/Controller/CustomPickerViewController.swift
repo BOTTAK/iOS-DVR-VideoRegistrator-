@@ -9,8 +9,6 @@
 import UIKit
 import AVFoundation
 
-typealias TrimTime = (start: Double, end: Double)
-
 class CustomPickerViewController: UIImagePickerController {
     
     var swipeLeftRecognizer: UISwipeGestureRecognizer {
@@ -136,6 +134,7 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
                                                 #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
                                                 nil)
         }
+        startVideoCapture()
     }
     
     @objc func video(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
