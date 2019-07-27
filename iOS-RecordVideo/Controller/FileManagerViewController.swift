@@ -12,16 +12,20 @@ import AVKit
 
 class FileManagerWithVideo: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    var videoPreviewFromLibrary = UIImagePickerController()
+    var videoAndImageReview = UIImagePickerController()
     var videoURL: URL?
     
     @IBAction func playVideoFromLibraryButton(_ sender: Any) {
-        videoPreviewFromLibrary.sourceType = .photoLibrary
-        videoPreviewFromLibrary.delegate = self
-        videoPreviewFromLibrary.mediaTypes = ["public.movie"]
-        present(videoPreviewFromLibrary, animated: true, completion: nil)
+        videoAndImageReview.sourceType = .photoLibrary
+        videoAndImageReview.delegate = self
+        videoAndImageReview.mediaTypes = ["public.movie"]
+        present(videoAndImageReview, animated: true, completion: nil)
     }
     
+    
+    
+    @IBAction func videoAndImagePreview(_ sender: Any) {
+    }
     
     
     func videoAndImageReview(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

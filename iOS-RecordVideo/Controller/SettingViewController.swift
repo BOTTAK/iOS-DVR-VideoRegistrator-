@@ -23,6 +23,8 @@ class SettingViewController: UIViewController {
     var settingPickerQuility = UIImagePickerController()
     var settingPickerDuration = UIImagePickerController()
     var settingMicrophone =  UIImagePickerController()
+    var videoAndImageReview = UIImagePickerController()
+    var videoURL: URL?
     
     @IBOutlet weak var videoQualityLabel: UILabel!
     @IBOutlet weak var videoDurationLabel: UILabel!
@@ -119,9 +121,21 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func uploadButtonTapped(_ sender: Any) {
-        ApiManager.instance.uploadVideoToServer { (getUploadVideoToServer) in
-            
-        }
+        
+        videoAndImageReview.sourceType = .photoLibrary
+        videoAndImageReview.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        videoAndImageReview.mediaTypes = ["public.movie"]
+        present(videoAndImageReview, animated: true, completion: nil)
+        
+//        ApiManager.instance.uploadVideoToServer { (getUploadVideoToServer) in
+//
+//        }
+    }
+    
+    func videoAndImageReview(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        videoURL = info[.mediaURL] as? URL
+        print("videoURL:\(String(describing: videoURL))")
+        self.dismiss(animated: true, completion: nil)
     }
     
     
