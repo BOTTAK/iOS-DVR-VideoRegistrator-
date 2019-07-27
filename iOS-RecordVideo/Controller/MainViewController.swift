@@ -12,6 +12,7 @@ import MobileCoreServices
 class MainViewController: UIViewController {
     
     var imagePicker = CustomPickerViewController()
+    var imagePic = MainViewController()
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
