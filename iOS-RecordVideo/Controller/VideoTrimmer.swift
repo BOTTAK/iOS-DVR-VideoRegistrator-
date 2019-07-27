@@ -9,8 +9,7 @@ import AVFoundation
 import UIKit
 
 class VideoTrimmer: NSObject {
-    typealias TrimCompletion = ((URL?, Error?) -> Void)
-    typealias TrimPoints = [(CMTime, CMTime)]
+    typealias TrimCompletion = ((VideoModel?, Error?) -> Void)
     
     func verifyPresetForAsset(preset: String, asset: AVAsset) -> Bool {
         let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: asset)
@@ -79,9 +78,15 @@ class VideoTrimmer: NSObject {
                 completion?(nil, nil)
             case .completed:
                 //Video conversion finished
-                print("Successful!")
-                print(exportSession.outputURL ?? "NO OUTPUT URL")
-                completion?(exportSession.outputURL, nil)
+                guard let correctURL = exportSession.outputURL,
+                    let correctMetaData = exportSession.metadata else {
+                        print("error getting metadata or url")
+                        return
+                }
+                print("Successful! \(correctURL)")
+                let video = VideoModel(fileURL: correctURL,
+                                       metaData: correctMetaData)
+                completion?(video, nil)
             default:
                 break
             }

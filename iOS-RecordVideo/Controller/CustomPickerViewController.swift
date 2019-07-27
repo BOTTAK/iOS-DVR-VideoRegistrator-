@@ -122,9 +122,10 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
             return
         }
         
-        videoTrimmer.trimVideo(sourceURL: videoURL, duration: fullVideoDuration) { (newFileURL, error) in
+        videoTrimmer.trimVideo(sourceURL: videoURL, duration: fullVideoDuration) { (newVideo, error) in
             
-            guard let trimmedVideoURL = newFileURL else {
+            
+            guard let trimmedVideoURL = newVideo?.fileURL else {
                 print("Error creating URL - \(error?.localizedDescription ?? "No error")")
                 return
             }
