@@ -27,6 +27,7 @@
 		7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */; };
 		7E8E8D9E22E9B50A00707D76 /* VideoTrimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9D22E9B50A00707D76 /* VideoTrimmer.swift */; };
 		7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */; };
+		7EE8CCBF22EC342C00DFC5AB /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */; };
 		FACC768922E5B88E00AC7ED5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768822E5B88E00AC7ED5 /* SettingViewController.swift */; };
 		FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */; };
 		FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F222BA802E004AE55D /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNotificationLabel.swift; sourceTree = "<group>"; };
 		7E8E8D9D22E9B50A00707D76 /* VideoTrimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTrimmer.swift; sourceTree = "<group>"; };
 		7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameGenerator.swift; sourceTree = "<group>"; };
+		7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataViewController.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
@@ -87,8 +89,8 @@
 			children = (
 				7E16F5E122E38762008B158C /* MainViewController.swift */,
 				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
-				7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */,
 				7E8E8D9D22E9B50A00707D76 /* VideoTrimmer.swift */,
+				7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */,
 				7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */,
 				FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */,
 				FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */,
@@ -110,6 +112,7 @@
 				FA8E8DCB22DDE12E001B780D /* CameraModel.swift */,
 				FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */,
 				FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */,
+				7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,13 +124,6 @@
 				FA32309E22BC120900725FCA /* UIView+CoreKit.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		FA32309722BC10E900725FCA /* Libs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Libs;
 			sourceTree = "<group>";
 		};
 		FA32309822BC10F500725FCA /* Resources */ = {
@@ -173,7 +169,6 @@
 				7E16F5F922E3AF10008B158C /* Controller */,
 				FA32309522BC0F5B00725FCA /* Views */,
 				7E16F5FA22E3AF67008B158C /* Model */,
-				FA32309722BC10E900725FCA /* Libs */,
 				FA32309822BC10F500725FCA /* Resources */,
 				FA32309922BC110100725FCA /* Extentions */,
 			);
@@ -260,6 +255,7 @@
 				7E16F5EA22E388F1008B158C /* CameraViewController.swift in Sources */,
 				7E16F5EC22E388F1008B158C /* MainViewController.swift in Sources */,
 				7E8E8D9E22E9B50A00707D76 /* VideoTrimmer.swift in Sources */,
+				7EE8CCBF22EC342C00DFC5AB /* VideoModel.swift in Sources */,
 				7E16F5EE22E388F1008B158C /* UIView+CoreKit.swift in Sources */,
 				7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */,
 				7E16F5EF22E388F1008B158C /* ApiManager.swift in Sources */,
