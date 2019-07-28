@@ -1,14 +1,7 @@
 PODS:
   - Alamofire (4.8.2)
-  - DPVideoMerger-Swift (1.0.0)
   - Kingfisher (5.7.0)
   - LFLiveKit (2.6)
-  - Realm (3.17.1):
-    - Realm/Headers (= 3.17.1)
-  - Realm/Headers (3.17.1)
-  - RealmSwift (3.17.1):
-    - Realm (= 3.17.1)
-  - SwiftVideoGenerator (1.2.7)
 
 DEPENDENCIES:
   - Alamofire

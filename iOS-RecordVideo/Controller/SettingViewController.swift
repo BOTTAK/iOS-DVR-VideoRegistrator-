@@ -36,9 +36,6 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var videoDurationSegment: UISegmentedControl!
     @IBOutlet weak var microphoneSegment: UISegmentedControl!
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -10,7 +10,7 @@ import UIKit
 
 class VideoManager {
     
-    func trimVideo(sourceURL: URL, duration: Double, completion: @escaping (Result<VideoModel, Error>)->Void) {
+    func trimVideo(sourceURL: URL, duration: Double, metaData: AVMutableMetadataItem, completion: @escaping (Result<VideoModel, Error>)->Void) {
         
         guard sourceURL.isFileURL else { fatalError() }
         
@@ -24,6 +24,7 @@ class VideoManager {
         exportSession.outputURL = FileManager.createNewFilePath(fileName: videoName)
         exportSession.outputFileType = AVFileType.mp4
         exportSession.shouldOptimizeForNetworkUse = true
+        exportSession.metadata = [metaData]
         
         exportSession.exportAsynchronously(completionHandler: {() -> Void in
             switch exportSession.status {

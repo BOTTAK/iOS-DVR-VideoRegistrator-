@@ -9,9 +9,11 @@
 import UIKit
 import MobileCoreServices
 import AVFoundation
+import CoreLocation
 
 final class MainViewController: UIViewController {
     
+    let locatioManager = CLLocationManager()
     let cameraMediaType = AVMediaType.video
     let imagePicker = CustomPickerViewController()
     var permissionsGranted = false
@@ -56,11 +58,11 @@ final class MainViewController: UIViewController {
     private func checkMicPermissions() {
         switch AVAudioSession.sharedInstance().recordPermission {
         case .granted:
-            checkSourcePermissions()
+            checkLocationPermissons()
         case .undetermined, .denied:
             AVAudioSession.sharedInstance().requestRecordPermission{ granted in
                 if granted {
-                    self.checkSourcePermissions()
+                    self.checkLocationPermissons()
                 } else {
                     let action = UIAlertAction(title: "Settings", style: .default, handler: { action in
                         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
@@ -83,6 +85,29 @@ final class MainViewController: UIViewController {
         } else {
             permissionsGranted = false
             UIHelper.showError(errorMessage: "Camera source is not available", controller: self)
+        }
+    }
+    
+    private func checkLocationPermissons() {
+        
+        
+        locatioManager.requestAlwaysAuthorization()
+        
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locatioManager.requestAlwaysAuthorization()
+        case .denied, .restricted:
+            let action = UIAlertAction(title: "Settings", style: .default, handler: { action in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                self.checkLocationPermissons()
+            })
+            UIHelper.showError(errorMessage: "Location access is absolutely necessary to use this app",
+                               action: action,
+                               controller: self)
+        case .authorizedAlways, .authorizedWhenInUse:
+            checkSourcePermissions()
+        @unknown default:
+            fatalError()
         }
     }
     
