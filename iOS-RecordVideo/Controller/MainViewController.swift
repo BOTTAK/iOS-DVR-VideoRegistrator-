@@ -93,6 +93,7 @@ final class MainViewController: UIViewController {
         imagePicker.cameraCaptureMode = .video
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
+        
         present(imagePicker, animated: false)
     }
 }
