@@ -11,8 +11,8 @@ import AVKit
 import AVFoundation
 import MobileCoreServices
 
-protocol SettingFromCustomView {
-    func settingFromCustomViewController(_ settingPickerQuility : UIImagePickerController.QualityType, _ settingPickerDuration : TimeInterval, _ settingMicrophone : String)
+protocol SettingFromCustomView: class {
+    func settingFromCustomViewController(_ settingPickerQuility: UIImagePickerController.QualityType, _ settingPickerDuration: TimeInterval,_ settingMicrophone: String)
     
 }
 
@@ -26,7 +26,7 @@ class SettingViewController: UIViewController {
     var settingMicrophone: String = ""
     var videoAndImageReview = UIImagePickerController()
     var videoURL: URL?
-    var delegate = SettingViewController()
+    weak var delegate: SettingFromCustomView?
     
     @IBOutlet weak var videoQualityLabel: UILabel!
     @IBOutlet weak var videoDurationLabel: UILabel!
@@ -53,7 +53,7 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        SettingFromCustomView.setting
+        delegate?.settingFromCustomViewController(settingPickerQuility, settingPickerDuration, settingMicrophone)
         navigationController?.popViewController(animated: true)
     }
     
