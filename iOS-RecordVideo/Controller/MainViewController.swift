@@ -39,6 +39,7 @@ class MainViewController: UIViewController {
         
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
+        
         present(imagePicker, animated: false)
     }
 }
