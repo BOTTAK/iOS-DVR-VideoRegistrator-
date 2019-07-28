@@ -10,6 +10,8 @@ import UIKit
 
 class UIHelper {
     
+    static let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    
     class func showError(error: String, action: UIAlertAction? = nil, controller: UIViewController) {
         DispatchQueue.main.async {
             
@@ -24,4 +26,10 @@ class UIHelper {
         }
     }
     
+}
+
+extension UIStoryboard { // used to call controllers with same id as a view controller type
+    func instantiateViewController(withIdentifier typeIdentifier: UIViewController.Type) -> UIViewController {
+        return instantiateViewController(withIdentifier: String(describing: typeIdentifier))
+    }
 }

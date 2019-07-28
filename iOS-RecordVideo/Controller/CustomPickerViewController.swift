@@ -75,8 +75,8 @@ class CustomPickerViewController: UIImagePickerController {
     }
     
     @objc func settingsButtonTouch(sender: UIButton) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let settingsController = storyBoard.instantiateViewController(withIdentifier: "SettingViewController")
+        stopVideoCapture()
+        let settingsController = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingViewController.self)
         present(settingsController, animated: true, completion: nil)
     }
     
