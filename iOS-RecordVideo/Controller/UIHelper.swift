@@ -6,4 +6,22 @@
 //  Copyright © 2019 VladimirBrejcha. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class UIHelper {
+    
+    class func showError(error: String, action: UIAlertAction? = nil, controller: UIViewController) {
+        DispatchQueue.main.async {
+            
+            let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            
+            if let alertAction = action {
+                alert.addAction(alertAction)
+            }
+            
+            controller.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+}
