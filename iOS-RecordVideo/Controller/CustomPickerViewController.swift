@@ -28,7 +28,7 @@ class CustomPickerViewController: UIImagePickerController {
     }
     var toSave = false
     var notificationLabel = SwipeNotificationLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    let videoTrimmer = VideoTrimmer()
+    let videoTrimmer = VideoManager()
     open var fullVideoDuration = 20.0 // expected video file duration after montage in seconds
 
     // MARK: LifeCycle

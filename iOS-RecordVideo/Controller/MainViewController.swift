@@ -43,7 +43,7 @@ final class MainViewController: UIViewController {
                         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
                         self.checkRecordingPermissions()
                     })
-                    UIHelper.showError(error: "Camera access is absolutely necessary to use this app",
+                    UIHelper.showError(errorMessage: "Camera access is absolutely necessary to use this app",
                                        action: action,
                                        controller: self)
                 }
@@ -66,7 +66,7 @@ final class MainViewController: UIViewController {
                         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
                         self.checkMicPermissions()
                     })
-                    UIHelper.showError(error: "Mic access is absolutely necessary to use this app",
+                    UIHelper.showError(errorMessage: "Mic access is absolutely necessary to use this app",
                                        action: action,
                                        controller: self)
                 }
@@ -82,7 +82,7 @@ final class MainViewController: UIViewController {
             checkPermissions()
         } else {
             permissionsGranted = false
-            UIHelper.showError(error: "Camera source is not available", controller: self)
+            UIHelper.showError(errorMessage: "Camera source is not available", controller: self)
         }
     }
     
