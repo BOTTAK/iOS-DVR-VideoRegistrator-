@@ -53,7 +53,7 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        
+        SettingFromCustomView.setting
         navigationController?.popViewController(animated: true)
     }
     

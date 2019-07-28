@@ -26,12 +26,12 @@
 		7E8E8D9E22E9B50A00707D76 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9D22E9B50A00707D76 /* VideoManager.swift */; };
 		7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */; };
 		7EE8CCBF22EC342C00DFC5AB /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */; };
-		D1E8565EEA401377B887927C /* Pods_iOS_RecordVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB5ABA887AC388788002476 /* Pods_iOS_RecordVideo.framework */; };
+		FA0D306C22EC368E00977CB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0ACC3522EC33BC00FE82E6 /* Main.storyboard */; };
+		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
+		FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
 		FACC768922E5B88E00AC7ED5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768822E5B88E00AC7ED5 /* SettingViewController.swift */; };
 		FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */; };
-		FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F222BA802E004AE55D /* Main.storyboard */; };
 		FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F522BA802F004AE55D /* Assets.xcassets */; };
-		FAD0A8F922BA802F004AE55D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,9 +46,12 @@
 		B96D02F8B283F6EB9FD0BD8C /* Pods-iOS-RecordVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RecordVideo.debug.xcconfig"; path = "Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo.debug.xcconfig"; sourceTree = "<group>"; };
 		BEB5ABA887AC388788002476 /* Pods_iOS_RecordVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_RecordVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA32309222BC0F4C00725FCA /* MetaDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataManager.swift; sourceTree = "<group>"; };
+		FA0ACC3522EC33BC00FE82E6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "/Users/macbook/Downloads/Programming/iOS-RecordVideo/iOS-RecordVideo/Views/Main.storyboard"; sourceTree = "<absolute>"; };
+		FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataViewController.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
 		FA32309E22BC120900725FCA /* UIView+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CoreKit.swift"; sourceTree = "<group>"; };
+		FA495CF622EE17D600FF3381 /* MetaDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaDataManager.swift; sourceTree = "<group>"; };
 		FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerViewController.swift; sourceTree = "<group>"; };
 		FA8E8DC722DDD056001B780D /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		FA8E8DC922DDD080001B780D /* MovieConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieConverter.swift; sourceTree = "<group>"; };
@@ -60,7 +63,6 @@
 		FAD0A8EB22BA802E004AE55D /* iOS-RecordVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-RecordVideo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD0A8EE22BA802E004AE55D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
-		FAD0A8F322BA802E004AE55D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAD0A8F522BA802F004AE55D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAD0A8F822BA802F004AE55D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAD0A8FA22BA802F004AE55D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		7E16F5F922E3AF10008B158C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FA495CF622EE17D600FF3381 /* MetaDataManager.swift */,
 				7E16F5E122E38762008B158C /* MainViewController.swift */,
 				7E19173122EDC98D00C4B7AA /* UIHelper.swift */,
 				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
@@ -129,7 +132,7 @@
 		FA32309522BC0F5B00725FCA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FAD0A8F222BA802E004AE55D /* Main.storyboard */,
+				FA0ACC3522EC33BC00FE82E6 /* Main.storyboard */,
 				FA32309E22BC120900725FCA /* UIView+CoreKit.swift */,
 			);
 			path = Views;
@@ -245,9 +248,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAD0A8F922BA802F004AE55D /* LaunchScreen.storyboard in Resources */,
+				FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */,
+				FA0D306C22EC368E00977CB9 /* Main.storyboard in Resources */,
 				FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */,
-				FAD0A8F422BA802E004AE55D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */,
 				7E16F5E522E388F1008B158C /* AppDelegate.swift in Sources */,
 				7E16F5E622E388F1008B158C /* MetaDataManager.swift in Sources */,
 				7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */,
@@ -327,14 +331,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		FAD0A8F222BA802E004AE55D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FAD0A8F322BA802E004AE55D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -469,13 +465,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 29UN6WTSCZ;
+				DEVELOPMENT_TEAM = ZZH8QX82PA;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-RecordVladimir";
+				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -490,13 +486,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 29UN6WTSCZ;
+				DEVELOPMENT_TEAM = ZZH8QX82PA;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-RecordVladimir";
+				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
