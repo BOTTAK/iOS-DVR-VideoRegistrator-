@@ -12,7 +12,7 @@ import AVFoundation
 import MobileCoreServices
 
 protocol SettingFromCustomView {
-    func settingFromCustomViewController()
+    func settingFromCustomViewController(_ settingPickerQuility : UIImagePickerController.QualityType, _ settingPickerDuration : TimeInterval, _ settingMicrophone : String)
     
 }
 
@@ -23,7 +23,7 @@ class SettingViewController: UIViewController {
     
     var settingPickerQuility: UIImagePickerController.QualityType = .typeMedium
     var settingPickerDuration:  TimeInterval = 20.0
-    var settingMicrophone =  UIImagePickerController()
+    var settingMicrophone: String = ""
     var videoAndImageReview = UIImagePickerController()
     var videoURL: URL?
     var delegate = SettingViewController()
@@ -103,20 +103,10 @@ class SettingViewController: UIViewController {
     }
     @IBAction func microphoneSegmented(_ sender: UISegmentedControl) {
         if microphoneSegment.selectedSegmentIndex == 0 {
-            settingMicrophone = CustomPickerViewController()
-            settingMicrophone.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-            settingMicrophone.sourceType = .camera
-            settingMicrophone.cameraFlashMode = .off
-            settingMicrophone.showsCameraControls = false
-            settingMicrophone.mediaTypes = [kUTTypeMovie as String]
+            settingMicrophone = kUTTypeMovie as String
         } else {
             if microphoneSegment.selectedSegmentIndex == 1 {
-                settingMicrophone = CustomPickerViewController()
-                settingMicrophone.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-                settingMicrophone.sourceType = .camera
-                settingMicrophone.cameraFlashMode = .off
-                settingMicrophone.showsCameraControls = false
-                settingMicrophone.mediaTypes = [kUTTypeVideo as String]
+                settingMicrophone = kUTTypeVideo as String
             }
         }
         
