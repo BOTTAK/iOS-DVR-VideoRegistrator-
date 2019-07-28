@@ -26,14 +26,11 @@ class CustomPickerViewController: UIImagePickerController {
         gesture.direction = .down
         return gesture
     }
-    
+    var toSave = false
     var notificationLabel = SwipeNotificationLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    
     let videoTrimmer = VideoTrimmer()
-    
     open var fullVideoDuration = 20.0 // expected video file duration after montage in seconds
 
-    
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +42,6 @@ class CustomPickerViewController: UIImagePickerController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         startVideoCapture()
     }
     
@@ -81,11 +77,13 @@ class CustomPickerViewController: UIImagePickerController {
     }
     
     // MARK: Swipe handling
+    // Left
     @objc func swipeLeft() {
         notificationLabel.changeTextAndAnimate(text: "Left")
-        stopVideoCapture()
+        stopCaptureAndTrim()
     }
     
+    // Right
     @objc func swipeRight() {
         notificationLabel.changeTextAndAnimate(text: "Right")
         notificationLabel.showTimer(seconds: Int(fullVideoDuration))
@@ -97,10 +95,10 @@ class CustomPickerViewController: UIImagePickerController {
     }
     
     @objc func swipeRightTimerAction() {
-        stopVideoCapture()
-        view.isUserInteractionEnabled = true
+        stopCaptureAndTrim()
     }
     
+    // Down
     @objc func swipeDown() {
         notificationLabel.changeTextAndAnimate(text: "Down")
         notificationLabel.showTimer(seconds: Int(fullVideoDuration / 2))
@@ -112,44 +110,44 @@ class CustomPickerViewController: UIImagePickerController {
     }
     
     @objc func swipeDownTimerAction() {
-        stopVideoCapture()
+        stopCaptureAndTrim()
+    }
+    
+    func stopCaptureAndTrim() {
         view.isUserInteractionEnabled = true
+        toSave = true
+        stopVideoCapture()
     }
     
 }
 extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        guard let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL else {
-            print("Error parsing info for an URL")
-            return
-        }
-        
-        videoTrimmer.trimVideo(sourceURL: videoURL, duration: fullVideoDuration) { (newVideo, error) in
-            
-            
-            guard let trimmedVideoURL = newVideo?.fileURL else {
-                print("Error creating URL - \(error?.localizedDescription ?? "No error")")
+        if toSave {
+            guard let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL else {
+                print("Error parsing info for an URL")
                 return
             }
-            
-            UISaveVideoAtPathToSavedPhotosAlbum(trimmedVideoURL.path,
-                                                self,
-                                                #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
-                                                nil)
+            videoTrimmer.trimVideo(sourceURL: videoURL, duration: fullVideoDuration) { (newVideo, error) in
+                guard let trimmedVideoURL = newVideo?.fileURL else {
+                    print("Error creating URL - \(error?.localizedDescription ?? "No error")")
+                    return
+                }
+                UISaveVideoAtPathToSavedPhotosAlbum(trimmedVideoURL.path,
+                                                    self,
+                                                    #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
+                                                    nil)
+            }
+            startVideoCapture()
         }
-        startVideoCapture()
     }
     
     @objc func video(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
         
-        let alert = error == nil
-            ? UIAlertController(title: "Успешно", message: "Видео сохранено", preferredStyle: .alert)
-            : UIAlertController(title: "Ошибка", message: error?.localizedDescription, preferredStyle: .alert)
+        let (title, message) = error == nil
+            ? ("Success", "Video saved!")
+            : (nil, error!.localizedDescription)
         
-        alert.addAction(UIAlertAction(title: "Ок", style: UIAlertAction.Style.cancel, handler: nil))
-        
-        present(alert, animated: true, completion: nil)
+        UIHelper.showError(error: message, customTitle: title, action: nil, controller: self)
     }
 }
 
