@@ -12,10 +12,10 @@ class UIHelper {
     
     static let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
-    class func showError(error: String, customTitle: String? = nil, action: UIAlertAction? = nil, controller: UIViewController) {
+    class func showError(errorMessage: String, customTitle: String? = nil, action: UIAlertAction? = nil, controller: UIViewController) {
         DispatchQueue.main.async {
             
-            let alert = UIAlertController(title: customTitle ?? "Error", message: error, preferredStyle: .alert)
+            let alert = UIAlertController(title: customTitle ?? "Error", message: errorMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel))
             
             if let alertAction = action {
