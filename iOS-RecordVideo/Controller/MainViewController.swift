@@ -8,26 +8,81 @@
 
 import UIKit
 import MobileCoreServices
+import AVFoundation
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
-    var imagePicker = CustomPickerViewController()
-    
+    let cameraMediaType = AVMediaType.video
+    let imagePicker = CustomPickerViewController()
+    var permissionsGranted = false
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        checkSourcePermissions()
+        checkPermissions()
+    }
+    
+    func checkPermissions() {
+        if permissionsGranted {
+            setupImagePicker()
+        } else {
+            checkRecordingPermissions()
+        }
+    }
+    
+    private func checkRecordingPermissions() {
+        switch AVCaptureDevice.authorizationStatus(for: cameraMediaType) {
+        case .authorized:
+            checkMicPermissions()
+        case .notDetermined, .restricted, .denied:
+            AVCaptureDevice.requestAccess(for: cameraMediaType) { granted in
+                if granted {
+                    self.checkMicPermissions()
+                } else {
+                    let action = UIAlertAction(title: "Settings", style: .default, handler: { action in
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                        self.checkRecordingPermissions()
+                    })
+                    UIHelper.showError(errorMessage: "Camera access is absolutely necessary to use this app",
+                                       action: action,
+                                       controller: self)
+                }
+            }
+        @unknown default:
+            fatalError("Unexpected case")
+        }
+    }
+    
+    private func checkMicPermissions() {
+        switch AVAudioSession.sharedInstance().recordPermission {
+        case .granted:
+            checkSourcePermissions()
+        case .undetermined, .denied:
+            AVAudioSession.sharedInstance().requestRecordPermission{ granted in
+                if granted {
+                    self.checkSourcePermissions()
+                } else {
+                    let action = UIAlertAction(title: "Settings", style: .default, handler: { action in
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                        self.checkMicPermissions()
+                    })
+                    UIHelper.showError(errorMessage: "Mic access is absolutely necessary to use this app",
+                                       action: action,
+                                       controller: self)
+                }
+            }
+        @unknown default:
+            fatalError("Unexpected case")
+        }
     }
     
     private func checkSourcePermissions() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            print("source type available")
-            setupImagePicker()
+            permissionsGranted = true
+            checkPermissions()
         } else {
-            let alert =  UIAlertController(title: "Ошибка", message: "Камера недоступна", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ок", style: UIAlertAction.Style.cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+            permissionsGranted = false
+            UIHelper.showError(errorMessage: "Camera source is not available", controller: self)
         }
     }
     
@@ -40,7 +95,7 @@ class MainViewController: UIViewController {
         
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
-       
+        
         present(imagePicker, animated: false)
     }
 }

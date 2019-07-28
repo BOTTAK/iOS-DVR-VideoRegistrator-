@@ -11,15 +11,26 @@ import AVKit
 import AVFoundation
 import CoreLocation
 
-class MetaDataViewController: UIViewController {
+class MetaDataManager: UIViewController {
     
+    var locManager = CLLocationManager()
     
-    var trimer = VideoTrimmer()
+    func checkPermissions() {
+        var currentLocation: CLLocation!
+        
+        if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() ==  .authorizedAlways) {
+            currentLocation = locManager.location
+        }
+    }
+    
+    var trimer = VideoManager()
     var fileName: String = ""
     
 
     
     func getGPSFromVideo(forLocation location: CLLocation) {
+        locManager.requestWhenInUseAuthorization()
         let metadata = AVMutableMetadataItem()
         metadata.keySpace = AVMetadataKeySpace.quickTimeMetadata
         metadata.key = AVMetadataKey.quickTimeMetadataKeyLocationISO6709 as NSString
