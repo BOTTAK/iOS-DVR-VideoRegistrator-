@@ -12,7 +12,7 @@ import MobileCoreServices
 class MainViewController: UIViewController {
     
     var imagePicker = CustomPickerViewController()
-    var imagePic = MainViewController()
+    
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -33,9 +33,11 @@ class MainViewController: UIViewController {
     
     private func setupImagePicker() {
         imagePicker.sourceType = .camera
+        imagePicker.videoQuality = .typeHigh
         imagePicker.cameraDevice = .rear
         imagePicker.mediaTypes = [kUTTypeMovie as String]
         imagePicker.cameraCaptureMode = .video
+        
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
        

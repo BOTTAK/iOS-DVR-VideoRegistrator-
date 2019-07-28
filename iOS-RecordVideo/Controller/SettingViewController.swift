@@ -13,6 +13,7 @@ import MobileCoreServices
 
 protocol SettingFromCustomView {
     func settingFromCustomViewController()
+    
 }
 
 class SettingViewController: UIViewController {
@@ -20,11 +21,12 @@ class SettingViewController: UIViewController {
     
     //MARK: Outlets
     
-    var settingPickerQuility = UIImagePickerController()
-    var settingPickerDuration = UIImagePickerController()
+    var settingPickerQuility: UIImagePickerController.QualityType = .typeMedium
+    var settingPickerDuration:  TimeInterval = 20.0
     var settingMicrophone =  UIImagePickerController()
     var videoAndImageReview = UIImagePickerController()
     var videoURL: URL?
+    var delegate = SettingViewController()
     
     @IBOutlet weak var videoQualityLabel: UILabel!
     @IBOutlet weak var videoDurationLabel: UILabel!
@@ -57,13 +59,13 @@ class SettingViewController: UIViewController {
     
     @IBAction func videoQualitySegmented(_ sender: UISegmentedControl) {
         if videoQuialitySegment.selectedSegmentIndex == 0 {
-            settingPickerQuility.videoQuality = .typeLow
+            settingPickerQuility = .typeLow
         } else {
             if videoQuialitySegment.selectedSegmentIndex == 1 {
-                settingPickerQuility.videoQuality = .typeMedium
+                settingPickerQuility = .typeMedium
             } else {
                 if videoQuialitySegment.selectedSegmentIndex == 2 {
-                    settingPickerQuility.videoQuality = .typeHigh
+                    settingPickerQuility = .typeHigh
                 }
             }
         }
@@ -75,22 +77,22 @@ class SettingViewController: UIViewController {
     
     @IBAction func videoDurationSegmented(_ sender: UISegmentedControl) {
         if videoDurationSegment.selectedSegmentIndex == 0 {
-            settingPickerDuration.videoMaximumDuration = TimeInterval (20.0)
+            settingPickerDuration = 20.0
         } else {
             if videoDurationSegment.selectedSegmentIndex == 1 {
-                settingPickerDuration.videoMaximumDuration = TimeInterval (30.0)
+                settingPickerDuration = 30.0
             } else {
                 if videoDurationSegment.selectedSegmentIndex == 2{
-                    settingPickerDuration.videoMaximumDuration = TimeInterval (45.0)
+                    settingPickerDuration = 45.0
                 } else {
                     if videoDurationSegment.selectedSegmentIndex == 3 {
-                        settingPickerDuration.videoMaximumDuration = TimeInterval (60.0)
+                        settingPickerDuration = 60.0
                     } else {
                         if videoDurationSegment.selectedSegmentIndex == 4 {
-                            settingPickerDuration.videoMaximumDuration = TimeInterval (90.0)
+                            settingPickerDuration = 90.0
                         } else {
                             if videoDurationSegment.selectedSegmentIndex == 5 {
-                                settingPickerDuration.videoMaximumDuration = TimeInterval (120.0)
+                                settingPickerDuration = 120.0
                             }
                         }
                     }
