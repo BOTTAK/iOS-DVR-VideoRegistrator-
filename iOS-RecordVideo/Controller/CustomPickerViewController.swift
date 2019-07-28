@@ -125,12 +125,12 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if toSave {
             guard let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL else {
-                print("Error parsing info for an URL")
+                UIHelper.showError(error: "Error parsing info for an URL", controller: self)
                 return
             }
             videoTrimmer.trimVideo(sourceURL: videoURL, duration: fullVideoDuration) { (newVideo, error) in
                 guard let trimmedVideoURL = newVideo?.fileURL else {
-                    print("Error creating URL - \(error?.localizedDescription ?? "No error")")
+                    UIHelper.showError(error: "Error creating URL - \(error?.localizedDescription ?? "No error")", controller: self)
                     return
                 }
                 UISaveVideoAtPathToSavedPhotosAlbum(trimmedVideoURL.path,
