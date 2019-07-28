@@ -10,12 +10,6 @@ import UIKit
 
 class VideoManager {
     
-    func verifyPresetForAsset(preset: String, asset: AVAsset) -> Bool {
-        let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: asset)
-        let filteredPresets = compatiblePresets.filter { $0 == preset }
-        return filteredPresets.count > 0 || preset == AVAssetExportPresetPassthrough
-    }
-    
     func trimVideo(sourceURL: URL, duration: Double, completion: @escaping (Result<VideoModel, Error>)->Void) {
         
         guard sourceURL.isFileURL else { fatalError() }
