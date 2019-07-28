@@ -14,7 +14,7 @@ import CoreLocation
 class MetaDataViewController: UIViewController {
     
     
-    var trimer = VideoTrimmer()
+    var trimer = VideoManager()
     var fileName: String = ""
     
 

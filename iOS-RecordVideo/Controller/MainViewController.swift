@@ -22,12 +22,11 @@ class MainViewController: UIViewController {
     
     private func checkSourcePermissions() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            print("source type available")
-            setupImagePicker()
+            permissionsGranted = true
+            checkPermissions()
         } else {
-            let alert =  UIAlertController(title: "Ошибка", message: "Камера недоступна", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ок", style: UIAlertAction.Style.cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+            permissionsGranted = false
+            UIHelper.showError(errorMessage: "Camera source is not available", controller: self)
         }
     }
     
@@ -40,7 +39,6 @@ class MainViewController: UIViewController {
         
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
-       
         present(imagePicker, animated: false)
     }
 }
