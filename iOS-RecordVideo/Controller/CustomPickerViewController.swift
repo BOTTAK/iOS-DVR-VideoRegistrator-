@@ -59,13 +59,16 @@ class CustomPickerViewController: UIImagePickerController {
     fileprivate func setupAndAddSubviews() {
         notificationLabel.center = view.center
         view.addSubview(notificationLabel)
-        let window = UIApplication.shared.keyWindow!
-        window.addSubview(settingsButton)
+        view.addSubview(settingsButton)
     }
     
     // MARK: Settings button setup
     var settingsButton: UIButton {
-        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 100, height: 50))
+        let button = UIButton(frame: CGRect(x: 0, y: view.frame.height - 50,
+                                            width: view.frame.width, height: 50))
+        button.center.x = view.center.x
+        button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
+        button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .highlighted)
         button.setTitle("Settings", for: .normal)
         button.addTarget(self, action: #selector(settingsButtonTouch(sender:)), for: .touchUpInside)
         return button
