@@ -28,7 +28,7 @@ class CustomPickerViewController: UIImagePickerController {
     }
     var toSave = false
     var notificationLabel = SwipeNotificationLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    let videoTrimmer = VideoManager()
+    let videoManager = VideoManager()
     open var fullVideoDuration = 20.0 // expected video file duration after montage in seconds
 
     // MARK: LifeCycle
@@ -130,7 +130,9 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
                 return
             }
             
-            videoTrimmer.trimVideo(sourceURL: videoURL, duration: fullVideoDuration) { result in
+            let locationManager = MetaDataManager()
+            
+            videoManager.trimVideo(sourceURL: videoURL, duration: fullVideoDuration, metaData: locationManager.getGPSFromVideo()) { result in
                 switch (result) {
                 case let .failure(error):
                     UIHelper.showError(errorMessage: "Error creating URL - \(error.localizedDescription)", controller: self)

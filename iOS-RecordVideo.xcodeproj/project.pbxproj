@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7E16F5E522E388F1008B158C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0A8EE22BA802E004AE55D /* AppDelegate.swift */; };
-		7E16F5E622E388F1008B158C /* MetaDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */; };
+		7E16F5E622E388F1008B158C /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32309222BC0F4C00725FCA /* MetaDataManager.swift */; };
 		7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */; };
 		7E16F5E922E388F1008B158C /* FileManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */; };
 		7E16F5EA22E388F1008B158C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DC722DDD056001B780D /* CameraViewController.swift */; };
@@ -41,7 +41,7 @@
 		7E8E8D9D22E9B50A00707D76 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameGenerator.swift; sourceTree = "<group>"; };
 		7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
-		FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataViewController.swift; sourceTree = "<group>"; };
+		FA32309222BC0F4C00725FCA /* MetaDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataManager.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
 		FA32309E22BC120900725FCA /* UIView+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CoreKit.swift"; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 				7E8E8D9D22E9B50A00707D76 /* VideoManager.swift */,
 				7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */,
 				7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */,
-				FA32309222BC0F4C00725FCA /* MetaDataViewController.swift */,
+				FA32309222BC0F4C00725FCA /* MetaDataManager.swift */,
 				FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */,
 				FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */,
 				FA8E8DC722DDD056001B780D /* CameraViewController.swift */,
@@ -241,7 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E16F5E522E388F1008B158C /* AppDelegate.swift in Sources */,
-				7E16F5E622E388F1008B158C /* MetaDataViewController.swift in Sources */,
+				7E16F5E622E388F1008B158C /* MetaDataManager.swift in Sources */,
 				7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */,
 				7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */,
 				7E16F5E922E388F1008B158C /* FileManagerViewController.swift in Sources */,

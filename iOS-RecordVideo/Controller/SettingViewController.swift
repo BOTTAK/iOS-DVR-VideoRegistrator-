@@ -17,9 +17,7 @@ protocol SettingFromCustomView {
 
 class SettingViewController: UIViewController {
     
-    
     //MARK: Outlets
-    
     var settingPickerQuility = UIImagePickerController()
     var settingPickerDuration = UIImagePickerController()
     var settingMicrophone =  UIImagePickerController()
@@ -33,9 +31,6 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var videoQuialitySegment: UISegmentedControl!
     @IBOutlet weak var videoDurationSegment: UISegmentedControl!
     @IBOutlet weak var microphoneSegment: UISegmentedControl!
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
