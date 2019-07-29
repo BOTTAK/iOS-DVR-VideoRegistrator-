@@ -26,40 +26,54 @@ class ApiManager {
         static let uploads = ""
     }
     
-    func uploadVideoToServer(onComplete: @escaping ([MainViewController]) -> Void) {
+    
+    func uploadVideo(url: String) {
+        
+            guard let url = URL(string: url) else { return }
+            
+            let image = UIImage(named: "Notification")!
+            let data = image.pngData()!
+            
+            let httpHeaders = ["Authorization": "Client-ID 1bd22b9ce396a4c"]
+            
+            upload(multipartFormData: { (multipartFormData) in
+                
+                multipartFormData.append(data, withName: "image")
+                
+            }, to: url,
+               headers: httpHeaders) { (encodingCompletion) in
+                
+                switch encodingCompletion {
+                    
+                case .success(request: let uploadRequest,
+                              streamingFromDisk: let streamingFromDisk,
+                              streamFileURL: let streamFileURL):
+                    
+                    print(uploadRequest)
+                    print(streamingFromDisk)
+                    print(streamFileURL ?? "strimingFileURL is NIL")
+                    
+                    uploadRequest.validate().responseJSON(completionHandler: { (responseJSON) in
+                        
+                        switch responseJSON.result {
+                            
+                        case .success(let value):
+                            print(value)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    })
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
         
     }
     
-   
+    
    
     
-    func uploadVideo(onComplete: @escaping ([VideoManager]) -> Void) { // local video file path..
 
-        let urlString = Constants.baseURL + EndPoints.uploads
-        
-//        Alamofire.upload(.POST, "http://test.com", multipartFormData: { (formData:MultipartFormData) in
-//            formData.appendBodyPart(fileURL: NSURL(fileURLWithPath: filePath), name: uname)
-//        }, encodingCompletion: { encodingResult in
-//            switch encodingResult {
-//            case .Success(let upload, _, _):
-//                upload.progress { bytesRead, totalBytesRead, totalBytesExpectedToRead in
-//                    print(totalBytesRead)
-//                }
-//                upload.responseJSON { response in
-//                    debugPrint(response)
-//                    //uploaded
-//                }
-//            case .Failure(let encodingError):
-//                //Something went wrong!
-//                if DEBUG_MODE {
-//                    print(encodingError)
-//                }
-//            }
-//        })
-        
-    }
-    
-    
-   
-    
-}
