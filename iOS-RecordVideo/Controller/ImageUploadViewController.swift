@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Photos
 
 class ImageUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -27,7 +28,7 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
         let imagePicker = UIImagePickerController()
        
         
-        imagePicker.delegate = self 
+        imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         
         self.present(imagePicker, animated: true, completion: nil)
@@ -37,17 +38,26 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    print("OK")
+                } else {}
+            })
+        }
         
     }
     
+    
 
-        func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaInfo info: [UIImagePickerController.InfoKey : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imageViewUpload.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         imageViewUpload.backgroundColor = UIColor.clear
-            self.dismiss(animated: true, completion: nil)
-            uploadImage()
+        self.dismiss(animated: true, completion: nil)
+        uploadImage()
+
     }
-    
     
     func uploadImage() {
         
