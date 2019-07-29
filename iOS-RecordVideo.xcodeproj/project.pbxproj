@@ -26,6 +26,7 @@
 		7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */; };
 		7EE8CCBF22EC342C00DFC5AB /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */; };
 		FA0D306C22EC368E00977CB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0ACC3522EC33BC00FE82E6 /* Main.storyboard */; };
+		FA1F73FD22EEE19B0006ACCA /* ImageUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F73FC22EEE19B0006ACCA /* ImageUploadViewController.swift */; };
 		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
 		FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
 		FACC768922E5B88E00AC7ED5 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768822E5B88E00AC7ED5 /* SettingViewController.swift */; };
@@ -42,6 +43,7 @@
 		7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameGenerator.swift; sourceTree = "<group>"; };
 		7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		FA0ACC3522EC33BC00FE82E6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "/Users/macbook/Downloads/Programming/iOS-RecordVideo/iOS-RecordVideo/Views/Main.storyboard"; sourceTree = "<absolute>"; };
+		FA1F73FC22EEE19B0006ACCA /* ImageUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewController.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
 		FA32309E22BC120900725FCA /* UIView+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CoreKit.swift"; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */,
 				FA8E8DC722DDD056001B780D /* CameraViewController.swift */,
 				FACC768822E5B88E00AC7ED5 /* SettingViewController.swift */,
+				FA1F73FC22EEE19B0006ACCA /* ImageUploadViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				7EE8CCBF22EC342C00DFC5AB /* VideoModel.swift in Sources */,
 				7E16F5EE22E388F1008B158C /* UIView+CoreKit.swift in Sources */,
 				7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */,
+				FA1F73FD22EEE19B0006ACCA /* ImageUploadViewController.swift in Sources */,
 				7E16F5EF22E388F1008B158C /* ApiManager.swift in Sources */,
 				7E16F5F222E388F1008B158C /* MovieConverter.swift in Sources */,
 				7E16F5F322E388F1008B158C /* CameraModel.swift in Sources */,

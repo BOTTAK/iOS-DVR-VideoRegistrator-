@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vx9-hr-55m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yGB-Xj-X2x">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -168,6 +168,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFJ-be-5NR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="881.25" y="-676.05633802816897"/>
+        </scene>
+        <!--Image Upload View Controller-->
+        <scene sceneID="1Jc-Te-Ws1">
+            <objects>
+                <viewController id="yGB-Xj-X2x" customClass="ImageUploadViewController" customModule="iOS_RecordVideo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" tag="1" contentMode="scaleToFill" id="JPa-0i-d4K">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gYX-ZS-Zli">
+                                <rect key="frame" x="10" y="45" width="300" height="128"/>
+                                <color key="backgroundColor" red="0.80392156859999997" green="0.80784313730000001" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69J-CI-Bnv">
+                                <rect key="frame" x="65" y="239" width="190" height="30"/>
+                                <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="uploadButtonToServer:" destination="yGB-Xj-X2x" eventType="touchUpInside" id="xGR-Bq-5gl"/>
+                                </connections>
+                            </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oTe-eK-u3l">
+                                <rect key="frame" x="21" y="334" width="288" height="2"/>
+                                <color key="progressTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="trackTintColor" red="0.80392156859999997" green="0.80784313730000001" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-f4-cac">
+                                <rect key="frame" x="140" y="381" width="40" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Aa1-Yc-ITD" firstAttribute="bottom" secondItem="Fd4-f4-cac" secondAttribute="bottom" constant="166" id="10c-3D-pey"/>
+                            <constraint firstItem="69J-CI-Bnv" firstAttribute="leading" secondItem="Aa1-Yc-ITD" secondAttribute="leading" constant="65" id="EJx-j2-QTV"/>
+                            <constraint firstItem="Fd4-f4-cac" firstAttribute="leading" secondItem="Aa1-Yc-ITD" secondAttribute="leading" constant="140" id="EUr-g2-GMy"/>
+                            <constraint firstItem="69J-CI-Bnv" firstAttribute="top" secondItem="gYX-ZS-Zli" secondAttribute="bottom" constant="66" id="H90-DF-tiP"/>
+                            <constraint firstItem="gYX-ZS-Zli" firstAttribute="top" secondItem="Aa1-Yc-ITD" secondAttribute="top" constant="25" id="JzH-dN-aIH"/>
+                            <constraint firstItem="Fd4-f4-cac" firstAttribute="top" secondItem="oTe-eK-u3l" secondAttribute="bottom" constant="45" id="Qj7-Y9-mpv"/>
+                            <constraint firstItem="Aa1-Yc-ITD" firstAttribute="trailing" secondItem="Fd4-f4-cac" secondAttribute="trailing" constant="140" id="Xed-L7-RCL"/>
+                            <constraint firstItem="oTe-eK-u3l" firstAttribute="leading" secondItem="JPa-0i-d4K" secondAttribute="leadingMargin" constant="5" id="aYw-4e-alv"/>
+                            <constraint firstItem="oTe-eK-u3l" firstAttribute="top" secondItem="69J-CI-Bnv" secondAttribute="bottom" constant="65" id="e2f-C4-nel"/>
+                            <constraint firstItem="Aa1-Yc-ITD" firstAttribute="trailing" secondItem="gYX-ZS-Zli" secondAttribute="trailing" constant="10" id="i6D-aG-99e"/>
+                            <constraint firstItem="oTe-eK-u3l" firstAttribute="trailing" secondItem="JPa-0i-d4K" secondAttribute="trailingMargin" constant="5" id="tyS-EW-tTw"/>
+                            <constraint firstItem="Aa1-Yc-ITD" firstAttribute="trailing" secondItem="69J-CI-Bnv" secondAttribute="trailing" constant="65" id="xVe-fZ-Eqf"/>
+                            <constraint firstItem="gYX-ZS-Zli" firstAttribute="leading" secondItem="Aa1-Yc-ITD" secondAttribute="leading" constant="10" id="ys2-eD-a0x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Aa1-Yc-ITD"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageViewUpload" destination="gYX-ZS-Zli" id="K4U-Qb-fuV"/>
+                        <outlet property="progressLabel" destination="Fd4-f4-cac" id="R5K-9P-xeg"/>
+                        <outlet property="progressUploadToServer" destination="oTe-eK-u3l" id="VHx-VP-ic9"/>
+                        <outlet property="uploadButton" destination="69J-CI-Bnv" id="dkc-Tu-4CW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tLW-5A-Ezv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1651.875" y="-681.33802816901414"/>
         </scene>
     </scenes>
 </document>
