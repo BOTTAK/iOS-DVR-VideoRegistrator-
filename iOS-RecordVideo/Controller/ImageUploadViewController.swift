@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ImageUploadViewController: UIViewController {
+class ImageUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
     
@@ -27,7 +27,7 @@ class ImageUploadViewController: UIViewController {
         let imagePicker = UIImagePickerController()
        
         
-        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePicker.delegate = self 
         imagePicker.sourceType = .photoLibrary
         
         self.present(imagePicker, animated: true, completion: nil)
