@@ -13,6 +13,8 @@ class CustomPickerViewController: UIImagePickerController {
     
     
 
+    let setting = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingViewController.self) as! SettingViewController
+    
     var firstTimeCapture = true
     
     var swipeLeftRecognizer: UISwipeGestureRecognizer {
@@ -42,6 +44,7 @@ class CustomPickerViewController: UIImagePickerController {
         addRecognizers()
         setupAndAddSubviews()
         delegate = self
+        setting.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,7 +83,7 @@ class CustomPickerViewController: UIImagePickerController {
     @objc func settingsButtonTouch(sender: UIButton) {
         toSave = false
         stopVideoCapture()
-        let settingsController = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingViewController.self)
+        let settingsController = setting
         present(settingsController, animated: true, completion: nil)
     }
     

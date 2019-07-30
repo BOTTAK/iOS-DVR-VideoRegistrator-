@@ -57,7 +57,7 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
         guard let fileURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL else { fatalError() }
         guard let metadata = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { fatalError() }
         guard let location = metadata.location else { fatalError() }
-        ApiManager.uploadVideo(url: fileURL, location: location)
+//        ApiManager.uploadVideo(url: fileURL, location: location)
         
         // ... Other stuff like dismiss omitted
         

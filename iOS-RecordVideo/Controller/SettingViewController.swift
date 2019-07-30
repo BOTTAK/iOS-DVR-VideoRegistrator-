@@ -26,7 +26,7 @@ class SettingViewController: UIViewController {
     var settingMicrophone: String = ""
     var videoAndImageReview = UIImagePickerController()
     var videoURL: URL?
-    weak var delegate: SettingFromCustomView?
+    weak var delegate: CustomPickerViewController?
     
     @IBOutlet weak var videoQualityLabel: UILabel!
     @IBOutlet weak var videoDurationLabel: UILabel!
@@ -126,6 +126,7 @@ class SettingViewController: UIViewController {
         print("videoURL:\(String(describing: videoURL))")
         self.dismiss(animated: true, completion: nil)
     }
+    
     
     
 }
