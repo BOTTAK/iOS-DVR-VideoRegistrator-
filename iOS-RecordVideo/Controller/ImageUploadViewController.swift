@@ -30,6 +30,7 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
         
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = ["public.image", "public.movie"]
         
         self.present(imagePicker, animated: true, completion: nil)
         
@@ -49,13 +50,20 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
         
     }
     
-    
-
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imageViewUpload.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         imageViewUpload.backgroundColor = UIColor.clear
-        self.dismiss(animated: true, completion: nil)
-        uploadImage()
+        
+        guard let fileURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL else { fatalError() }
+        guard let metadata = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { fatalError() }
+        guard let location = metadata.location else { fatalError() }
+        ApiManager.uploadVideo(url: fileURL, location: location)
+        
+        // ... Other stuff like dismiss omitted
+        
+        //        ApiManager.uploadVideo(url: fileURL.path)
+        //        self.dismiss(animated: true, completion: nil)
+        //        uploadImage()
 
     }
     
@@ -80,7 +88,6 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
         
         let task = session.uploadTask(with: request as URLRequest, from: imageDataSource!)
         task.resume()
-        
         
         
     }
