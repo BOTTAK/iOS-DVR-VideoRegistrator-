@@ -42,6 +42,7 @@ class CustomPickerViewController: UIImagePickerController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         startVideoCapture()
     }
     
@@ -137,8 +138,7 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
                 case let .failure(error):
                     UIHelper.showError(errorMessage: "Error creating URL - \(error.localizedDescription)", controller: self)
                 case let .success(video):
-                    print(video.metaData)
-                    UISaveVideoAtPathToSavedPhotosAlbum(video.fileURL.path,
+                    UISaveVideoAtPathToSavedPhotosAlbum(video.path,
                                                         self,
                                                         #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
                                                         nil)
