@@ -11,7 +11,6 @@ import Alamofire
 import Photos
 import SwiftyJSON
 
-<<<<<<< HEAD:iOS-RecordVideo/Model/NetworkingManager.swift
 typealias TokenBlock = (String) -> ()
 typealias VideoUploadBlock = (Any?, Error?) -> ()
 
@@ -24,11 +23,6 @@ struct APIConstants {
                                          "expired_at": APIConstants.expireDateString]
     static let tokensURL = URL(string: "https://api.detect.camera/tokens")!
     static let uploadVideoURL = URL(string:"https://api.detect.camera/videos")!
-=======
-class ApiManager: CustomPickerViewController {
-    
-    var video = VideoManager()
->>>>>>> OldBranch:iOS-RecordVideo/Model/ApiManager.swift
     
     private init() {}
 }
@@ -50,7 +44,6 @@ final class NetworkingManager {
     
     public func uploadVideo(videoUrl: URL, location: CLLocation, complitionHandler: @escaping VideoUploadBlock) {
         
-<<<<<<< HEAD:iOS-RecordVideo/Model/NetworkingManager.swift
         //        let latitude = location.coordinate.latitude
         //        let longtitude = location.coordinate.longitude
         //        let speed = location.speed
@@ -68,20 +61,6 @@ final class NetworkingManager {
             //            multipartFormData.append(<#T##data: Data##Data#>, withName: "violations[0][violation_id]")
             multipartFormData.append(videoUrl, withName: "videoFile", fileName: "secondTry.mp4", mimeType: "video/mp4")
         }, to: APIConstants.uploadVideoURL,
-=======
-        guard let url = URL(string: url) else { return }
-        
-        let image = UIImage(named: "Notification")!
-        let data = image.pngData()!
-        
-        let httpHeaders = ["Authorization": "Client-ID 1bd22b9ce396a4c"]
-        
-        upload(multipartFormData: { (multipartFormData) in
-            
-            multipartFormData.append(data, withName: "image")
-            
-        }, to: url,
->>>>>>> OldBranch:iOS-RecordVideo/Model/ApiManager.swift
            headers: httpHeaders) { (encodingCompletion) in
             
             switch encodingCompletion {
@@ -97,48 +76,16 @@ final class NetworkingManager {
                 uploadRequest.validate().responseJSON(completionHandler: { (responseJSON) in
                     
                     switch responseJSON.result {
-<<<<<<< HEAD:iOS-RecordVideo/Model/NetworkingManager.swift
                     case .success(let value):
                         complitionHandler(value, nil)
                     case .failure(let error):
                         complitionHandler(nil, error)
-=======
-                        
-                    case .success(let value):
-                        print(value)
-                    case .failure(let error):
-                        print(error)
->>>>>>> OldBranch:iOS-RecordVideo/Model/ApiManager.swift
                     }
                 })
                 
             case .failure(let error):
-<<<<<<< HEAD:iOS-RecordVideo/Model/NetworkingManager.swift
                 complitionHandler(nil, error)
             }
         }
     }
 }
-
-
-   
-    
-=======
-                print(error)
-            }
-        }
-    }
-    
-    
-    func uploadVideoTwo(url: String) { // local video file path..
-        
-        
-        
-        
-    }
-    
-    
-}
-
->>>>>>> OldBranch:iOS-RecordVideo/Model/ApiManager.swift
-
