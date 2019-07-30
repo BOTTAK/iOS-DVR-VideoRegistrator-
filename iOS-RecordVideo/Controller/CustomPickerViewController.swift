@@ -46,15 +46,10 @@ class CustomPickerViewController: UIImagePickerController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-<<<<<<< HEAD
-        
-        startVideoCapture()
-=======
 
         if firstTimeCapture {
             startVideoCapture()
         }
->>>>>>> OldBranch
     }
     
     // MARK: View setup
