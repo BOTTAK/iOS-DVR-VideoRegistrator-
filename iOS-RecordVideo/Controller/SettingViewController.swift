@@ -51,7 +51,7 @@ class SettingViewController: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         delegate?.settingFromCustomViewController(settingPickerQuility, settingPickerDuration, settingMicrophone)
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func videoQualitySegmented(_ sender: UISegmentedControl) {
