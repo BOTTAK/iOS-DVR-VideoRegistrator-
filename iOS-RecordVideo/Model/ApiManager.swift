@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import Photos
 
-class ApiManager {
+class ApiManager: CustomPickerViewController {
     
     var video = VideoManager()
     
@@ -29,51 +29,56 @@ class ApiManager {
     
     func uploadVideo(url: String) {
         
-            guard let url = URL(string: url) else { return }
+        guard let url = URL(string: url) else { return }
+        
+        let image = UIImage(named: "Notification")!
+        let data = image.pngData()!
+        
+        let httpHeaders = ["Authorization": "Client-ID 1bd22b9ce396a4c"]
+        
+        upload(multipartFormData: { (multipartFormData) in
             
-            let image = UIImage(named: "Notification")!
-            let data = image.pngData()!
+            multipartFormData.append(data, withName: "image")
             
-            let httpHeaders = ["Authorization": "Client-ID 1bd22b9ce396a4c"]
+        }, to: url,
+           headers: httpHeaders) { (encodingCompletion) in
             
-            upload(multipartFormData: { (multipartFormData) in
+            switch encodingCompletion {
                 
-                multipartFormData.append(data, withName: "image")
+            case .success(request: let uploadRequest,
+                          streamingFromDisk: let streamingFromDisk,
+                          streamFileURL: let streamFileURL):
                 
-            }, to: url,
-               headers: httpHeaders) { (encodingCompletion) in
+                print(uploadRequest)
+                print(streamingFromDisk)
+                print(streamFileURL ?? "strimingFileURL is NIL")
                 
-                switch encodingCompletion {
+                uploadRequest.validate().responseJSON(completionHandler: { (responseJSON) in
                     
-                case .success(request: let uploadRequest,
-                              streamingFromDisk: let streamingFromDisk,
-                              streamFileURL: let streamFileURL):
-                    
-                    print(uploadRequest)
-                    print(streamingFromDisk)
-                    print(streamFileURL ?? "strimingFileURL is NIL")
-                    
-                    uploadRequest.validate().responseJSON(completionHandler: { (responseJSON) in
+                    switch responseJSON.result {
                         
-                        switch responseJSON.result {
-                            
-                        case .success(let value):
-                            print(value)
-                        case .failure(let error):
-                            print(error)
-                        }
-                    })
-                    
-                case .failure(let error):
-                    print(error)
-                }
+                    case .success(let value):
+                        print(value)
+                    case .failure(let error):
+                        print(error)
+                    }
+                })
+                
+            case .failure(let error):
+                print(error)
             }
         }
+    }
+    
+    
+    func uploadVideoTwo(url: String) { // local video file path..
+        
+        
         
         
     }
     
     
-   
-    
+}
+
 

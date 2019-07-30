@@ -11,7 +11,8 @@ import AVFoundation
 
 class CustomPickerViewController: UIImagePickerController {
     
-    var setting: SettingViewController?
+    
+
     var firstTimeCapture = true
     
     var swipeLeftRecognizer: UISwipeGestureRecognizer {
