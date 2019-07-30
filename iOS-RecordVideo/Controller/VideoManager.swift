@@ -10,7 +10,7 @@ import UIKit
 
 class VideoManager {
     
-    func trimVideo(sourceURL: URL, duration: Double, metaData: AVMutableMetadataItem, completion: @escaping (Result<URL, Error>)->Void) {
+    func trimVideo(sourceURL: URL, duration: Double, metaData: AVMutableMetadataItem, completion: @escaping (Result<(URL, [AVMetadataItem]), Error>)->Void) {
         
         guard sourceURL.isFileURL else { fatalError() }
         
@@ -35,12 +35,14 @@ class VideoManager {
                 let error = NSError(domain: "VideoApp", code: 00, userInfo: ["Message": "Export cancelled"])
                 completion(.failure(error))
             case .completed:
-                guard let correctURL = exportSession.outputURL else {
-                    print("error getting url")
+                guard let correctURL = exportSession.outputURL,
+                let correctMetaData = exportSession.metadata
+                else {
+                    print("error getting url or metadata")
                     return
                 }
                 print("Successful! \(correctURL)")
-                completion(.success(correctURL))
+                completion(.success((correctURL, correctMetaData)))
             default:
                 fatalError()
             }

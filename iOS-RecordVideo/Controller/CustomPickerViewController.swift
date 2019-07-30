@@ -143,8 +143,9 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
                 switch (result) {
                 case let .failure(error):
                     UIHelper.showError(errorMessage: "Error creating URL - \(error.localizedDescription)", controller: self)
-                case let .success(video):
-                    UISaveVideoAtPathToSavedPhotosAlbum(video.path,
+                case let .success((video, metadata)):
+                    let videoPath = video.path
+                    UISaveVideoAtPathToSavedPhotosAlbum(videoPath,
                                                         self,
                                                         #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
                                                         nil)
