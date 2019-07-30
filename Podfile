@@ -11,5 +11,6 @@ target 'iOS-RecordVideo' do
   pod 'Alamofire'
   pod 'Kingfisher'
   pod 'LFLiveKit'
+  pod 'SwiftyJSON'
 
 end
