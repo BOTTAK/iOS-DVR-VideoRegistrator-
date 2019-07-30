@@ -11,7 +11,8 @@ import Alamofire
 import Photos
 import SwiftyJSON
 
-typealias ClosureReturnToken = (String) -> ()
+typealias TokenBlock = (String) -> ()
+typealias VideoUploadBlock = (Any?, Error?) -> ()
 
 struct APIConstants {
     static let login = "9@m.ru"
@@ -26,44 +27,40 @@ struct APIConstants {
     private init() {}
 }
 
-class NetworkingManager {
+final class NetworkingManager {
     
-    var video = VideoManager()
+    public var token: String = "invalidToken"
     
-    class func authorisation(complition: @escaping ClosureReturnToken) {
+    public func authorisation(complition: @escaping TokenBlock) {
         Alamofire.request(APIConstants.tokensURL,
                           method: .post,
                           parameters: APIConstants.parameters).responseJSON { response in
                             
-            let json = JSON(response.result.value!)
-            guard let token = json["token"].string else { fatalError() }
-            complition(token)
+                            let json = JSON(response.result.value!)
+                            guard let validToken = json["token"].string else { fatalError() }
+                            complition(validToken)
         }
     }
     
-    
-    class func uploadVideo(videoUrl: URL, location: CLLocation, token: String) {
+    public func uploadVideo(videoUrl: URL, location: CLLocation, complitionHandler: @escaping VideoUploadBlock) {
         
-        let latitude = location.coordinate.latitude
-        let longtitude = location.coordinate.longitude
-        let speed = location.speed
-        print(videoUrl)
+        //        let latitude = location.coordinate.latitude
+        //        let longtitude = location.coordinate.longitude
+        //        let speed = location.speed
         
-        let latitudeData = withUnsafeBytes(of: latitude) { Data($0) }
-        let longtitudeData = withUnsafeBytes(of: longtitude) { Data($0) }
-        let speedData = withUnsafeBytes(of: speed) { Data($0) }
-        
-        guard let url: URL =  URL(string:"https://api.detect.camera/videos") else { fatalError() }
+        //        let latitudeData = withUnsafeBytes(of: latitude) { Data($0) }
+        //        let longtitudeData = withUnsafeBytes(of: longtitude) { Data($0) }
+        //        let speedData = withUnsafeBytes(of: speed) { Data($0) }
         
         let httpHeaders = ["Authorization": "Bearer \(token)", "Cache-Control": "no-cache"]
         
         upload(multipartFormData: { (multipartFormData) in
-//            multipartFormData.append(latitudeData, withName: "location_data[latitude]")
-//            multipartFormData.append(longtitudeData, withName: "location_data[longitude]")
-//            multipartFormData.append(speedData, withName: "location_data[speed]")
-            multipartFormData.append(<#T##data: Data##Data#>, withName: "violations[0][violation_id]")
+            //            multipartFormData.append(latitudeData, withName: "location_data[latitude]")
+            //            multipartFormData.append(longtitudeData, withName: "location_data[longitude]")
+            //            multipartFormData.append(speedData, withName: "location_data[speed]")
+            //            multipartFormData.append(<#T##data: Data##Data#>, withName: "violations[0][violation_id]")
             multipartFormData.append(videoUrl, withName: "videoFile", fileName: "secondTry.mp4", mimeType: "video/mp4")
-        }, to: url,
+        }, to: APIConstants.uploadVideoURL,
            headers: httpHeaders) { (encodingCompletion) in
             
             switch encodingCompletion {
@@ -79,45 +76,21 @@ class NetworkingManager {
                 uploadRequest.validate().responseJSON(completionHandler: { (responseJSON) in
                     
                     switch responseJSON.result {
-                        
                     case .success(let value):
-                        print(value)
+                        complitionHandler(value, nil)
                     case .failure(let error):
-                        print(error)
+                        complitionHandler(nil, error)
                     }
                 })
                 
             case .failure(let error):
-                print(error)
+                complitionHandler(nil, error)
             }
         }
     }
-    //
-    //    class func uploadToServer(url: URL) {
-    //
-    //        Alamofire.upload(
-    //            multipartFormData: { multipartFormData in
-    //                multipartFormData.append(url, withName: "unicorn")
-    //                multipartFormData.append(rainbowImageURL, withName: "rainbow")
-    //        },
-//            to: "https://httpbin.org/post",
-//            encodingCompletion: { encodingResult in
-//                switch encodingResult {
-//                case .success(let upload, _, _):
-//                    upload.responseJSON { response in
-//                        debugPrint(response)
-//                    }
-//                case .failure(let encodingError):
-//                    print(encodingError)
-//                }
-//        }
-//        )
-//    }
-    
-        
-    }
-    
-    
+}
+
+
    
     
 
