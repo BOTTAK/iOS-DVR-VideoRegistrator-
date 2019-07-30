@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		637CBFD3CBA5F816AC8D1DCE /* Pods_iOS_RecordVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC06ECEECD52902E9D9A4B3 /* Pods_iOS_RecordVideo.framework */; };
 		7E16F5E522E388F1008B158C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0A8EE22BA802E004AE55D /* AppDelegate.swift */; };
 		7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */; };
 		7E16F5E922E388F1008B158C /* FileManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */; };
 		7E16F5EA22E388F1008B158C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DC722DDD056001B780D /* CameraViewController.swift */; };
 		7E16F5EC22E388F1008B158C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16F5E122E38762008B158C /* MainViewController.swift */; };
 		7E16F5EE22E388F1008B158C /* UIView+CoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32309E22BC120900725FCA /* UIView+CoreKit.swift */; };
-		7E16F5EF22E388F1008B158C /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32309A22BC119F00725FCA /* ApiManager.swift */; };
+		7E16F5EF22E388F1008B158C /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32309A22BC119F00725FCA /* NetworkingManager.swift */; };
 		7E16F5F222E388F1008B158C /* MovieConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DC922DDD080001B780D /* MovieConverter.swift */; };
 		7E16F5F322E388F1008B158C /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCB22DDE12E001B780D /* CameraModel.swift */; };
 		7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */; };
@@ -25,8 +24,8 @@
 		7E19173222EDC98D00C4B7AA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E19173122EDC98D00C4B7AA /* UIHelper.swift */; };
 		7E8E8D9E22E9B50A00707D76 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9D22E9B50A00707D76 /* VideoManager.swift */; };
 		7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */; };
+		7E95E26922EF7EDF002248F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E95E26822EF7EDF002248F1 /* Main.storyboard */; };
 		7EE8CCBF22EC342C00DFC5AB /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */; };
-		FA0D306C22EC368E00977CB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0ACC3522EC33BC00FE82E6 /* Main.storyboard */; };
 		FA1F73FD22EEE19B0006ACCA /* ImageUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F73FC22EEE19B0006ACCA /* ImageUploadViewController.swift */; };
 		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
 		FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
@@ -36,19 +35,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		217DA1B0773DC1038D1245D1 /* Pods-iOS-RecordVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RecordVideo.debug.xcconfig"; path = "Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo.debug.xcconfig"; sourceTree = "<group>"; };
-		3AC06ECEECD52902E9D9A4B3 /* Pods_iOS_RecordVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_RecordVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E16F5E122E38762008B158C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerViewController.swift; sourceTree = "<group>"; };
 		7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNotificationLabel.swift; sourceTree = "<group>"; };
 		7E19173122EDC98D00C4B7AA /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		7E8E8D9D22E9B50A00707D76 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameGenerator.swift; sourceTree = "<group>"; };
+		7E95E26822EF7EDF002248F1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
-		C9E16AF73CEEBA59CB7E792D /* Pods-iOS-RecordVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RecordVideo.release.xcconfig"; path = "Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo.release.xcconfig"; sourceTree = "<group>"; };
-		FA0ACC3522EC33BC00FE82E6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "/Users/macbook/Downloads/Programming/iOS-RecordVideo/iOS-RecordVideo/Views/Main.storyboard"; sourceTree = "<absolute>"; };
 		FA1F73FC22EEE19B0006ACCA /* ImageUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewController.swift; sourceTree = "<group>"; };
-		FA32309A22BC119F00725FCA /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		FA32309A22BC119F00725FCA /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
 		FA32309E22BC120900725FCA /* UIView+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CoreKit.swift"; sourceTree = "<group>"; };
 		FA495CF622EE17D600FF3381 /* MetaDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaDataManager.swift; sourceTree = "<group>"; };
@@ -73,26 +69,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				637CBFD3CBA5F816AC8D1DCE /* Pods_iOS_RecordVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		234F3F2F73E219C7108205F7 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3AC06ECEECD52902E9D9A4B3 /* Pods_iOS_RecordVideo.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		2CD2069E4A9BE9C916A06E40 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				217DA1B0773DC1038D1245D1 /* Pods-iOS-RecordVideo.debug.xcconfig */,
-				C9E16AF73CEEBA59CB7E792D /* Pods-iOS-RecordVideo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -119,7 +104,7 @@
 		7E16F5FA22E3AF67008B158C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FA32309A22BC119F00725FCA /* ApiManager.swift */,
+				FA32309A22BC119F00725FCA /* NetworkingManager.swift */,
 				FA8E8DC922DDD080001B780D /* MovieConverter.swift */,
 				FA8E8DCB22DDE12E001B780D /* CameraModel.swift */,
 				FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */,
@@ -132,7 +117,7 @@
 		FA32309522BC0F5B00725FCA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FA0ACC3522EC33BC00FE82E6 /* Main.storyboard */,
+				7E95E26822EF7EDF002248F1 /* Main.storyboard */,
 				FA32309E22BC120900725FCA /* UIView+CoreKit.swift */,
 			);
 			path = Views;
@@ -162,7 +147,6 @@
 				FAD0A8ED22BA802E004AE55D /* iOS-RecordVideo */,
 				FAD0A8EC22BA802E004AE55D /* Products */,
 				2CD2069E4A9BE9C916A06E40 /* Pods */,
-				234F3F2F73E219C7108205F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -195,11 +179,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAD0A8FD22BA802F004AE55D /* Build configuration list for PBXNativeTarget "iOS-RecordVideo" */;
 			buildPhases = (
-				59893AB9657C3B93FB6B1105 /* [CP] Check Pods Manifest.lock */,
 				FAD0A8E722BA802E004AE55D /* Sources */,
 				FAD0A8E822BA802E004AE55D /* Frameworks */,
 				FAD0A8E922BA802E004AE55D /* Resources */,
-				0F1F2CE7F3D2463B7E26B12D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -249,54 +231,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */,
-				FA0D306C22EC368E00977CB9 /* Main.storyboard in Resources */,
 				FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */,
+				7E95E26922EF7EDF002248F1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0F1F2CE7F3D2463B7E26B12D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		59893AB9657C3B93FB6B1105 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iOS-RecordVideo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FAD0A8E722BA802E004AE55D /* Sources */ = {
@@ -315,7 +255,7 @@
 				7E16F5EE22E388F1008B158C /* UIView+CoreKit.swift in Sources */,
 				7E16F5FE22E457EB008B158C /* SwipeNotificationLabel.swift in Sources */,
 				FA1F73FD22EEE19B0006ACCA /* ImageUploadViewController.swift in Sources */,
-				7E16F5EF22E388F1008B158C /* ApiManager.swift in Sources */,
+				7E16F5EF22E388F1008B158C /* NetworkingManager.swift in Sources */,
 				7E16F5F222E388F1008B158C /* MovieConverter.swift in Sources */,
 				7E16F5F322E388F1008B158C /* CameraModel.swift in Sources */,
 				FACC768922E5B88E00AC7ED5 /* SettingViewController.swift in Sources */,
@@ -460,18 +400,17 @@
 		};
 		FAD0A8FE22BA802F004AE55D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 217DA1B0773DC1038D1245D1 /* Pods-iOS-RecordVideo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZZH8QX82PA;
+				DEVELOPMENT_TEAM = 29UN6WTSCZ;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideo";
+				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideo.Vladimir";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -481,18 +420,17 @@
 		};
 		FAD0A8FF22BA802F004AE55D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9E16AF73CEEBA59CB7E792D /* Pods-iOS-RecordVideo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZZH8QX82PA;
+				DEVELOPMENT_TEAM = 29UN6WTSCZ;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideo";
+				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideo.Vladimir";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
