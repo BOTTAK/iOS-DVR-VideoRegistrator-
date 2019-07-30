@@ -11,6 +11,9 @@ import AVFoundation
 
 class CustomPickerViewController: UIImagePickerController {
     
+    var setting: SettingViewController?
+    var firstTimeCapture = true
+    
     var swipeLeftRecognizer: UISwipeGestureRecognizer {
         let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
         gesture.direction = .left
@@ -42,7 +45,10 @@ class CustomPickerViewController: UIImagePickerController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startVideoCapture()
+
+        if firstTimeCapture {
+            startVideoCapture()
+        }
     }
     
     // MARK: View setup
@@ -156,5 +162,16 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
         
         UIHelper.showError(errorMessage: message, customTitle: title, action: nil, controller: self)
     }
+}
+import MobileCoreServices
+extension CustomPickerViewController: SettingFromCustomView {
+    func settingFromCustomViewController(_ settingPickerQuility: UIImagePickerController.QualityType, _ settingPickerDuration: TimeInterval, _ settingMicrophone: String) {
+        fullVideoDuration = settingPickerDuration
+        videoQuality = settingPickerQuility
+        mediaTypes = [settingMicrophone]
+        startVideoCapture()
+    }
+    
+    
 }
 
