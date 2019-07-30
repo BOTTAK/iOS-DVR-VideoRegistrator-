@@ -41,8 +41,7 @@ class MetaDataManager: NSObject {
              metadata.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
              metadata.value = String(format: "%+09.5f%+010.5f%+.0fCRSWGS_84",
                                      currentLocation.coordinate.latitude,
-                                     currentLocation.coordinate.longitude,
-                                     currentLocation.altitude, currentLocation.speed) as NSString
+                                     currentLocation.coordinate.longitude, currentLocation.speed) as NSString
              return metadata
         @unknown default:
             fatalError()
