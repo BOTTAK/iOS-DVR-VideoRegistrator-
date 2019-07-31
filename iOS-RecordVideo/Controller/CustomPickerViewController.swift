@@ -13,6 +13,8 @@ class CustomPickerViewController: UIImagePickerController {
     
     
 
+    let setting = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingViewController.self) as! SettingViewController
+    
     var firstTimeCapture = true
     
     var swipeLeftRecognizer: UISwipeGestureRecognizer {
@@ -42,6 +44,7 @@ class CustomPickerViewController: UIImagePickerController {
         addRecognizers()
         setupAndAddSubviews()
         delegate = self
+        setting.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,8 +83,62 @@ class CustomPickerViewController: UIImagePickerController {
     @objc func settingsButtonTouch(sender: UIButton) {
         toSave = false
         stopVideoCapture()
-        let settingsController = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingViewController.self)
+        let settingsController = setting
         present(settingsController, animated: true, completion: nil)
+    }
+    
+    //MARK: Setting label setup
+    
+    func longitudeLabel() {
+        let longitudeSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
+        
+        longitudeSetting.center.x = view.center.x
+        longitudeSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
+        longitudeSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
+        longitudeSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        longitudeSetting.text = "Latitude"
+        longitudeSetting.textAlignment = .center
+        view.addSubview(longitudeSetting)
+        
+    }
+    
+    func latitudeLabel() {
+        let latitudeSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
+        
+        latitudeSetting.center.x = view.center.x
+        latitudeSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
+        latitudeSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
+        latitudeSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        latitudeSetting.text = "Latitude"
+        latitudeSetting.textAlignment = .center
+        view.addSubview(latitudeSetting)
+        
+    }
+    
+    func speedLabel() {
+        let speedSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
+        
+        speedSetting.center.x = view.center.x
+        speedSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
+        speedSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
+        speedSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        speedSetting.text = "Latitude"
+        speedSetting.textAlignment = .center
+        view.addSubview(speedSetting)
+        
+    }
+    
+    func dateLabel() {
+        let dateSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
+        
+        dateSetting.center.x = view.center.x
+        dateSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
+        dateSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
+        dateSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        dateSetting.text = "Latitude"
+        dateSetting.textAlignment = .center
+        view.addSubview(dateSetting)
+        
     }
     
     // MARK: Swipe handling
@@ -146,6 +203,7 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
                 case let .success((video, metadata)):
                     let videoPath = video.path
                     UISaveVideoAtPathToSavedPhotosAlbum(videoPath,
+
                                                         self,
                                                         #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
                                                         nil)
