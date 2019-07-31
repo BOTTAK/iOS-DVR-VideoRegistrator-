@@ -12,7 +12,7 @@ import Photos
 import SwiftyJSON
 
 typealias TokenBlock = (String) -> ()
-typealias VideoUploadBlock = (Any?, Error?) -> ()
+typealias VideoUploadBlock = (Swift.Result<Any, Error>)->Void
 
 struct APIConstants {
     static let login = "9@m.ru"
@@ -77,14 +77,14 @@ final class NetworkingManager {
                     
                     switch responseJSON.result {
                     case .success(let value):
-                        complitionHandler(value, nil)
+                        complitionHandler(.success(value))
                     case .failure(let error):
-                        complitionHandler(nil, error)
+                        complitionHandler(.failure(error))
                     }
                 })
                 
             case .failure(let error):
-                complitionHandler(nil, error)
+                complitionHandler(.failure(error))
             }
         }
     }

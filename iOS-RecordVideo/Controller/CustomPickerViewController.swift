@@ -117,7 +117,8 @@ class CustomPickerViewController: UIImagePickerController {
     
     func speedLabel() {
         let speedSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
-        
+        let speedLocation = MetaDataManager()
+        speedLocation
         speedSetting.center.x = view.center.x
         speedSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         speedSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
