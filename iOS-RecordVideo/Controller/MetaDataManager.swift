@@ -34,6 +34,10 @@ class MetaDataManager: NSObject {
              locManager.startUpdatingLocation()
              locManager.requestLocation()
              currentLocation = locManager.location
+             
+             let dateData = Calendar(identifier: .gregorian)
+             var componentData = dateData.dateComponents([.day,.month,.year,.hour,.minute,.second], from: Date())
+             
              let metadata = AVMutableMetadataItem()
              
              metadata.keySpace = AVMetadataKeySpace.quickTimeMetadata
@@ -41,8 +45,8 @@ class MetaDataManager: NSObject {
              metadata.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
              metadata.value = String(format: "%+09.5f%+010.5f%+.0fCRSWGS_84",
                                      currentLocation.coordinate.latitude,
-                                     currentLocation.coordinate.longitude,
-                                     currentLocation.altitude, currentLocation.speed) as NSString
+                                     currentLocation.coordinate.longitude, currentLocation.speed,
+                                     componentData as CVarArg) as NSString
              return metadata
         @unknown default:
             fatalError()
