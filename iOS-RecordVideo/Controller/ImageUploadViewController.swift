@@ -82,12 +82,14 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
                     return
                 }
                 print("Successful! \(correctURL)")
-                self.networkingManager.uploadVideo(videoUrl: correctURL, location: location) { (result, error) in
-                    if error != nil {
-                        print(error?.localizedDescription ?? "No error")
-                    } else {
-                        print(result as Any)
+                
+                self.networkingManager.uploadVideo(videoUrl: correctURL, location: location) { (result: Result<Any, Error>) in
+                    switch result {
+                    case let .success(value):
+                        print(value as Any)
                         self.dismiss(animated: true, completion: nil)
+                    case let .failure(error):
+                        print(error.localizedDescription)
                     }
                 }
             default:
