@@ -12,7 +12,7 @@ import Photos
 
 class ImageUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    
+    private let networkingManager = NetworkingManager()
     
     //MARK: - Outlets
     
@@ -24,21 +24,25 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
     //MARK: - Action
     
     @IBAction func uploadButtonToServer(_ sender: Any) {
-        
+//
         let imagePicker = UIImagePickerController()
-       
-        
+
+
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-        imagePicker.mediaTypes = ["public.image", "public.movie"]
-        
+        imagePicker.mediaTypes = ["public.movie"]
+
         self.present(imagePicker, animated: true, completion: nil)
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        networkingManager.authorisation { [weak self] token in
+            self?.networkingManager.token = token
+        }
+        
         let photos = PHPhotoLibrary.authorizationStatus()
         if photos == .notDetermined {
             PHPhotoLibrary.requestAuthorization({status in
@@ -51,20 +55,51 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imageViewUpload.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        imageViewUpload.backgroundColor = UIColor.clear
         
         guard let fileURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL else { fatalError() }
         guard let metadata = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { fatalError() }
         guard let location = metadata.location else { fatalError() }
+
 //        ApiManager.uploadVideo(url: fileURL, location: location)
         
         // ... Other stuff like dismiss omitted
-        
-        //        ApiManager.uploadVideo(url: fileURL.path)
-        //        self.dismiss(animated: true, completion: nil)
-        //        uploadImage()
 
+
+        
+        guard fileURL.isFileURL else { fatalError() }
+        
+        let asset = AVURLAsset(url: fileURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
+        
+        guard let exportSession = AVAssetExportSession(asset: asset,
+                                                       presetName: AVAssetExportPresetPassthrough) else { fatalError() }
+        exportSession.outputFileType = .mp4
+        FileManager.removeFileAtURLIfExists(url: FileManager.createNewFilePath(fileName: "secondTry"))
+        exportSession.outputURL = FileManager.createNewFilePath(fileName: "secondTry")
+        
+        exportSession.exportAsynchronously(completionHandler: {() -> Void in
+            switch exportSession.status {
+            case .failed:
+                print(exportSession.error ?? "No error")
+            case .cancelled:
+                print("Export cancelled")
+            case .completed:
+                guard let correctURL = exportSession.outputURL else {
+                    print("error getting url")
+                    return
+                }
+                print("Successful! \(correctURL)")
+                self.networkingManager.uploadVideo(videoUrl: correctURL, location: location) { (result, error) in
+                    if error != nil {
+                        print(error?.localizedDescription ?? "No error")
+                    } else {
+                        print(result as Any)
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            default:
+                fatalError()
+            }
+        })
     }
     
     func uploadImage() {

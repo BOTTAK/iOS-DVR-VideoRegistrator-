@@ -10,8 +10,10 @@ import UIKit
 
 class VideoManager {
     
-    func trimVideo(sourceURL: URL, duration: Double, metaData: AVMutableMetadataItem, completion: @escaping (Result<VideoModel, Error>)->Void) {
-        
+    func trimVideo(sourceURL: URL, duration: Double, metaData: AVMutableMetadataItem, completion: @escaping (Result<(URL, [AVMetadataItem]), Error>)->Void)
+    {
+
+    
         guard sourceURL.isFileURL else { fatalError() }
         
         let asset = AVURLAsset(url: sourceURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
@@ -36,14 +38,14 @@ class VideoManager {
                 completion(.failure(error))
             case .completed:
                 guard let correctURL = exportSession.outputURL,
-                    let correctMetaData = exportSession.metadata else {
-                        print("error getting metadata or url")
-                        return
+                    let correctMetaData = exportSession.metadata
+                    else {
+                        print("error getting url or metadata")
+
+                    return
                 }
                 print("Successful! \(correctURL)")
-                let video = VideoModel(fileURL: correctURL,
-                                       metaData: correctMetaData)
-                completion(.success(video))
+                completion(.success((correctURL, correctMetaData)))
             default:
                 fatalError()
             }
