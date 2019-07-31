@@ -9,7 +9,9 @@
 import UIKit
 import AVFoundation
 
-class CustomPickerViewController: UIImagePickerController {
+class CustomPickerViewController: UIImagePickerController, UIGestureRecognizerDelegate {
+    
+    
     
     
 
@@ -30,6 +32,69 @@ class CustomPickerViewController: UIImagePickerController {
         gesture.direction = .down
         return gesture
     }
+    //MARK: UIPanGestureRecognizet
+    var swipePanRecognizer: UIPanGestureRecognizer {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(swipeLeft))
+        
+        
+        let vel = gesture.velocity(in: self.view)
+        if vel.x > 0 {
+            // user dragged towards the right
+            print("right")
+        }
+        else if vel.x < 0 {
+            // user dragged towards the left
+            print("left")
+        }
+        
+        if vel.y > 0 {
+            // user dragged towards the down
+            print("down")
+        }
+        else if vel.y < 0 {
+            // user dragged towards the up
+            print("up")
+        }
+       return gesture
+        
+        //MARK: Act to UIPanGesture
+        
+        if gesture.state == .began {
+            
+        }
+        if gesture.state == .ended {
+            
+            
+        }
+        
+    }
+    
+    //MARK: UILongPressGestureRecognizer
+    
+    func swipeLongRecognizer() {
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        lpgr.delegate = self
+        self.view.addGestureRecognizer(lpgr)
+        
+    }
+    
+    
+    //MARK: Act to UILong
+    
+    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state != UIGestureRecognizer.State.ended {
+            return
+        }
+        
+        let p = gestureReconizer.location(in: self.view)
+
+            print("Could not find index path")
+        
+    }
+    
     var toSave = false
     var notificationLabel = SwipeNotificationLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     let videoManager = VideoManager()
@@ -89,7 +154,7 @@ class CustomPickerViewController: UIImagePickerController {
     
     func longitudeLabel() {
         let longitudeSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
-        
+        longitudeSetting.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50)
         longitudeSetting.center.x = view.center.x
         longitudeSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         longitudeSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
@@ -200,6 +265,8 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
                 case let .failure(error):
                     UIHelper.showError(errorMessage: "Error creating URL - \(error.localizedDescription)", controller: self)
                 case let .success((video, metadata)):
+                    metadata.first?.value
+                    
                     let videoPath = video.path
                     UISaveVideoAtPathToSavedPhotosAlbum(videoPath,
                                                         self,
