@@ -90,7 +90,6 @@ final class NetworkingManager {
                     switch responseJSON.result {
                     case .success(let value):
                         complitionHandler(.success(value))
-                        print(value)
                     case .failure(let error):
                         complitionHandler(.failure(error))
                     }
