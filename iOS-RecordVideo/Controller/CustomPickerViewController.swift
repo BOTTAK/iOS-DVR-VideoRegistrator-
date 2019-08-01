@@ -9,32 +9,33 @@
 import UIKit
 import AVFoundation
 
+enum SwipeSide {
+    case left
+    case right
+    case down
+    case none
+}
+
 class CustomPickerViewController: UIImagePickerController {
     
-    
+    var swipeEnded = false
+    var swipedTo: SwipeSide = .none
 
     let setting = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingViewController.self) as! SettingViewController
     
     var firstTimeCapture = true
     
-    var swipeLeftRecognizer: UISwipeGestureRecognizer {
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
-        gesture.direction = .left
-        return gesture
-    }
-    var swipeRightRecognizer: UISwipeGestureRecognizer {
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight))
-        gesture.direction = .right
-        return gesture
-    }
-    var swipeDownRecognizer: UISwipeGestureRecognizer {
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown))
-        gesture.direction = .down
-        return gesture
-    }
+    var swipeLeftRecognizer: UISwipeGestureRecognizer!
+    var swipeRightRecognizer: UISwipeGestureRecognizer!
+    var swipeDownRecognizer: UISwipeGestureRecognizer!
+    var longPressRecognizer: CustomLongPress!
+    
     var toSave = false
+    
     var notificationLabel = SwipeNotificationLabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    var timerNotificationLabel = SwipeNotificationLabel(frame: CGRect(x: 15, y: 15, width: 100, height: 100))
     let videoManager = VideoManager()
+    open var maximumVideoDuration = 120.0
     open var fullVideoDuration = 20.0 // expected video file duration after montage in seconds
 
     // MARK: LifeCycle
@@ -57,14 +58,24 @@ class CustomPickerViewController: UIImagePickerController {
     
     // MARK: View setup
     fileprivate func addRecognizers() {
-        view.addGestureRecognizer(swipeLeftRecognizer)
-        view.addGestureRecognizer(swipeRightRecognizer)
-        view.addGestureRecognizer(swipeDownRecognizer)
+        swipeLeftRecognizer = createGesture(target: self, action: #selector(swipeLeft), direction: .left)
+        swipeRightRecognizer = createGesture(target: self, action: #selector(swipeRight), direction: .right)
+        swipeDownRecognizer = createGesture(target: self, action: #selector(swipeDown), direction: .down)
+        longPressRecognizer = CustomLongPress(target: self, action: #selector(longPress), controller: self)
+    }
+    
+    fileprivate func createGesture(target: Any?, action: Selector?, direction: UISwipeGestureRecognizer.Direction) -> UISwipeGestureRecognizer {
+        let gesture = UISwipeGestureRecognizer(target: target, action: action)
+        gesture.direction = direction
+        gesture.delegate = self
+        view.addGestureRecognizer(gesture)
+        return gesture
     }
     
     fileprivate func setupAndAddSubviews() {
         notificationLabel.center = view.center
         view.addSubview(notificationLabel)
+        view.addSubview(timerNotificationLabel)
         view.addSubview(settingsButton)
     }
     
@@ -118,7 +129,7 @@ class CustomPickerViewController: UIImagePickerController {
     func speedLabel() {
         let speedSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
         let speedLocation = MetaDataManager()
-        speedLocation
+        
         speedSetting.center.x = view.center.x
         speedSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         speedSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
@@ -143,21 +154,33 @@ class CustomPickerViewController: UIImagePickerController {
     }
     
     // MARK: Swipe handling
+    @objc func longPress() {
+        if longPressRecognizer.state == .changed {
+            return
+        }
+        notificationLabel.changeTextAndAnimate(text: "Long press")
+    }
     // Left
     @objc func swipeLeft() {
         notificationLabel.changeTextAndAnimate(text: "Left")
-        stopCaptureAndTrim()
+        print("left")
+        swipeEnded = true
+        swipedTo = .left
+//        stopCaptureAndTrim()
     }
     
     // Right
     @objc func swipeRight() {
         notificationLabel.changeTextAndAnimate(text: "Right")
-        notificationLabel.showTimer(seconds: Int(fullVideoDuration))
-        Timer.scheduledTimer(timeInterval: fullVideoDuration,
-                             target: self,
-                             selector: #selector(swipeRightTimerAction),
-                             userInfo: nil, repeats: false)
-        view.isUserInteractionEnabled = false
+        print("right")
+        swipeEnded = true
+        swipedTo = .right
+//        notificationLabel.showTimer(seconds: Int(fullVideoDuration))
+//        Timer.scheduledTimer(timeInterval: fullVideoDuration,
+//                             target: self,
+//                             selector: #selector(swipeRightTimerAction),
+//                             userInfo: nil, repeats: false)
+//        view.isUserInteractionEnabled = false
     }
     
     @objc func swipeRightTimerAction() {
@@ -167,12 +190,16 @@ class CustomPickerViewController: UIImagePickerController {
     // Down
     @objc func swipeDown() {
         notificationLabel.changeTextAndAnimate(text: "Down")
-        notificationLabel.showTimer(seconds: Int(fullVideoDuration / 2))
-        Timer.scheduledTimer(timeInterval: fullVideoDuration / 2,
-                             target: self,
-                             selector: #selector(swipeDownTimerAction),
-                             userInfo: nil, repeats: false)
-        view.isUserInteractionEnabled = false
+        print("down - \(swipeDownRecognizer.state)")
+        swipeEnded = true
+        swipedTo = .down
+//        notificationLabel.changeTextAndAnimate(text: "Down")
+//        notificationLabel.showTimer(seconds: Int(fullVideoDuration / 2))
+//        Timer.scheduledTimer(timeInterval: fullVideoDuration / 2,
+//                             target: self,
+//                             selector: #selector(swipeDownTimerAction),
+//                             userInfo: nil, repeats: false)
+//        view.isUserInteractionEnabled = false
     }
     
     @objc func swipeDownTimerAction() {
@@ -233,5 +260,22 @@ extension CustomPickerViewController: SettingFromCustomView {
     }
     
     
+}
+
+extension CustomPickerViewController: LongPressDelegate {
+    func gestureDidEnd() {
+        timerNotificationLabel.changeTextAndAnimate(text: "Stop")
+    }
+    
+    func timerDidTick(_ time: Int) {
+        timerNotificationLabel.changeTextAndAnimate(text: "+\(time)")
+        fullVideoDuration += 10.0
+    }
+}
+
+extension CustomPickerViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
 
