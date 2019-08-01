@@ -63,8 +63,7 @@ class MetaDataManager: NSObject {
                                      currentLocation.coordinate.latitude,
                                      currentLocation.coordinate.longitude, currentLocation.speed,
                                      currentLocation.altitude,
-                                     currentLocation.horizontalAccuracy,
-                                     componentData.date! as CVarArg) as NSString
+                                     currentLocation.horizontalAccuracy) as NSString
              return metadata
         @unknown default:
             fatalError()

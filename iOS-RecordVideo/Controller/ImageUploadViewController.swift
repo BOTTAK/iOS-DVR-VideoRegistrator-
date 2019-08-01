@@ -27,7 +27,6 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
 //
         let imagePicker = UIImagePickerController()
 
-
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         imagePicker.mediaTypes = ["public.movie"]
@@ -87,6 +86,7 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
                     switch result {
                     case let .success(value):
                         print(value as Any)
+                        self.dismiss(animated: true, completion: nil)
                         self.dismiss(animated: true, completion: nil)
                     case let .failure(error):
                         print(error.localizedDescription)
