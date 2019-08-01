@@ -108,6 +108,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="uploadButtonTapped:" destination="FxO-vN-GuZ" eventType="touchUpInside" id="8yX-K9-Kcm"/>
+                                    <segue destination="yGB-Xj-X2x" kind="showDetail" id="kVr-cQ-Xxe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZL-a2-hWe">
