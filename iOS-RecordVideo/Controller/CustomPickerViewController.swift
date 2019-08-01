@@ -316,10 +316,10 @@ extension CustomPickerViewController: SettingFromCustomView {
 
 import CoreLocation
 extension CustomPickerViewController: MetaDataManagerSetting {
-    func metaDataManagerSetting(_ getGPSFromVideo: CLLocationManager) {
-        longitudeAddMeta = String((getGPSFromVideo.location?.coordinate.longitude)!)
-        latitudeAddMeta = String((getGPSFromVideo.location?.coordinate.latitude)!)
-        speedAddMeta = String((getGPSFromVideo.location?.speed)!)
+    func metaDataManagerSetting(_ getGPSFromVideo:  CLLocation) {
+        longitudeAddMeta = String((getGPSFromVideo.coordinate.longitude))
+        latitudeAddMeta = String((getGPSFromVideo.coordinate.latitude))
+        speedAddMeta = String((getGPSFromVideo.speed))
         
         
         

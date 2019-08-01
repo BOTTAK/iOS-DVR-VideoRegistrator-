@@ -12,14 +12,15 @@ import AVFoundation
 import CoreLocation
 import Photos
 
-protocol MetaDataManagerSetting {
-    func metaDataManagerSetting(_ getGPSFromVideo: CLLocationManager)
+protocol MetaDataManagerSetting: class {
+    func metaDataManagerSetting(_ getGPSFromVideo: CLLocation)
 }
 
 class MetaDataManager: NSObject {
     
     private var currentLocation: CLLocation!
     private var locManager = CLLocationManager()
+    private var library: PHAsset!
     
     override init() {
         super.init()
@@ -120,3 +121,4 @@ extension MetaDataManager: CLLocationManagerDelegate {
         
     }
 }
+
