@@ -22,6 +22,8 @@ class MetaDataManager: NSObject {
     private var locManager = CLLocationManager()
     private var library: PHAsset!
     
+    weak var delegate: MetaDataManagerSetting?
+    
     override init() {
         super.init()
         locManager.delegate = self
@@ -34,7 +36,7 @@ class MetaDataManager: NSObject {
     }
     
     
-    open func getGPSFromVideo() -> AVMutableMetadataItem {
+    func getGPSFromVideo() -> AVMutableMetadataItem {
         
         let status = CLLocationManager.authorizationStatus()
         
@@ -47,7 +49,7 @@ class MetaDataManager: NSObject {
              locManager.startUpdatingLocation()
              locManager.requestLocation()
              currentLocation = locManager.location
-             
+             delegate?.metaDataManagerSetting(currentLocation)
              let dateData = Calendar(identifier: .gregorian)
              let componentData = dateData.dateComponents([.day,.month,.year,.hour,.minute,.second], from: Date())
 
@@ -59,8 +61,7 @@ class MetaDataManager: NSObject {
              metadata.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
              metadata.value = String(format: "%+09.5f%+010.5f%+.0fCRSWGS_84",
                                      currentLocation.coordinate.latitude,
-                                     currentLocation.coordinate.longitude, currentLocation.speed,
-                                     componentData.date! as CVarArg) as NSString
+                                     currentLocation.coordinate.longitude, currentLocation.speed as CVarArg) as NSString
              return metadata
         @unknown default:
             fatalError()

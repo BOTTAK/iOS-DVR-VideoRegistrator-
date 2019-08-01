@@ -20,10 +20,15 @@ class CustomPickerViewController: UIImagePickerController {
     
     var swipeEnded = false
     var swipedTo: SwipeSide = .none
+    let locationManager = MetaDataManager()
 
     let setting = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingViewController.self) as! SettingViewController
     
     var firstTimeCapture = true
+    let longitudeSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
+    let latitudeSetting = UILabel(frame: CGRect(x: 0, y: 50, width: 300, height: 50))
+    let speedSetting = UILabel(frame: CGRect(x: 0, y: 100, width: 300, height: 50))
+    let dateSetting = UILabel(frame: CGRect(x: 0, y: 150, width: 100, height: 50))
     
     var swipeLeftRecognizer: UISwipeGestureRecognizer!
     var swipeRightRecognizer: UISwipeGestureRecognizer!
@@ -33,88 +38,6 @@ class CustomPickerViewController: UIImagePickerController {
     var latitudeAddMeta: String = ""
     var speedAddMeta: String = ""
     var dateAddMeta: String = ""
-    
-    
-    
-    
-    
-    var swipeLeftRecognizer: UISwipeGestureRecognizer {
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
-        gesture.direction = .left
-        return gesture
-    }
-    var swipeRightRecognizer: UISwipeGestureRecognizer {
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight))
-        gesture.direction = .right
-        return gesture
-    }
-    var swipeDownRecognizer: UISwipeGestureRecognizer {
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown))
-        gesture.direction = .down
-        return gesture
-    }
-    //MARK: UIPanGestureRecognizet
-    var swipePanRecognizer: UIPanGestureRecognizer {
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(swipeLeft))
-        
-        
-        let vel = gesture.velocity(in: self.view)
-        if vel.x > 0 {
-            // user dragged towards the right
-            print("right")
-        }
-        else if vel.x < 0 {
-            // user dragged towards the left
-            print("left")
-        }
-        
-        if vel.y > 0 {
-            // user dragged towards the down
-            print("down")
-        }
-        else if vel.y < 0 {
-            // user dragged towards the up
-            print("up")
-        }
-       return gesture
-        
-        //MARK: Act to UIPanGesture
-        
-        if gesture.state == .began {
-            
-        }
-        if gesture.state == .ended {
-            
-            
-        }
-        
-    }
-    
-    //MARK: UILongPressGestureRecognizer
-    
-    func swipeLongRecognizer() {
-        
-        let lpgr = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
-        lpgr.minimumPressDuration = 0.5
-        lpgr.delaysTouchesBegan = true
-        lpgr.delegate = self
-        self.view.addGestureRecognizer(lpgr)
-        
-    }
-    
-    
-    //MARK: Act to UILong
-    
-    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-        if gestureReconizer.state != UIGestureRecognizer.State.ended {
-            return
-        }
-        
-        let p = gestureReconizer.location(in: self.view)
-
-            print("Could not find index path")
-        
-    }
     
     var toSave = false
     
@@ -132,6 +55,7 @@ class CustomPickerViewController: UIImagePickerController {
         setupAndAddSubviews()
         delegate = self
         setting.delegate = self
+        locationManager.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -163,6 +87,10 @@ class CustomPickerViewController: UIImagePickerController {
         view.addSubview(notificationLabel)
         view.addSubview(timerNotificationLabel)
         view.addSubview(settingsButton)
+        latitudeLabel()
+        longitudeLabel()
+        speedLabel()
+        dateLabel()
     }
     
     // MARK: Settings button setup
@@ -188,11 +116,6 @@ class CustomPickerViewController: UIImagePickerController {
     //MARK: Setting label setup
     
     func longitudeLabel() {
-        let longitudeSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
-        
-        let longitudeSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        longitudeSetting.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15)
-        longitudeSetting.topAnchor.constraint(equalTo: view.topAnchor, constant: 15)
         longitudeSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         longitudeSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
         longitudeSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
@@ -200,15 +123,10 @@ class CustomPickerViewController: UIImagePickerController {
         longitudeSetting.textAlignment = .center
         longitudeSetting.text = longitudeAddMeta
         
-        
         view.addSubview(longitudeSetting)
-        
     }
     
     func latitudeLabel() {
-        let latitudeSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        latitudeSetting.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15)
-        latitudeSetting.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)
         latitudeSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         latitudeSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
         latitudeSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
@@ -217,13 +135,9 @@ class CustomPickerViewController: UIImagePickerController {
         latitudeSetting.text = latitudeAddMeta
         
         view.addSubview(latitudeSetting)
-        
     }
     
     func speedLabel() {
-        let speedSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        speedSetting.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 15)
-        speedSetting.topAnchor.constraint(equalTo: view.topAnchor, constant: 15)
         speedSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         speedSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
         speedSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
@@ -236,9 +150,6 @@ class CustomPickerViewController: UIImagePickerController {
     }
     
     func dateLabel() {
-        let dateSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        dateSetting.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 15)
-        dateSetting.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)
         dateSetting.center.x = view.center.x
         dateSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         dateSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
@@ -255,29 +166,23 @@ class CustomPickerViewController: UIImagePickerController {
         if longPressRecognizer.state == .changed {
             return
         }
+        if longPressRecognizer.state == .ended {
+            return
+        }
         notificationLabel.changeTextAndAnimate(text: "Long press")
     }
     // Left
     @objc func swipeLeft() {
         notificationLabel.changeTextAndAnimate(text: "Left")
-        print("left")
         swipeEnded = true
         swipedTo = .left
-//        stopCaptureAndTrim()
     }
     
     // Right
     @objc func swipeRight() {
         notificationLabel.changeTextAndAnimate(text: "Right")
-        print("right")
         swipeEnded = true
         swipedTo = .right
-//        notificationLabel.showTimer(seconds: Int(fullVideoDuration))
-//        Timer.scheduledTimer(timeInterval: fullVideoDuration,
-//                             target: self,
-//                             selector: #selector(swipeRightTimerAction),
-//                             userInfo: nil, repeats: false)
-//        view.isUserInteractionEnabled = false
     }
     
     @objc func swipeRightTimerAction() {
@@ -290,17 +195,6 @@ class CustomPickerViewController: UIImagePickerController {
         print("down - \(swipeDownRecognizer.state)")
         swipeEnded = true
         swipedTo = .down
-//        notificationLabel.changeTextAndAnimate(text: "Down")
-//        notificationLabel.showTimer(seconds: Int(fullVideoDuration / 2))
-//        Timer.scheduledTimer(timeInterval: fullVideoDuration / 2,
-//                             target: self,
-//                             selector: #selector(swipeDownTimerAction),
-//                             userInfo: nil, repeats: false)
-//        view.isUserInteractionEnabled = false
-    }
-    
-    @objc func swipeDownTimerAction() {
-        stopCaptureAndTrim()
     }
     
     func stopCaptureAndTrim() {
@@ -319,15 +213,14 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
                 return
             }
             
-            let locationManager = MetaDataManager()
+            
             
             videoManager.trimVideo(sourceURL: videoURL, duration: fullVideoDuration, metaData: locationManager.getGPSFromVideo()) { result in
                 switch (result) {
                 case let .failure(error):
                     UIHelper.showError(errorMessage: "Error creating URL - \(error.localizedDescription)", controller: self)
                 case let .success((video, metadata)):
-                    metadata.first?.value
-                    
+                    print(metadata)
                     let videoPath = video.path
                     UISaveVideoAtPathToSavedPhotosAlbum(videoPath,
 
@@ -364,11 +257,29 @@ extension CustomPickerViewController: SettingFromCustomView {
 extension CustomPickerViewController: LongPressDelegate {
     func gestureDidEnd() {
         timerNotificationLabel.changeTextAndAnimate(text: "Stop")
+        switch swipedTo {
+        case .left:
+            stopCaptureAndTrim()
+        case .right:
+            Timer.scheduledTimer(withTimeInterval: 16, repeats: false) { (timer) in
+                self.stopCaptureAndTrim()
+            }
+            view.isUserInteractionEnabled = false
+        case .down:
+            Timer.scheduledTimer(withTimeInterval: 8, repeats: false) { (timer) in
+                self.stopCaptureAndTrim()
+            }
+            view.isUserInteractionEnabled = false
+        case .none:
+            print("unexpectred behavior")
+        }
     }
     
     func timerDidTick(_ time: Int) {
-        timerNotificationLabel.changeTextAndAnimate(text: "+\(time)")
-        fullVideoDuration += 10.0
+        if time > 0 {
+            timerNotificationLabel.changeTextAndAnimate(text: "+\(time)")
+            fullVideoDuration += 10.0
+        }
     }
 }
 
@@ -381,12 +292,9 @@ extension CustomPickerViewController: UIGestureRecognizerDelegate {
 import CoreLocation
 extension CustomPickerViewController: MetaDataManagerSetting {
     func metaDataManagerSetting(_ getGPSFromVideo:  CLLocation) {
-        longitudeAddMeta = String((getGPSFromVideo.coordinate.longitude))
-        latitudeAddMeta = String((getGPSFromVideo.coordinate.latitude))
-        speedAddMeta = String((getGPSFromVideo.speed))
-        
-        
-        
+        longitudeSetting.text = String((getGPSFromVideo.coordinate.longitude))
+        latitudeSetting.text = String((getGPSFromVideo.coordinate.latitude))
+        speedSetting.text = String((getGPSFromVideo.speed))
     }
     
     
