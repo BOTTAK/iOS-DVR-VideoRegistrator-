@@ -17,6 +17,15 @@ class CustomPickerViewController: UIImagePickerController, UIGestureRecognizerDe
 
     var firstTimeCapture = true
     
+    var longitudeAddMeta: String = ""
+    var latitudeAddMeta: String = ""
+    var speedAddMeta: String = ""
+    var dateAddMeta: String = ""
+    
+    
+    
+    
+    
     var swipeLeftRecognizer: UISwipeGestureRecognizer {
         let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft))
         gesture.direction = .left
@@ -153,52 +162,58 @@ class CustomPickerViewController: UIImagePickerController, UIGestureRecognizerDe
     //MARK: Setting label setup
     
     func longitudeLabel() {
-        let longitudeSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
-        longitudeSetting.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50)
-        longitudeSetting.center.x = view.center.x
+        
+        let longitudeSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        longitudeSetting.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15)
+        longitudeSetting.topAnchor.constraint(equalTo: view.topAnchor, constant: 15)
         longitudeSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         longitudeSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
         longitudeSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        longitudeSetting.text = "Latitude"
         longitudeSetting.textAlignment = .center
+        longitudeSetting.text = longitudeAddMeta
+        
+        
         view.addSubview(longitudeSetting)
         
     }
     
     func latitudeLabel() {
-        let latitudeSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
-        
-        latitudeSetting.center.x = view.center.x
+        let latitudeSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        latitudeSetting.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15)
+        latitudeSetting.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)
         latitudeSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         latitudeSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
         latitudeSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        latitudeSetting.text = "Latitude"
         latitudeSetting.textAlignment = .center
+        latitudeSetting.text = latitudeAddMeta
+        
         view.addSubview(latitudeSetting)
         
     }
     
     func speedLabel() {
-        let speedSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
-        
-        speedSetting.center.x = view.center.x
+        let speedSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        speedSetting.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 15)
+        speedSetting.topAnchor.constraint(equalTo: view.topAnchor, constant: 15)
         speedSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         speedSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
         speedSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        speedSetting.text = "Latitude"
         speedSetting.textAlignment = .center
+        speedSetting.text = speedAddMeta
+        
         view.addSubview(speedSetting)
         
     }
     
     func dateLabel() {
-        let dateSetting = UILabel(frame: CGRect(x: 0, y: view.frame.height - 50, width: view.frame.width, height: 50))
-        
+        let dateSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        dateSetting.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 15)
+        dateSetting.topAnchor.constraint(equalTo: view.topAnchor, constant: 80)
         dateSetting.center.x = view.center.x
         dateSetting.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         dateSetting.textColor = #colorLiteral(red: 0.9607843137, green: 0.1921568627, blue: 0.1490196078, alpha: 1)
         dateSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        dateSetting.text = "Latitude"
+        dateSetting.text = "Date"
         dateSetting.textAlignment = .center
         view.addSubview(dateSetting)
         
@@ -299,3 +314,16 @@ extension CustomPickerViewController: SettingFromCustomView {
     
 }
 
+import CoreLocation
+extension CustomPickerViewController: MetaDataManagerSetting {
+    func metaDataManagerSetting(_ getGPSFromVideo: CLLocationManager) {
+        longitudeAddMeta = String((getGPSFromVideo.location?.coordinate.longitude)!)
+        latitudeAddMeta = String((getGPSFromVideo.location?.coordinate.latitude)!)
+        speedAddMeta = String((getGPSFromVideo.location?.speed)!)
+        
+        
+        
+    }
+    
+    
+}
