@@ -25,6 +25,7 @@
 		7E8E8D9E22E9B50A00707D76 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9D22E9B50A00707D76 /* VideoManager.swift */; };
 		7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */; };
 		7E95E26922EF7EDF002248F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E95E26822EF7EDF002248F1 /* Main.storyboard */; };
+		7E9A2F3E22F23999008E2A34 /* CustomLongPress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A2F3D22F23999008E2A34 /* CustomLongPress.swift */; };
 		7EE8CCBF22EC342C00DFC5AB /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */; };
 		FA1F73FD22EEE19B0006ACCA /* ImageUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F73FC22EEE19B0006ACCA /* ImageUploadViewController.swift */; };
 		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
@@ -42,6 +43,7 @@
 		7E8E8D9D22E9B50A00707D76 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameGenerator.swift; sourceTree = "<group>"; };
 		7E95E26822EF7EDF002248F1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7E9A2F3D22F23999008E2A34 /* CustomLongPress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLongPress.swift; sourceTree = "<group>"; };
 		7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		FA1F73FC22EEE19B0006ACCA /* ImageUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewController.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				7E16F5E122E38762008B158C /* MainViewController.swift */,
 				7E19173122EDC98D00C4B7AA /* UIHelper.swift */,
 				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
+				7E9A2F3D22F23999008E2A34 /* CustomLongPress.swift */,
 				7E8E8D9D22E9B50A00707D76 /* VideoManager.swift */,
 				7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */,
 				7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */,
@@ -258,6 +261,7 @@
 				7E16F5EF22E388F1008B158C /* NetworkingManager.swift in Sources */,
 				7E16F5F222E388F1008B158C /* MovieConverter.swift in Sources */,
 				7E16F5F322E388F1008B158C /* CameraModel.swift in Sources */,
+				7E9A2F3E22F23999008E2A34 /* CustomLongPress.swift in Sources */,
 				FACC768922E5B88E00AC7ED5 /* SettingViewController.swift in Sources */,
 				7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */,
 				FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */,
