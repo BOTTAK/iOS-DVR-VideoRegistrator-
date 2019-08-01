@@ -59,6 +59,8 @@ class MetaDataManager: NSObject {
              metadata.value = String(format: "%+09.5f%+010.5f%+.0fCRSWGS_84",
                                      currentLocation.coordinate.latitude,
                                      currentLocation.coordinate.longitude, currentLocation.speed,
+                                     currentLocation.altitude,
+                                     currentLocation.horizontalAccuracy,
                                      componentData.date! as CVarArg) as NSString
              return metadata
         @unknown default:
@@ -66,6 +68,19 @@ class MetaDataManager: NSObject {
         }
         return AVMutableMetadataItem()
         
+    }
+    
+    
+    func XXRadiansToDegrees(radians: Double) -> Double {
+        return radians * 180.0 / M_PI
+    }
+    
+    func getBearingBetweenTwoPoints(point1 : CLLocation, point2 : CLLocation) -> Double {
+        // Returns a float with the angle between the two points
+        let x = point1.coordinate.longitude - point2.coordinate.longitude
+        let y = point1.coordinate.latitude - point2.coordinate.latitude
+        
+        return fmod(XXRadiansToDegrees(radians: atan2(y, x)), 360.0) + 90.0
     }
     
     
