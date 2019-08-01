@@ -55,23 +55,27 @@ final class NetworkingManager {
         //        let latitudeData = withUnsafeBytes(of: latitude) { Data($0) }
         //        let longtitudeData = withUnsafeBytes(of: longtitude) { Data($0) }
         //        let speedData = withUnsafeBytes(of: speed) { Data($0) }
-        let violationIDData = withUnsafeBytes(of: APIConstants.violationID) { Data($0) }
-        let regNumberData = withUnsafeBytes(of: APIConstants.regNumber) { Data($0) }
-        let streetSideData = withUnsafeBytes(of: APIConstants.streetSide) { Data($0) }
-        let recordedAtData = withUnsafeBytes(of: APIConstants.recordedAtConstString) { Data($0) }
-        
+//        let violationIDData = withUnsafeBytes(of: APIConstants.violationID) { Data($0) }
+        let violationIDData = APIConstants.violationID.data(using: .utf8)
+        let regNumberData = APIConstants.regNumber.data(using: .utf8)
+        let streetSideData = APIConstants.streetSide.data(using: .utf8)
+        let recordedAtData = APIConstants.recordedAtConstString.data(using: .utf8)
+    
         let httpHeaders = ["Authorization": "Bearer \(token)", "Cache-Control": "no-cache"]
         print(token)
         upload(multipartFormData: { (multipartFormData) in
-            //            multipartFormData.append(latitudeData, withName: "location_data[latitude]")
-            //            multipartFormData.append(longtitudeData, withName: "location_data[longitude]")
-            //            multipartFormData.append(speedData, withName: "location_data[speed]")
-            //            multipartFormData.append(, withName: "violations[0][violation_id]")w
-            multipartFormData.append(violationIDData, withName: "violations[0][violation_id]")
-            multipartFormData.append(regNumberData, withName: "violations[0][reg_number]")
-            multipartFormData.append(streetSideData, withName: "street_side")
-            multipartFormData.append(recordedAtData, withName: "recorded_at")
+//                        multipartFormData.append(latitudeData, withName: "location_data[latitude]")
+//                        multipartFormData.append(longtitudeData, withName: "location_data[longitude]")
+//                        multipartFormData.append(speedData, withName: "location_data[speed]")
+//                        multipartFormData.append(, withName: "violations[0][violation_id]")
+//            multipartFormData.append(violationIDData!, withName: "violations[0][violation_id]")
+//            multipartFormData.append(regNumberData!, withName: "violations[0][reg_number]")
+            multipartFormData.append(streetSideData!, withName: "street_side")
+            multipartFormData.append(recordedAtData!, withName: "recorded_at")
             multipartFormData.append(videoUrl, withName: "videoFile", fileName: "secondTry.mp4", mimeType: "video/mp4")
+            
+            
+            
         }, to: APIConstants.uploadVideoURL,
            headers: httpHeaders) { (encodingCompletion) in
             
@@ -81,19 +85,29 @@ final class NetworkingManager {
                           streamingFromDisk: let streamingFromDisk,
                           streamFileURL: let streamFileURL):
                 
+                print(uploadRequest.request?.allHTTPHeaderFields)
+                print(uploadRequest.request?.httpBody)
+                
                 print(uploadRequest)
                 print(streamingFromDisk)
                 print(streamFileURL ?? "strimingFileURL is NIL")
-                
-                uploadRequest.validate().responseJSON(completionHandler: { (responseJSON) in
-                    
-                    switch responseJSON.result {
-                    case .success(let value):
-                        complitionHandler(.success(value))
-                    case .failure(let error):
-                        complitionHandler(.failure(error))
-                    }
+                uploadRequest.responseJSON(completionHandler: { (response) in
+                    print("########## - response \(response)")
                 })
+                
+//                uploadRequest.validate(statusCode: 200..<600).responseJSON(completionHandler: { (responseJSON) in
+//                    print(responseJSON)
+//
+////                    let json = JSON(responseJSON.result)
+////                    print(json)
+//                    switch responseJSON.result {
+//                    case .success(let value):
+//                        complitionHandler(.success(value))
+//                    case .failure(let error):
+//                        complitionHandler(.failure(error))
+//                        print("########### - \(error)")
+//                    }
+//                })
                 
             case .failure(let error):
                 complitionHandler(.failure(error))

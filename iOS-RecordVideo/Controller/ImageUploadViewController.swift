@@ -82,7 +82,7 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
                     return
                 }
                 print("Successful! \(correctURL)")
-                
+                print(correctURL.pathExtension)
                 self.networkingManager.uploadVideo(videoUrl: correctURL, location: location) { (result: Result<Any, Error>) in
                     switch result {
                     case let .success(value):
