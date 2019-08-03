@@ -17,13 +17,42 @@
                     <view key="view" contentMode="scaleToFill" id="51O-Sd-rfi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKo-dT-OZy">
+                                <rect key="frame" x="60" y="246.5" width="200" height="75"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.84721610915492962" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="4TF-pf-NLs"/>
+                                    <constraint firstAttribute="width" constant="200" id="Kgh-nc-Ez5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                <state key="normal" title="Allow Permissions">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="startTouch:" destination="Vx9-hr-55m" eventType="touchUpInside" id="Ab5-oo-AD5"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hKo-dT-OZy" firstAttribute="centerX" secondItem="51O-Sd-rfi" secondAttribute="centerX" id="BXB-Ji-CMI"/>
+                            <constraint firstItem="hKo-dT-OZy" firstAttribute="centerY" secondItem="51O-Sd-rfi" secondAttribute="centerY" id="c1g-ud-xe8"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Jcv-e1-kBV"/>
                     </view>
+                    <connections>
+                        <outlet property="startButton" destination="hKo-dT-OZy" id="XSW-71-pSQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ktx-Qb-9YC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="96" y="-676"/>
+            <point key="canvasLocation" x="95.625" y="-676.05633802816897"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="zIe-XU-3XR">
