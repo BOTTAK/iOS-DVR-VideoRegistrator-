@@ -15,16 +15,13 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
     private let networkingManager = NetworkingManager()
     
     //MARK: - Outlets
-    
     @IBOutlet weak var imageViewUpload: UIImageView!
     @IBOutlet weak var progressUploadToServer: UIProgressView!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var uploadButton: UIButton!
     
     //MARK: - Action
-    
     @IBAction func uploadButtonToServer(_ sender: Any) {
-//
         let imagePicker = UIImagePickerController()
 
         imagePicker.delegate = self
@@ -32,7 +29,6 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
         imagePicker.mediaTypes = ["public.movie"]
 
         self.present(imagePicker, animated: true, completion: nil)
-        
     }
     
     override func viewDidLoad() {
@@ -82,16 +78,16 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
                 }
                 print("Successful! \(correctURL)")
                 print(correctURL.pathExtension)
-                self.networkingManager.uploadVideo(videoUrl: correctURL, location: location) { (result: Result<Any, Error>) in
-                    switch result {
-                    case let .success(value):
-                        print(value as Any)
-                        self.dismiss(animated: true, completion: nil)
-                        self.dismiss(animated: true, completion: nil)
-                    case let .failure(error):
-                        print(error.localizedDescription)
-                    }
-                }
+//                self.networkingManager.uploadVideo(videoUrl: correctURL, location: location) { (result: Result<Any, Error>) in
+//                    switch result {
+//                    case let .success(value):
+//                        print(value as Any)
+//                        self.dismiss(animated: true, completion: nil)
+//                        self.dismiss(animated: true, completion: nil)
+//                    case let .failure(error):
+//                        print(error.localizedDescription)
+//                    }
+//                }
             default:
                 fatalError()
             }
