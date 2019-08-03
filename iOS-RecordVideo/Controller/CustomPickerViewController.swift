@@ -222,6 +222,7 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
                 case let .success((video, metadata)):
                     print(metadata)
                     let videoPath = video.path
+                    print(video.path)
                     UISaveVideoAtPathToSavedPhotosAlbum(videoPath,
 
                                                         self,
@@ -247,7 +248,7 @@ extension CustomPickerViewController: SettingFromCustomView {
     func settingFromCustomViewController(_ settingPickerQuility: UIImagePickerController.QualityType, _ settingPickerDuration: TimeInterval, _ settingMicrophone: String) {
         fullVideoDuration = settingPickerDuration
         videoQuality = settingPickerQuility
-        mediaTypes = [settingMicrophone]
+//        mediaTypes = [settingMicrophone]
         startVideoCapture()
     }
     
