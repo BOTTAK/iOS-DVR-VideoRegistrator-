@@ -21,7 +21,7 @@ class VideoManager {
         
         exportSession.timeRange = generateRange(startTime: asset.duration.seconds - duration,
                                                 endTime: asset.duration.seconds)
-        exportSession.outputURL = FileManager.createNewFilePath(fileName: videoName)
+        exportSession.outputURL = FileManager.createNewFilePath(fileName: "Testing")
         exportSession.outputFileType = AVFileType.mp4
         exportSession.shouldOptimizeForNetworkUse = true
         exportSession.metadata = [metaData]
@@ -42,6 +42,7 @@ class VideoManager {
                     return
                 }
                 print("Successful! \(correctURL)")
+                FileManager.getFiles()
                 completion(.success((correctURL, correctMetaData)))
             default:
                 fatalError()
@@ -72,10 +73,59 @@ extension FileManager {
 
 extension FileManager {
     class func createNewFilePath(fileName: String) -> URL {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
-        let filePath = documentsDirectory.appendingPathComponent("\(fileName).mp4")
+        guard let filePath = URL.createFolder(folderName: "iOS-VideoApp")?.appendingPathComponent("\(fileName).mp4") else { fatalError("couldnt create file")}
         guard filePath.isFileURL else { fatalError() }
         removeFileAtURLIfExists(url: filePath)
         return filePath
+    }
+}
+
+extension FileManager {
+    class func getFiles() {
+        // Get the document directory url
+        let documentsUrl = URL.createFolder(folderName: "iOS-VideoApp")
+        
+        do {
+            // Get the directory contents urls (including subfolders urls)
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl!, includingPropertiesForKeys: nil)
+            print(directoryContents)
+            
+            // if you want to filter the directory contents you can do like this:
+            let mp4Files = directoryContents.filter{ $0.pathExtension == "mp4" }
+            print("mp3 urls:",mp4Files)
+            let mp4FileNames = mp4Files.map{ $0.deletingPathExtension().lastPathComponent }
+            print("mp3 list:", mp4FileNames)
+        } catch {
+            print(error)
+        }
+    }
+}
+
+extension URL {
+    static func createFolder(folderName: String) -> URL? {
+        let fileManager = FileManager.default
+        // Get document directory for device, this should succeed
+        if let documentDirectory = fileManager.urls(for: .documentDirectory,
+                                                    in: .userDomainMask).first {
+            // Construct a URL with desired folder name
+            let folderURL = documentDirectory.appendingPathComponent(folderName)
+            // If folder URL does not exist, create it
+            if !fileManager.fileExists(atPath: folderURL.path) {
+                do {
+                    // Attempt to create folder
+                    try fileManager.createDirectory(atPath: folderURL.path,
+                                                    withIntermediateDirectories: true,
+                                                    attributes: nil)
+                } catch {
+                    // Creation failed. Print error & return nil
+                    print(error.localizedDescription)
+                    return nil
+                }
+            }
+            // Folder either exists, or was created. Return URL
+            return folderURL
+        }
+        // Will only be called if document directory not found
+        return nil
     }
 }
