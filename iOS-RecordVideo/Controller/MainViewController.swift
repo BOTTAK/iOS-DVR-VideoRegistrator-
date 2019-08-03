@@ -11,104 +11,39 @@ import MobileCoreServices
 import AVFoundation
 import CoreLocation
 
+fileprivate typealias Granted = Bool
+
 final class MainViewController: UIViewController {
     
     let locatioManager = CLLocationManager()
     let cameraMediaType = AVMediaType.video
     let imagePicker = CustomPickerViewController()
-    var permissionsGranted = false
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        checkPermissions()
+    
+    fileprivate var permissionsGranted: Granted {
+        if AVCaptureDevice.authorizationStatus(for: .audio) == .authorized
+            && AVCaptureDevice.authorizationStatus(for: .video) == .authorized
+            && (CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse)
+            && UIImagePickerController.isSourceTypeAvailable(.camera) {
+            return true
+        }
+        return false
     }
     
-    func checkPermissions() {
+    @IBOutlet weak var startButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if permissionsGranted {
+            startButton.setTitle("Start", for: .normal)
+        }
+    }
+    
+    @IBAction func startTouch(_ sender: UIButton) {
         if permissionsGranted {
             setupImagePicker()
-        } else {
-            checkRecordingPermissions()
         }
-    }
-    
-    private func checkRecordingPermissions() {
-        switch AVCaptureDevice.authorizationStatus(for: cameraMediaType) {
-        case .authorized:
-            checkMicPermissions()
-        case .notDetermined, .restricted, .denied:
-            AVCaptureDevice.requestAccess(for: cameraMediaType) { granted in
-                if granted {
-                    self.checkMicPermissions()
-                } else {
-                    let action = UIAlertAction(title: "Settings", style: .default, handler: { action in
-                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                        self.checkRecordingPermissions()
-                    })
-                    UIHelper.showError(errorMessage: "Camera access is absolutely necessary to use this app",
-                                       action: action,
-                                       controller: self)
-                }
-            }
-        @unknown default:
-            fatalError("Unexpected case")
-        }
-    }
-    
-    private func checkMicPermissions() {
-        switch AVAudioSession.sharedInstance().recordPermission {
-        case .granted:
-            checkLocationPermissons()
-        case .undetermined, .denied:
-            AVAudioSession.sharedInstance().requestRecordPermission{ granted in
-                if granted {
-                    self.checkLocationPermissons()
-                } else {
-                    let action = UIAlertAction(title: "Settings", style: .default, handler: { action in
-                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                        self.checkMicPermissions()
-                    })
-                    UIHelper.showError(errorMessage: "Mic access is absolutely necessary to use this app",
-                                       action: action,
-                                       controller: self)
-                }
-            }
-        @unknown default:
-            fatalError("Unexpected case")
-        }
-    }
-    
-    private func checkSourcePermissions() {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            permissionsGranted = true
-            checkPermissions()
-        } else {
-            permissionsGranted = false
-            UIHelper.showError(errorMessage: "Camera source is not available", controller: self)
-        }
-    }
-    
-    private func checkLocationPermissons() {
-        
-        
-        locatioManager.requestAlwaysAuthorization()
-        
-        switch CLLocationManager.authorizationStatus() {
-        case .notDetermined:
-            locatioManager.requestAlwaysAuthorization()
-        case .denied, .restricted:
-            let action = UIAlertAction(title: "Settings", style: .default, handler: { action in
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                self.checkLocationPermissons()
-            })
-            UIHelper.showError(errorMessage: "Location access is absolutely necessary to use this app",
-                               action: action,
-                               controller: self)
-        case .authorizedAlways, .authorizedWhenInUse:
-            checkSourcePermissions()
-        @unknown default:
-            fatalError()
-        }
+        getPermissions()
     }
     
     private func setupImagePicker() {
@@ -117,10 +52,78 @@ final class MainViewController: UIViewController {
         imagePicker.cameraDevice = .rear
         imagePicker.mediaTypes = [kUTTypeMovie as String]
         imagePicker.cameraCaptureMode = .video
-        
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
         
         present(imagePicker, animated: false)
+    }
+    
+    func getPermissions() {
+        AVCaptureDevice.requestPermissionIfNeeded(for: .audio) {
+            AVCaptureDevice.requestPermissionIfNeeded(for: .video, handler: {
+                self.checkLocationPermissons {
+                    self.checkSourcePermissions {
+                        self.startButton.setTitle("Start", for: .normal)
+                    }
+                }
+            })
+        }
+    }
+    
+    private func checkLocationPermissons(handler: () -> Void) {
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locatioManager.requestWhenInUseAuthorization()
+            handler()
+        case .denied, .restricted:
+            let action = UIAlertAction(title: "Settings", style: .default) { action in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+                                          options: [:],
+                                          completionHandler: nil)
+            }
+            UIHelper.showError(errorMessage: "Location permissions required", action: action, controller: self)
+        case .authorizedAlways:
+            handler()
+        case .authorizedWhenInUse:
+            handler()
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    private func checkSourcePermissions(handler: () -> Void) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            handler()
+        } else {
+            UIHelper.showError(errorMessage: "Camera source is not available", controller: self)
+        }
+    }
+
+}
+
+extension AVCaptureDevice {
+    class func requestPermissionIfNeeded(for type: AVMediaType, handler: @escaping () -> Void) {
+        switch AVCaptureDevice.authorizationStatus(for: type) {
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: type) { granted in
+                DispatchQueue.main.async {
+                    if granted {
+                        handler()
+                    }   
+                }
+            }
+        case .restricted, .denied:
+            let action = UIAlertAction(title: "Settings", style: .default) { action in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+                                          options: [:],
+                                          completionHandler: nil)
+            }
+            UIHelper.showError(errorMessage: "\(type.rawValue) permissions required", action: action,
+                               controller: UIApplication.shared.keyWindow!.rootViewController!)
+        case .authorized:
+            handler()
+        default:
+            handler()
+        }
     }
 }
