@@ -27,6 +27,8 @@
 		7E95E26922EF7EDF002248F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E95E26822EF7EDF002248F1 /* Main.storyboard */; };
 		7E9A2F3E22F23999008E2A34 /* CustomLongPress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A2F3D22F23999008E2A34 /* CustomLongPress.swift */; };
 		7EE8CCBF22EC342C00DFC5AB /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */; };
+		7EFC20E322F5F6B7002ABE95 /* ChooseAndUploadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFC20E222F5F6B7002ABE95 /* ChooseAndUploadController.swift */; };
+		7EFC20E522F60E70002ABE95 /* VideoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFC20E422F60E70002ABE95 /* VideoPreview.swift */; };
 		FA1F73FD22EEE19B0006ACCA /* ImageUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F73FC22EEE19B0006ACCA /* ImageUploadViewController.swift */; };
 		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
 		FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
@@ -45,6 +47,8 @@
 		7E95E26822EF7EDF002248F1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7E9A2F3D22F23999008E2A34 /* CustomLongPress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLongPress.swift; sourceTree = "<group>"; };
 		7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		7EFC20E222F5F6B7002ABE95 /* ChooseAndUploadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAndUploadController.swift; sourceTree = "<group>"; };
+		7EFC20E422F60E70002ABE95 /* VideoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreview.swift; sourceTree = "<group>"; };
 		FA1F73FC22EEE19B0006ACCA /* ImageUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewController.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
@@ -90,9 +94,11 @@
 				FA495CF622EE17D600FF3381 /* MetaDataManager.swift */,
 				7E16F5E122E38762008B158C /* MainViewController.swift */,
 				7E19173122EDC98D00C4B7AA /* UIHelper.swift */,
+				7EFC20E422F60E70002ABE95 /* VideoPreview.swift */,
 				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
 				7E9A2F3D22F23999008E2A34 /* CustomLongPress.swift */,
 				7E8E8D9D22E9B50A00707D76 /* VideoManager.swift */,
+				7EFC20E222F5F6B7002ABE95 /* ChooseAndUploadController.swift */,
 				7E8E8D9F22E9B64000707D76 /* NameGenerator.swift */,
 				7E16F5FD22E457EB008B158C /* SwipeNotificationLabel.swift */,
 				FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */,
@@ -261,10 +267,12 @@
 				7E16F5EF22E388F1008B158C /* NetworkingManager.swift in Sources */,
 				7E16F5F222E388F1008B158C /* MovieConverter.swift in Sources */,
 				7E16F5F322E388F1008B158C /* CameraModel.swift in Sources */,
+				7EFC20E322F5F6B7002ABE95 /* ChooseAndUploadController.swift in Sources */,
 				7E9A2F3E22F23999008E2A34 /* CustomLongPress.swift in Sources */,
 				FACC768922E5B88E00AC7ED5 /* SettingViewController.swift in Sources */,
 				7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */,
 				FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */,
+				7EFC20E522F60E70002ABE95 /* VideoPreview.swift in Sources */,
 				7E16F5F722E388F1008B158C /* UIViewController+CoreKit.swift in Sources */,
 				7E16F5FC22E4521C008B158C /* CustomPickerViewController.swift in Sources */,
 				7E16F5F822E388F1008B158C /* CVPixelBuffer+Copy.swift in Sources */,
