@@ -21,7 +21,7 @@ class VideoManager {
         
         exportSession.timeRange = generateRange(startTime: asset.duration.seconds - duration,
                                                 endTime: asset.duration.seconds)
-        exportSession.outputURL = FileManager.createNewFilePath(fileName: "Testing")
+        exportSession.outputURL = FileManager.createNewFilePath(fileName: videoName)
         exportSession.outputFileType = AVFileType.mp4
         exportSession.shouldOptimizeForNetworkUse = true
         exportSession.metadata = [metaData]
