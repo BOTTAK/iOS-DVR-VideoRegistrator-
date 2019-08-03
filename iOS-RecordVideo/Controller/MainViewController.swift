@@ -98,7 +98,7 @@ final class MainViewController: UIViewController {
             UIHelper.showError(errorMessage: "Camera source is not available", controller: self)
         }
     }
-
+    
 }
 
 extension AVCaptureDevice {
