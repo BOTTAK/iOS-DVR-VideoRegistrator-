@@ -48,14 +48,15 @@ final class NetworkingManager {
         }
     }
     
-    public func uploadVideo(videoUrl: URL, location: CLLocation, complitionHandler: @escaping VideoUploadBlock) {
+    public func uploadVideo(videoUrl: URL, metadata: [String], complitionHandler: @escaping VideoUploadBlock) {
         
-        let latitude = String(location.coordinate.latitude)
-        let longtitude = String(location.coordinate.longitude)
+        let latitude = metadata[1]
+        let longtitude = metadata[2]
         let bearing = "127"
-        let speed = String(location.speed)
-        let accuracy = String(location.horizontalAccuracy)
-        let attitude = String(location.altitude)
+        let speed = "10"
+        let accuracy = "1"
+        let attitude = "50"
+        print(metadata)
         
         let latitudeData = latitude.data(using: .utf8)
         let longtitudeData = longtitude.data(using: .utf8)
@@ -74,8 +75,6 @@ final class NetworkingManager {
         
         upload(multipartFormData: { (multipartFormData) in
             
-            
-    
             //            multipartFormData.append(violationIDData!, withName: "violations[0][violation_id]")
             //            multipartFormData.append(regNumberData!, withName: "violations[0][reg_number]")
             multipartFormData.append(streetSideData!, withName: "street_side")
@@ -89,9 +88,7 @@ final class NetworkingManager {
             multipartFormData.append(accuracyData!, withName: "location_data[accuracy]")
             multipartFormData.append(attitudeData!, withName: "location_data[altitude]")
             multipartFormData.append(videoUrl, withName: "videoFile", fileName: "secondTry.mp4", mimeType: "video/mp4")
-            
-            
-            
+
         }, to: APIConstants.uploadVideoURL,
            headers: httpHeaders) { (encodingCompletion) in
             
@@ -100,31 +97,9 @@ final class NetworkingManager {
             case .success(request: let uploadRequest,
                           streamingFromDisk: let streamingFromDisk,
                           streamFileURL: let streamFileURL):
-                
-                print(uploadRequest.request?.allHTTPHeaderFields)
-                print(uploadRequest.request?.httpBody)
-                
-                print(uploadRequest)
-                print(streamingFromDisk)
-                print(streamFileURL ?? "strimingFileURL is NIL")
                 uploadRequest.responseJSON(completionHandler: { (response) in
-                    print("########## - response \(response)")
                     complitionHandler(.success(response))
                 })
-                
-//                uploadRequest.validate(statusCode: 200..<600).responseJSON(completionHandler: { (responseJSON) in
-//                    print(responseJSON)
-//
-////                    let json = JSON(responseJSON.result)
-////                    print(json)
-//                    switch responseJSON.result {
-//                    case .success(let value):
-//                        complitionHandler(.success(value))
-//                    case .failure(let error):
-//                        complitionHandler(.failure(error))
-//                        print("########### - \(error)")
-//                    }
-//                })
                 
             case .failure(let error):
                 complitionHandler(.failure(error))
