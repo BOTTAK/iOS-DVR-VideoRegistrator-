@@ -42,7 +42,6 @@ class VideoManager {
                     return
                 }
                 print("Successful! \(correctURL)")
-                FileManager.getFiles()
                 completion(.success((correctURL, correctMetaData)))
             default:
                 fatalError()
@@ -73,7 +72,7 @@ extension FileManager {
 
 extension FileManager {
     class func createNewFilePath(fileName: String) -> URL {
-        guard let filePath = URL.createFolder(folderName: "iOS-VideoApp")?.appendingPathComponent("\(fileName).mp4") else { fatalError("couldnt create file")}
+        guard let filePath = URL.createFolder(folderName: "temp")?.appendingPathComponent("\(fileName).mp4") else { fatalError("couldnt create file")}
         guard filePath.isFileURL else { fatalError() }
         removeFileAtURLIfExists(url: filePath)
         return filePath
@@ -81,9 +80,9 @@ extension FileManager {
 }
 
 extension FileManager {
-    class func getFiles() {
+    class func getFiles() -> ([URL], [String])? {
         // Get the document directory url
-        let documentsUrl = URL.createFolder(folderName: "iOS-VideoApp")
+        let documentsUrl = URL.createFolder(folderName: "temp")
         
         do {
             // Get the directory contents urls (including subfolders urls)
@@ -92,11 +91,11 @@ extension FileManager {
             
             // if you want to filter the directory contents you can do like this:
             let mp4Files = directoryContents.filter{ $0.pathExtension == "mp4" }
-            print("mp3 urls:",mp4Files)
             let mp4FileNames = mp4Files.map{ $0.deletingPathExtension().lastPathComponent }
-            print("mp3 list:", mp4FileNames)
+            return(mp4Files, mp4FileNames)
         } catch {
             print(error)
+            return nil
         }
     }
 }
