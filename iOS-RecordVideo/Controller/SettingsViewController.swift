@@ -16,7 +16,7 @@ protocol SettingFromCustomView: class {
     
 }
 
-class SettingViewController: UIViewController {
+class SettingsViewController: UIViewController {
     
     
     //MARK: Outlets
