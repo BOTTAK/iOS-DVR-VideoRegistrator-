@@ -12,5 +12,6 @@ target 'iOS-RecordVideo' do
   pod 'Kingfisher'
   pod 'LFLiveKit'
   pod 'SwiftyJSON'
+  pod "MediaWatermark"
 
 end
