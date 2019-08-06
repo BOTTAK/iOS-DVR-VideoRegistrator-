@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MediaWatermark
 
 enum SwipeSide {
     case left
@@ -22,7 +23,7 @@ class CustomPickerViewController: UIImagePickerController {
     var swipedTo: SwipeSide = .none
     let locationManager = MetaDataManager()
 
-    let setting = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingViewController.self) as! SettingViewController
+    let setting = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingsViewController.self) as! SettingsViewController
     
     var firstTimeCapture = true
     let longitudeSetting = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
@@ -63,6 +64,7 @@ class CustomPickerViewController: UIImagePickerController {
 
         if firstTimeCapture {
             startVideoCapture()
+            locationManager.getGPSFromVideo()
         }
     }
     
@@ -156,7 +158,7 @@ class CustomPickerViewController: UIImagePickerController {
         dateSetting.highlightedTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         dateSetting.text = "Date"
         dateSetting.textAlignment = .center
-        view.addSubview(dateSetting)
+//        view.addSubview(dateSetting)
         
     }
 
@@ -214,20 +216,52 @@ extension CustomPickerViewController: UIImagePickerControllerDelegate, UINavigat
             }
             
             
-            
             videoManager.trimVideo(sourceURL: videoURL, duration: fullVideoDuration, metaData: locationManager.getGPSFromVideo()) { result in
                 switch (result) {
                 case let .failure(error):
                     UIHelper.showError(errorMessage: "Error creating URL - \(error.localizedDescription)", controller: self)
-                case let .success((video, metadata)):
-                    print(metadata)
-                    let videoPath = video.path
-                    print(video.path)
-                    UISaveVideoAtPathToSavedPhotosAlbum(videoPath,
+                case let .success(video):
 
-                                                        self,
-                                                        #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
-                                                        nil)
+                    if let item = MediaItem(url: video) {
+                        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 35) ]
+                        DispatchQueue.main.async {
+                            
+                            let lattitudeattrStr = NSAttributedString(string: self.latitudeSetting.text!, attributes: attributes)
+                            let longtitudeattrStr = NSAttributedString(string: self.longitudeSetting.text!, attributes: attributes)
+                            let speedattrStr = NSAttributedString(string: self.speedSetting.text!, attributes: attributes)
+                            
+                            let firstElement = MediaElement(text: lattitudeattrStr)
+                            firstElement.frame = CGRect(x: 30, y: 30, width: self.view.frame.width, height: 50)
+                            
+                            let secondElement = MediaElement(text: longtitudeattrStr)
+                            secondElement.frame = CGRect(x: 30, y: 80, width: self.view.frame.width, height: 50)
+                            
+                            let thirdElement = MediaElement(text: speedattrStr)
+                            thirdElement.frame = CGRect(x: 30, y: 120, width: self.view.frame.width, height: 50)
+                            
+                            item.add(elements: [firstElement, secondElement, thirdElement])
+                            
+                            let mediaProcessor = MediaProcessor()
+                            mediaProcessor.processElements(item: item) { [weak self] (result, error) in
+                                
+                                UISaveVideoAtPathToSavedPhotosAlbum(result.processedUrl!.path,
+                                                                    self,
+                                                                    #selector(self!.video(_:didFinishSavingWithError:contextInfo:)),
+                                                                    nil)
+                            }
+                        }
+
+
+                    }
+                    
+                    
+//                    print(metadata)
+//                    let videoPath = video.path
+//                    print(video.path)
+//                    UISaveVideoAtPathToSavedPhotosAlbum(videoPath,
+//                                                        self,
+//                                                        #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
+//                                                        nil)
                 }
             }
             startVideoCapture()

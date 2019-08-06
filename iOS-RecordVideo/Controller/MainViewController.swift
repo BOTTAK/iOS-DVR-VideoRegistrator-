@@ -42,6 +42,9 @@ final class MainViewController: UIViewController {
     @IBAction func startTouch(_ sender: UIButton) {
         if permissionsGranted {
             setupImagePicker()
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: FoundationViewController.self)
+//            present(controller, animated: false, completion: nil)
         }
         getPermissions()
     }
