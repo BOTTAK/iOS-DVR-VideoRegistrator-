@@ -48,14 +48,21 @@ final class NetworkingManager {
         }
     }
     
-    public func uploadVideo(videoUrl: URL, metadata: [String], complitionHandler: @escaping VideoUploadBlock) {
+    public func uploadVideo(videoUrl: URL, complitionHandler: @escaping VideoUploadBlock) {
+        let asset = AVURLAsset(url: videoUrl, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
         
-        let latitude = metadata[1]
-        let longtitude = metadata[2]
+        guard let metadata = asset.metadata.first?.value else { fatalError() }
+        let newMetadata = String(metadata as! Substring)
+        
+        let parsedMetaDataArray = newMetadata.components(separatedBy: "+")
+        guard let date = asset.metadata[1].value else {fatalError()}
+        
+        let latitude = parsedMetaDataArray[0]
+        let longtitude = parsedMetaDataArray[1]
         let bearing = "127"
         let speed = "10"
         let accuracy = "1"
-        let attitude = "50"
+        let attitude = parsedMetaDataArray[2]
         print(metadata)
         
         let latitudeData = latitude.data(using: .utf8)
@@ -66,7 +73,7 @@ final class NetworkingManager {
         let timeData = APIConstants.time.data(using: .utf8)
         let atTimeStampData = APIConstants.atTimeStamp.data(using: .utf8)
         let streetSideData = APIConstants.streetSide.data(using: .utf8)
-        let recordedAtData = APIConstants.recordedAtConstString.data(using: .utf8)
+        let recordedAtData = date.description.data(using: .utf8)
         let bearingData = bearing.data(using: .utf8)
         let accuracyData = accuracy.data(using: .utf8)
         let attitudeData = attitude.data(using: .utf8)
