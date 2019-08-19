@@ -46,7 +46,7 @@ class CustomPickerViewController: UIImagePickerController {
     var timerNotificationLabel = SwipeNotificationLabel(frame: CGRect(x: 15, y: 15, width: 100, height: 100))
     let videoManager = VideoManager()
     open var maximumVideoDuration = 120.0
-    open var fullVideoDuration = 20.0 // expected video file duration after montage in seconds
+    open var fullVideoDuration = 16.0 // expected video file duration after montage in seconds
 
     // MARK: LifeCycle
     override func viewDidLoad() {
