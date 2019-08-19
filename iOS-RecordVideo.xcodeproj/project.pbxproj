@@ -37,7 +37,6 @@
 		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
 		FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
 		FACC768922E5B88E00AC7ED5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768822E5B88E00AC7ED5 /* SettingsViewController.swift */; };
-		FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */; };
 		FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F522BA802F004AE55D /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +68,6 @@
 		FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Copy.swift"; sourceTree = "<group>"; };
 		FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbum.swift; sourceTree = "<group>"; };
 		FACC768822E5B88E00AC7ED5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FAD0A8EB22BA802E004AE55D /* iOS-RecordVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-RecordVideo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD0A8EE22BA802E004AE55D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVideoViewController.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 				FA8E8DC922DDD080001B780D /* MovieConverter.swift */,
 				FA8E8DCB22DDE12E001B780D /* CameraModel.swift */,
 				FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */,
-				FACC768A22E5DFF500AC7ED5 /* LocationManager.swift */,
 				7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */,
 			);
 			path = Model;
@@ -286,7 +283,6 @@
 				7EB0ECFA230ABD9800D6CD98 /* LabelWithMetadata.swift in Sources */,
 				FACC768922E5B88E00AC7ED5 /* SettingsViewController.swift in Sources */,
 				7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */,
-				FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */,
 				7EFC20E522F60E70002ABE95 /* VideoPreview.swift in Sources */,
 				7E936E8122F727A7003846E1 /* FoundationViewController.swift in Sources */,
 				7E16F5F722E388F1008B158C /* UIViewController+CoreKit.swift in Sources */,
