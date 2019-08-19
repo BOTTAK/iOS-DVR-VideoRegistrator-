@@ -52,7 +52,7 @@ class MetaDataManager: NSObject {
     
     
     func XXRadiansToDegrees(radians: Double) -> Double {
-        return radians * 180.0 / M_PI
+        return radians * 180.0 / .pi
     }
     
     func getBearingBetweenTwoPoints(point1 : CLLocation, point2 : CLLocation) -> Double {

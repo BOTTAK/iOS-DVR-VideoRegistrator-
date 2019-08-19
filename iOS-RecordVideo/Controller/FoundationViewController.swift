@@ -147,7 +147,7 @@ extension FoundationViewController {
                 let error = NSError(domain: "VideoApp", code: 00, userInfo: ["Message": "Export cancelled"])
                 print(error.localizedDescription)
             case .completed:
-                print("Successful! \(exporter!.outputURL)")
+                print("Successful! \(String(describing: exporter!.outputURL))")
                 UISaveVideoAtPathToSavedPhotosAlbum(exporter!.outputURL!.path,
                                                     self,
                                                     #selector(self.video(_:didFinishSavingWithError:contextInfo:)),

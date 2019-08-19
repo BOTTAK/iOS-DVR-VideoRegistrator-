@@ -100,6 +100,6 @@ public class VideoPreview: UIView {
     // MARK:- NSNotification
     @objc func playerItemDidReachEnd(notification: NSNotification) {
         let playerItem = notification.object as! AVPlayerItem
-        playerItem.seek(to: CMTime.zero)
+        playerItem.seek(to: Date(), completionHandler: nil)
     }
 }

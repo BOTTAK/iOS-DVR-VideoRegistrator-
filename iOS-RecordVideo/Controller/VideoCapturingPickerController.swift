@@ -106,13 +106,13 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     var swipeSide = SwipeSide.none
     
     // MARK: Labels && Buttons
-    let longitudeLabel = LabelWithMetadata()
-    let latitudeLabel = LabelWithMetadata()
-    let speedLabel = LabelWithMetadata()
-    let dateLabel = LabelWithMetadata()
-    var notificationLabel = SwipeNotificationLabel()
-    var timerNotificationLabel = SwipeNotificationLabel()
-    var infoLabel = SwipeNotificationLabel()
+    private let longitudeLabel = LabelWithMetadata()
+    private let latitudeLabel = LabelWithMetadata()
+    private let speedLabel = LabelWithMetadata()
+    private let dateLabel = LabelWithMetadata()
+    private var notificationLabel = SwipeNotificationLabel()
+    private var timerNotificationLabel = SwipeNotificationLabel()
+    private var infoLabel = SwipeNotificationLabel()
     // Setup
     fileprivate func addLabels() {
         longitudeLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
@@ -132,7 +132,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     }
     
     // MARK: Location and metadata
-    let locationManager = MetaDataManager()
+    private let locationManager = MetaDataManager()
     func metadataDidUpdate(_ getGPSFromVideo: CLLocation) {
         longitudeLabel.metadata = getGPSFromVideo.coordinate.longitude.description
         latitudeLabel.metadata = getGPSFromVideo.coordinate.latitude.description
@@ -141,11 +141,11 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     }
     
     // MARK: Video
-    let videoManager = VideoManager()
+    private let videoManager = VideoManager()
     open var maximumDuration = 120.0
     open var currentDuration = 16.0
-    var firstTimeCapture = true
-    func stopCaptureAndTrim() {
+    private var firstTimeCapture = true
+    private func stopCaptureAndTrim() {
         infoLabel.changeTextAndAnimate(text: "Creating video")
         view.isUserInteractionEnabled = true
         toSave = true
@@ -153,7 +153,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     }
     
     // MARK: Saving
-    var toSave = false
+    private var toSave = false
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         view.isUserInteractionEnabled = true
         if toSave {
@@ -218,7 +218,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     
     // MARK: Settings
     // Settings button
-    var settingsButton: UIButton {
+    private var settingsButton: UIButton {
         let button = UIButton(frame: CGRect(x: 0, y: view.frame.height - 50,
                                             width: view.frame.width, height: 50))
         button.center.x = view.center.x
@@ -234,7 +234,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         let settingsController = settingsViewController
         present(settingsController, animated: true, completion: nil)
     }
-    let settingsViewController = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingsViewController.self) as! SettingsViewController
+    private let settingsViewController = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingsViewController.self) as! SettingsViewController
     func settingsDidChange(_ settingPickerQuility: UIImagePickerController.QualityType,
                            _ settingPickerDuration: TimeInterval, _ settingMicrophone: String) {
         currentDuration = settingPickerDuration

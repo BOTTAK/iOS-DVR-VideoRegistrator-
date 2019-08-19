@@ -59,7 +59,7 @@ final class CameraSetup: NSObject {
         
         ///6
         let queue: DispatchQueue = DispatchQueue(label: "VideoDataOutput")
-        dataOutput.setSampleBufferDelegate(self as? AVCaptureVideoDataOutputSampleBufferDelegate, queue: queue)
+        dataOutput.setSampleBufferDelegate(self, queue: queue)
         dataOutput.connection(with: AVMediaType.video)?.videoOrientation = .portrait
         
         //output.presentCaptureSession()
