@@ -19,9 +19,9 @@ class CustomLongPress: UILongPressGestureRecognizer {
     var count = 0
     weak var longTapDelegate: LongPressDelegate?
     
-    var vc: CustomPickerViewController!
+    var vc: VideoCapturingPickerController!
     
-    init(target: Any?, action: Selector?, controller: CustomPickerViewController) {
+    init(target: Any?, action: Selector?, controller: VideoCapturingPickerController) {
         super.init(target: target, action: action)
         vc = controller
         longTapDelegate = controller
@@ -32,11 +32,9 @@ class CustomLongPress: UILongPressGestureRecognizer {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         if vc.swipeEnded {
-           super.touchesBegan(touches, with: event)
+            super.touchesBegan(touches, with: event)
             startTimer()
             vc.swipeEnded = false
-        } else {
-            return
         }
     }
     

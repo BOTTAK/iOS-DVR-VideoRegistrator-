@@ -10,12 +10,15 @@ import UIKit
 
 class VideoManager {
     
-    func trimVideo(sourceURL: URL, duration: Double, metaData: AVMutableMetadataItem, completion: @escaping (Result<URL, Error>)->Void) {
+    func trimVideo(sourceURL: URL, duration: Double, metaData: [String], completion: @escaping (Result<URL, Error>)->Void) {
         
         guard sourceURL.isFileURL else { fatalError() }
         
         let asset = AVURLAsset(url: sourceURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
-        
+        if asset.duration.seconds < duration {
+            completion(.failure(NSError(domain: "Video", code: 1056, userInfo: [NSLocalizedDescriptionKey : "Cannot create video with \(Int(duration)) sec duration because it is not recorded yet"])))
+            return
+        }
         guard let exportSession = AVAssetExportSession(asset: asset,
                                                        presetName: AVAssetExportPresetPassthrough) else { fatalError() }
         
@@ -24,7 +27,6 @@ class VideoManager {
         exportSession.outputURL = FileManager.createNewFilePath(fileName: videoName)
         exportSession.outputFileType = AVFileType.mp4
         exportSession.shouldOptimizeForNetworkUse = true
-        exportSession.metadata = [metaData]
         
         exportSession.exportAsynchronously(completionHandler: {() -> Void in
             switch exportSession.status {

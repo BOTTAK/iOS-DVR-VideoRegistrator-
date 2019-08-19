@@ -12,8 +12,8 @@ import AVFoundation
 import CoreLocation
 import Photos
 
-protocol MetaDataManagerSetting: class {
-    func metaDataManagerSetting(_ getGPSFromVideo: CLLocation)
+protocol MetaDataDelegate: class {
+    func metadataDidUpdate(_ getGPSFromVideo: CLLocation)
 }
 
 class MetaDataManager: NSObject {
@@ -22,54 +22,32 @@ class MetaDataManager: NSObject {
     private var locManager = CLLocationManager()
     private var library: PHAsset!
     
-    weak var delegate: MetaDataManagerSetting?
+    weak var delegate: MetaDataDelegate?
     
     override init() {
         super.init()
         locManager.delegate = self
     }
     
-    func getDataAndTime() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm, MMMMM, dd, yyyy, EEEE"
-        let str = dateFormatter.string(from: Date())
+    func getGPSFromVideo() {
+        locManager.startUpdatingLocation()
+        locManager.requestLocation()
+        currentLocation = locManager.location
+        delegate?.metadataDidUpdate(currentLocation)
+        locManager.stopUpdatingLocation()
     }
     
-    
-    func getGPSFromVideo() -> AVMutableMetadataItem {
-        
-        let status = CLLocationManager.authorizationStatus()
-        
-        switch status {
-        case .notDetermined:
-            locManager.requestWhenInUseAuthorization()
-        case .denied, .restricted:
-            print("no permissions")
-        case .authorizedAlways, .authorizedWhenInUse:
-             locManager.startUpdatingLocation()
-             locManager.requestLocation()
-             currentLocation = locManager.location
-             delegate?.metaDataManagerSetting(currentLocation)
-             let dateData = Calendar(identifier: .gregorian)
-             let componentData = dateData.dateComponents([.day,.month,.year,.hour,.minute,.second], from: Date())
-
-             let metadata = AVMutableMetadataItem()
-             
-             
-             metadata.keySpace = AVMetadataKeySpace.quickTimeMetadata
-             metadata.key = AVMetadataKey.quickTimeMetadataKeyLocationISO6709 as NSString
-             metadata.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
-             metadata.value = String(format: "%+09.5f%+010.5f%+.0fCRSWGS_84",
-                                     currentLocation.coordinate.latitude,
-                                     currentLocation.coordinate.longitude, currentLocation.speed,
-                                     currentLocation.altitude,
-                                     currentLocation.horizontalAccuracy) as NSString
-             return metadata
-        @unknown default:
-            fatalError()
-        }
-        return AVMutableMetadataItem()
-        
+    func generateMetadata() -> AVMutableMetadataItem {
+        let metadata = AVMutableMetadataItem()
+        metadata.keySpace = AVMetadataKeySpace.quickTimeMetadata
+        metadata.key = AVMetadataKey.quickTimeMetadataKeyLocationISO6709 as NSString
+        metadata.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
+        metadata.value = String(format: "%+09.5f%+010.5f%+.0fCRSWGS_84",
+                                currentLocation.coordinate.latitude,
+                                currentLocation.coordinate.longitude, currentLocation.speed,
+                                currentLocation.altitude,
+                                currentLocation.horizontalAccuracy) as NSString
+        return metadata
     }
     
     
@@ -131,9 +109,8 @@ extension MetaDataManager: CLLocationManagerDelegate {
         print("error:: \(error.localizedDescription)")
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         if locations.first != nil {
-            print("location:: (location)")
+            print("location:: \(locations)")
         }
         
     }

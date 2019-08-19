@@ -11,8 +11,8 @@ import AVKit
 import AVFoundation
 import MobileCoreServices
 
-protocol SettingFromCustomView: class {
-    func settingFromCustomViewController(_ settingPickerQuility: UIImagePickerController.QualityType, _ settingPickerDuration: TimeInterval,_ settingMicrophone: String)
+protocol SettingsDelegate: class {
+    func settingsDidChange(_ settingPickerQuility: UIImagePickerController.QualityType, _ settingPickerDuration: TimeInterval,_ settingMicrophone: String)
     
 }
 
@@ -22,11 +22,11 @@ class SettingsViewController: UIViewController {
     //MARK: Outlets
     
     var settingPickerQuility: UIImagePickerController.QualityType = .typeMedium
-    var settingPickerDuration:  TimeInterval = 20.0
+    var settingPickerDuration:  TimeInterval = 16.0
     var settingMicrophone: String = ""
     var videoAndImageReview = ImageUploadViewController()
     var videoURL: URL?
-    weak var delegate: SettingFromCustomView?
+    weak var delegate: SettingsDelegate?
     
     @IBOutlet weak var videoQualityLabel: UILabel!
     @IBOutlet weak var videoDurationLabel: UILabel!
@@ -50,8 +50,8 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        delegate?.settingFromCustomViewController(settingPickerQuility, settingPickerDuration, settingMicrophone)
         dismiss(animated: true, completion: nil)
+        delegate?.settingsDidChange(settingPickerQuility, settingPickerDuration, settingMicrophone)
     }
     
     @IBAction func videoQualitySegmented(_ sender: UISegmentedControl) {
@@ -74,7 +74,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func videoDurationSegmented(_ sender: UISegmentedControl) {
         if videoDurationSegment.selectedSegmentIndex == 0 {
-            settingPickerDuration = 20.0
+            settingPickerDuration = 16.0
         } else {
             if videoDurationSegment.selectedSegmentIndex == 1 {
                 settingPickerDuration = 30.0

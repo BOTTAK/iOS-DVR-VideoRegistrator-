@@ -17,7 +17,7 @@ final class MainViewController: UIViewController {
     
     let locatioManager = CLLocationManager()
     let cameraMediaType = AVMediaType.video
-    let imagePicker = CustomPickerViewController()
+    let imagePicker = VideoCapturingPickerController()
     
     fileprivate var permissionsGranted: Granted {
         if AVCaptureDevice.authorizationStatus(for: .audio) == .authorized
