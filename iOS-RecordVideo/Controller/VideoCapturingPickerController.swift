@@ -25,24 +25,30 @@ extension UIGestureRecognizer {
 class VideoCapturingPickerController: UIImagePickerController, UIGestureRecognizerDelegate, LongPressDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SettingsDelegate, MetaDataDelegate {
     
     // MARK: Gesture recognizers
+    enum SwipeSide {
+        case left
+        case right
+        case down
+        case none
+    }
     // Left
     private var swipeLeftRecognizer: UISwipeGestureRecognizer!
     @objc func swipeLeft() {
-        notificationLabel.changeTextAndAnimate(text: "Left")
+        mainInfoLabel.changeTextAndAnimate(text: "Left")
         swipeEnded = true
         swipeSide = .left
     }
     // Right
     private var swipeRightRecognizer: UISwipeGestureRecognizer!
     @objc func swipeRight() {
-        notificationLabel.changeTextAndAnimate(text: "Right")
+        mainInfoLabel.changeTextAndAnimate(text: "Right")
         swipeEnded = true
         swipeSide = .right
     }
     // Down
     private var swipeDownRecognizer: UISwipeGestureRecognizer!
     @objc func swipeDown() {
-        notificationLabel.changeTextAndAnimate(text: "Down")
+        mainInfoLabel.changeTextAndAnimate(text: "Down")
         swipeEnded = true
         swipeSide = .down
     }
@@ -52,29 +58,29 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         if longPressRecognizer.state == .changed || longPressRecognizer.state == .ended {
             return
         } else {
-            notificationLabel.changeTextAndAnimate(text: "Long press")
+            mainInfoLabel.changeTextAndAnimate(text: "Long press")
         }
     }
     // LongPressDelegate
     func gestureDidEnd() {
-        timerNotificationLabel.changeTextAndAnimate(text: "Stop")
+        recordingWaitingTimerLabel.changeTextAndAnimate(text: "Stop")
         switch swipeSide {
         case .left:
-            infoLabel.changeTextAndAnimate(text: "Please wait")
-            infoLabel.showTimer(seconds: 3)
+            recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
+            recordingWaitingTimerLabel.showTimer(seconds: 3)
             view.isUserInteractionEnabled = false
             self.stopCaptureAndTrim()
         case .right:
             view.isUserInteractionEnabled = false
-            self.infoLabel.changeTextAndAnimate(text: "Please wait")
-            self.infoLabel.showTimer(seconds: Int(self.currentDuration))
+            recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
+            recordingWaitingTimerLabel.showTimer(seconds: Int(currentDuration))
             Timer.scheduledTimer(withTimeInterval: currentDuration, repeats: false) { (timer) in
                 self.stopCaptureAndTrim()
             }
         case .down:
             view.isUserInteractionEnabled = false
-            self.infoLabel.changeTextAndAnimate(text: "Please wait")
-            self.infoLabel.showTimer(seconds: Int(self.currentDuration / 2))
+            recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
+            recordingWaitingTimerLabel.showTimer(seconds: Int(self.currentDuration / 2))
             Timer.scheduledTimer(withTimeInterval: currentDuration / 2, repeats: false) { (timer) in
                 self.stopCaptureAndTrim()
             }
@@ -84,7 +90,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     }
     func timerDidTick(_ time: Int) {
         if time > 0 && time < Int(maximumDuration - currentDuration) {
-            notificationLabel.changeTextAndAnimate(text: "+\(time)")
+            mainInfoLabel.changeTextAndAnimate(text: "+\(time)")
             currentDuration += 10.0
         } else {
             print("timer wrongtime")
@@ -110,25 +116,25 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     private let latitudeLabel = LabelWithMetadata()
     private let speedLabel = LabelWithMetadata()
     private let dateLabel = LabelWithMetadata()
-    private var notificationLabel = SwipeNotificationLabel()
-    private var timerNotificationLabel = SwipeNotificationLabel()
-    private var infoLabel = SwipeNotificationLabel()
+    private var mainInfoLabel = SwipeNotificationLabel()
+    private var recordingWaitingTimerLabel = SwipeNotificationLabel()
+    private var recordingInfoLabel = SwipeNotificationLabel()
     // Setup
     fileprivate func addLabels() {
-        longitudeLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        longitudeLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
         view.addSubview(longitudeLabel)
-        latitudeLabel.frame = CGRect(x: 0, y: 50, width: view.frame.width, height: 50)
+        latitudeLabel.frame = CGRect(x: 0, y: 40, width: view.frame.width, height: 40)
         view.addSubview(latitudeLabel)
-        speedLabel.frame = CGRect(x: 0, y: 100, width: view.frame.width, height: 50)
+        speedLabel.frame = CGRect(x: 0, y: 80, width: view.frame.width, height: 40)
         view.addSubview(speedLabel)
-        dateLabel.frame = CGRect(x: 0, y: 150, width: view.frame.width, height: 50)
+        dateLabel.frame = CGRect(x: 0, y: 120, width: view.frame.width, height: 40)
         view.addSubview(dateLabel)
-        notificationLabel.frame = CGRect(x: 0, y: 200, width: view.frame.width, height: 50)
-        view.addSubview(notificationLabel)
-        timerNotificationLabel.frame = CGRect(x: 0, y: 250, width: view.frame.width, height: 50)
-        view.addSubview(timerNotificationLabel)
-        infoLabel.frame = CGRect(x: 0, y: 300, width: view.frame.width, height: 50)
-        view.addSubview(infoLabel)
+        mainInfoLabel.frame = CGRect(x: 0, y: 200, width: view.frame.width, height: 40)
+        view.addSubview(mainInfoLabel)
+        recordingWaitingTimerLabel.frame = CGRect(x: 0, y: 250, width: view.frame.width, height: 40)
+        view.addSubview(recordingWaitingTimerLabel)
+        recordingInfoLabel.frame = CGRect(x: 0, y: 300, width: view.frame.width, height: 40)
+        view.addSubview(recordingInfoLabel)
     }
     
     // MARK: Location and metadata
@@ -146,7 +152,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     open var currentDuration = 16.0
     private var firstTimeCapture = true
     private func stopCaptureAndTrim() {
-        infoLabel.changeTextAndAnimate(text: "Creating video")
+        recordingInfoLabel.changeTextAndAnimate(text: "Creating video")
         view.isUserInteractionEnabled = true
         toSave = true
         stopVideoCapture()
@@ -161,9 +167,11 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                 UIHelper.showError(errorMessage: "Error parsing info for an URL", controller: self)
                 return
             }
+            locationManager.getGPSFromVideo()
+            print(latitudeLabel.metadata)
             
             videoManager.trimVideo(sourceURL: videoURL, duration: currentDuration,
-                                   metaData: [latitudeLabel.metadata, longitudeLabel.metadata, speedLabel.metadata, dateLabel.metadata]) { result in
+                                   location: locationManager.generateMetadata(), date: dateLabel.metadata) { result in
                                     switch result {
                                     case let .success(video):
                                         if let item = MediaItem(url: video) {
@@ -207,6 +215,8 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                                     }
             }
             startVideoCapture()
+            recordingInfoLabel.text = "Recording"
+            recordingInfoLabel.alpha = 1.0
         }
     }
     @objc func video(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
@@ -240,6 +250,8 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         currentDuration = settingPickerDuration
         videoQuality = settingPickerQuility
         startVideoCapture()
+        recordingInfoLabel.text = "Recording"
+        recordingInfoLabel.alpha = 1.0
     }
     
     // MARK: Delegates
@@ -263,6 +275,8 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         
         if firstTimeCapture {
             startVideoCapture()
+            recordingInfoLabel.text = "Recording"
+            recordingInfoLabel.alpha = 1.0
         }
         locationManager.getGPSFromVideo()
     }
