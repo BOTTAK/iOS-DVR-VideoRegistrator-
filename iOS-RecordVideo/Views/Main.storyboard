@@ -166,8 +166,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="uploadButtonTapped:" destination="FxO-vN-GuZ" eventType="touchUpInside" id="8yX-K9-Kcm"/>
-                                    <segue destination="SPQ-KG-QQj" kind="show" id="Huz-if-rC0"/>
+                                    <segue destination="SPQ-KG-QQj" kind="show" id="8BG-Nl-FzZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZL-a2-hWe">
