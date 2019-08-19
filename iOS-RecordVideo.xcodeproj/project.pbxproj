@@ -28,6 +28,8 @@
 		7E936E8322F72802003846E1 /* VideoOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E936E8222F72802003846E1 /* VideoOutputView.swift */; };
 		7E95E26922EF7EDF002248F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E95E26822EF7EDF002248F1 /* Main.storyboard */; };
 		7E9A2F3E22F23999008E2A34 /* CustomLongPress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A2F3D22F23999008E2A34 /* CustomLongPress.swift */; };
+		7EB0ECF8230AB4E200D6CD98 /* VideoCapturingPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB0ECF7230AB4E200D6CD98 /* VideoCapturingPickerController.swift */; };
+		7EB0ECFA230ABD9800D6CD98 /* LabelWithMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB0ECF9230ABD9800D6CD98 /* LabelWithMetadata.swift */; };
 		7EE8CCBF22EC342C00DFC5AB /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */; };
 		7EFC20E322F5F6B7002ABE95 /* ChooseAndUploadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFC20E222F5F6B7002ABE95 /* ChooseAndUploadController.swift */; };
 		7EFC20E522F60E70002ABE95 /* VideoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFC20E422F60E70002ABE95 /* VideoPreview.swift */; };
@@ -50,6 +52,8 @@
 		7E936E8222F72802003846E1 /* VideoOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOutputView.swift; sourceTree = "<group>"; };
 		7E95E26822EF7EDF002248F1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7E9A2F3D22F23999008E2A34 /* CustomLongPress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLongPress.swift; sourceTree = "<group>"; };
+		7EB0ECF7230AB4E200D6CD98 /* VideoCapturingPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCapturingPickerController.swift; sourceTree = "<group>"; };
+		7EB0ECF9230ABD9800D6CD98 /* LabelWithMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithMetadata.swift; sourceTree = "<group>"; };
 		7EE8CCBE22EC342C00DFC5AB /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		7EFC20E222F5F6B7002ABE95 /* ChooseAndUploadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAndUploadController.swift; sourceTree = "<group>"; };
 		7EFC20E422F60E70002ABE95 /* VideoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreview.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 				7E936E8022F727A7003846E1 /* FoundationViewController.swift */,
 				7E936E8222F72802003846E1 /* VideoOutputView.swift */,
 				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
+				7EB0ECF9230ABD9800D6CD98 /* LabelWithMetadata.swift */,
+				7EB0ECF7230AB4E200D6CD98 /* VideoCapturingPickerController.swift */,
 				FACC768822E5B88E00AC7ED5 /* SettingsViewController.swift */,
 				7EFC20E222F5F6B7002ABE95 /* ChooseAndUploadController.swift */,
 				FA495CF622EE17D600FF3381 /* MetaDataManager.swift */,
@@ -259,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */,
+				7EB0ECF8230AB4E200D6CD98 /* VideoCapturingPickerController.swift in Sources */,
 				7E16F5E522E388F1008B158C /* AppDelegate.swift in Sources */,
 				7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */,
 				7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */,
@@ -276,6 +283,7 @@
 				7E16F5F322E388F1008B158C /* CameraModel.swift in Sources */,
 				7EFC20E322F5F6B7002ABE95 /* ChooseAndUploadController.swift in Sources */,
 				7E9A2F3E22F23999008E2A34 /* CustomLongPress.swift in Sources */,
+				7EB0ECFA230ABD9800D6CD98 /* LabelWithMetadata.swift in Sources */,
 				FACC768922E5B88E00AC7ED5 /* SettingsViewController.swift in Sources */,
 				7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */,
 				FACC768B22E5DFF500AC7ED5 /* LocationManager.swift in Sources */,
