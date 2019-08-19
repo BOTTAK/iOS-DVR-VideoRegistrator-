@@ -48,14 +48,7 @@ class ChooseAndUploadController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func prepareFile(url: URL) {
-        let asset = AVURLAsset(url: url, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
-        
-        guard let metadata = asset.metadata.first?.value else { fatalError() }
-        let newMetadata = String(metadata as! Substring)
-        
-        let parsedMetaDataArray = newMetadata.components(separatedBy: "+")
-        
-        networkingManager.uploadVideo(videoUrl: url, metadata: parsedMetaDataArray) { result in
+        networkingManager.uploadVideo(videoUrl: url) { result in
             switch result {
             case let .success(value):
                 print(value as Any)
@@ -64,7 +57,6 @@ class ChooseAndUploadController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     }
-    
 }
 
 extension ChooseAndUploadController {
