@@ -30,6 +30,7 @@
 		7EB0ECFA230ABD9800D6CD98 /* LabelWithMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB0ECF9230ABD9800D6CD98 /* LabelWithMetadata.swift */; };
 		7EFC20E322F5F6B7002ABE95 /* ChooseAndUploadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFC20E222F5F6B7002ABE95 /* ChooseAndUploadController.swift */; };
 		7EFC20E522F60E70002ABE95 /* VideoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFC20E422F60E70002ABE95 /* VideoPreview.swift */; };
+		CEB66226093FFDF4DCA5EB44 /* Pods_iOS_RecordVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 697575A8AA9CE5158BD79D96 /* Pods_iOS_RecordVideo.framework */; };
 		FA21FF18230B2A5700EFADB1 /* SwipeNotificationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21FF17230B2A5600EFADB1 /* SwipeNotificationLabel.swift */; };
 		FA21FF1C230B2A6E00EFADB1 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21FF1B230B2A6E00EFADB1 /* VideoModel.swift */; };
 		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		697575A8AA9CE5158BD79D96 /* Pods_iOS_RecordVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_RecordVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E16F5E122E38762008B158C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerViewController.swift; sourceTree = "<group>"; };
 		7E19173122EDC98D00C4B7AA /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -52,6 +54,8 @@
 		7EB0ECF9230ABD9800D6CD98 /* LabelWithMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithMetadata.swift; sourceTree = "<group>"; };
 		7EFC20E222F5F6B7002ABE95 /* ChooseAndUploadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAndUploadController.swift; sourceTree = "<group>"; };
 		7EFC20E422F60E70002ABE95 /* VideoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreview.swift; sourceTree = "<group>"; };
+		AA3C557BC386EB73453D082F /* Pods-iOS-RecordVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RecordVideo.debug.xcconfig"; path = "Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		E10FFC7B852136B766180EAB /* Pods-iOS-RecordVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RecordVideo.release.xcconfig"; path = "Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo.release.xcconfig"; sourceTree = "<group>"; };
 		FA21FF17230B2A5600EFADB1 /* SwipeNotificationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeNotificationLabel.swift; sourceTree = "<group>"; };
 		FA21FF1B230B2A6E00EFADB1 /* VideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
@@ -77,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB66226093FFDF4DCA5EB44 /* Pods_iOS_RecordVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +91,8 @@
 		2CD2069E4A9BE9C916A06E40 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				AA3C557BC386EB73453D082F /* Pods-iOS-RecordVideo.debug.xcconfig */,
+				E10FFC7B852136B766180EAB /* Pods-iOS-RecordVideo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -126,6 +133,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		A3FD116A4B793E2B9BCF1C74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				697575A8AA9CE5158BD79D96 /* Pods_iOS_RecordVideo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FA32309522BC0F5B00725FCA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +174,7 @@
 				FAD0A8ED22BA802E004AE55D /* iOS-RecordVideo */,
 				FAD0A8EC22BA802E004AE55D /* Products */,
 				2CD2069E4A9BE9C916A06E40 /* Pods */,
+				A3FD116A4B793E2B9BCF1C74 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,9 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAD0A8FD22BA802F004AE55D /* Build configuration list for PBXNativeTarget "iOS-RecordVideo" */;
 			buildPhases = (
+				B20F203D5C8E5337D7EAB9B3 /* [CP] Check Pods Manifest.lock */,
 				FAD0A8E722BA802E004AE55D /* Sources */,
 				FAD0A8E822BA802E004AE55D /* Frameworks */,
 				FAD0A8E922BA802E004AE55D /* Resources */,
+				EBA21D098C9C5FD28D65C4F7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -249,6 +267,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B20F203D5C8E5337D7EAB9B3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-RecordVideo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBA21D098C9C5FD28D65C4F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FAD0A8E722BA802E004AE55D /* Sources */ = {
@@ -416,17 +476,18 @@
 		};
 		FAD0A8FE22BA802F004AE55D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA3C557BC386EB73453D082F /* Pods-iOS-RecordVideo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 29UN6WTSCZ;
+				DEVELOPMENT_TEAM = ZZH8QX82PA;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideo.Brejcha";
+				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideoRegister";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -436,17 +497,18 @@
 		};
 		FAD0A8FF22BA802F004AE55D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E10FFC7B852136B766180EAB /* Pods-iOS-RecordVideo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 29UN6WTSCZ;
+				DEVELOPMENT_TEAM = ZZH8QX82PA;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideo.Brejcha";
+				PRODUCT_BUNDLE_IDENTIFIER = "iOS-RecordVideoRegister";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
