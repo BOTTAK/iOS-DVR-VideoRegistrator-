@@ -35,9 +35,6 @@ class VideoManager {
         
         exportSession.metadata = [location, dateMetadata]
         
-        print(exportSession.metadata![0].value)
-        print(exportSession.metadata![1].value)
-        
         exportSession.exportAsynchronously(completionHandler: {() -> Void in
             switch exportSession.status {
             case .failed:

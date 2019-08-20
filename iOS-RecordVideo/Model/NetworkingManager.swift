@@ -53,16 +53,17 @@ final class NetworkingManager {
         
         guard let metadata = asset.metadata.first?.value else { fatalError() }
         let newMetadata = String(metadata as! Substring)
-        
+        print(asset.metadata)
         let parsedMetaDataArray = newMetadata.components(separatedBy: "+")
         guard let date = asset.metadata[1].value else {fatalError()}
-        
-        let latitude = parsedMetaDataArray[0]
-        let longtitude = parsedMetaDataArray[1]
+        print(date.description)
+        print(parsedMetaDataArray)
+        let latitude = parsedMetaDataArray[1]
+        let longtitude = parsedMetaDataArray[2]
         let bearing = "127"
         let speed = "10"
         let accuracy = "1"
-        let attitude = parsedMetaDataArray[2]
+        let attitude = parsedMetaDataArray[3]
         print(metadata)
         
         let latitudeData = latitude.data(using: .utf8)

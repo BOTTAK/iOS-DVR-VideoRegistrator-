@@ -24,7 +24,6 @@ class SettingsViewController: UIViewController {
     var settingPickerQuility: UIImagePickerController.QualityType = .typeMedium
     var settingPickerDuration:  TimeInterval = 16.0
     var settingMicrophone: String = ""
-//    var videoAndImageReview = ImageUploadViewController()
     var videoURL: URL?
     weak var delegate: SettingsDelegate?
     
@@ -108,16 +107,6 @@ class SettingsViewController: UIViewController {
         }
         
     }
-    
-//    @IBAction func uploadButtonTapped(_ sender: Any) {
-//        present(videoAndImageReview, animated: true, completion: nil)
-//    }
-//
-//    func videoAndImageReview(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        videoURL = info[.mediaURL] as? URL
-//        print("videoURL:\(String(describing: videoURL))")
-//        self.dismiss(animated: true, completion: nil)
-//    }
     
     
     
