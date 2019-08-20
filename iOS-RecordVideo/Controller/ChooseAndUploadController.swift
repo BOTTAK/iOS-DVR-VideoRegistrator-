@@ -35,8 +35,10 @@ class ChooseAndUploadController: UIViewController, UITableViewDelegate, UITableV
 
         videoListTableView.delegate = self
         videoListTableView.dataSource = self
+        SVProgressHUD.show(withStatus: "Authorising")
         networkingManager.authorisation { token in
             self.networkingManager.token = token
+            SVProgressHUD.showSuccess(withStatus: "Autorised")
         }
     }
     

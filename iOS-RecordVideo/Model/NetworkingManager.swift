@@ -51,21 +51,20 @@ final class NetworkingManager {
     public func uploadVideo(videoUrl: URL, complitionHandler: @escaping VideoUploadBlock) {
         let asset = AVURLAsset(url: videoUrl, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
         
-        guard let metadata = asset.metadata.first?.value else { fatalError() }
-        let newMetadata = String(metadata as! Substring)
-        print(asset.metadata)
-        let parsedMetaDataArray = newMetadata.components(separatedBy: "+")
-        guard let date = asset.metadata[1].value else {fatalError()}
-        print(date.description)
-        print(parsedMetaDataArray)
+        guard let metadata = asset.metadata.first?.value?.description else { fatalError() }
+        
+        let parsedMetaDataArray = metadata.components(separatedBy: "+")
         let latitude = parsedMetaDataArray[1]
-        let longtitude = parsedMetaDataArray[2]
+        let longtitude = parsedMetaDataArray[2].dropFirst(1)
+        let attitude = parsedMetaDataArray[3].dropLast(5)
+        
+        guard let date = asset.metadata[1].value?.description.dropLast(5) else {fatalError()}
+        print(latitude, longtitude, attitude, date)
+        
         let bearing = "127"
         let speed = "10"
         let accuracy = "1"
-        let attitude = parsedMetaDataArray[3]
-        print(metadata)
-        
+
         let latitudeData = latitude.data(using: .utf8)
         let longtitudeData = longtitude.data(using: .utf8)
         let speedData = speed.data(using: .utf8)
@@ -74,7 +73,7 @@ final class NetworkingManager {
         let timeData = APIConstants.time.data(using: .utf8)
         let atTimeStampData = APIConstants.atTimeStamp.data(using: .utf8)
         let streetSideData = APIConstants.streetSide.data(using: .utf8)
-        let recordedAtData = date.description.data(using: .utf8)
+        let recordedAtData = date.data(using: .utf8)
         let bearingData = bearing.data(using: .utf8)
         let accuracyData = accuracy.data(using: .utf8)
         let attitudeData = attitude.data(using: .utf8)
