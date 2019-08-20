@@ -12,7 +12,8 @@ import MediaWatermark
 
 class VideoManager {
     
-    func trimVideo(sourceURL: URL, duration: Double, location: AVMutableMetadataItem, labels: [String], date: String, completion: @escaping (Result<URL, Error>)->Void) {
+    func
+        trimVideo(sourceURL: URL, duration: Double, location: AVMetadataItem, labels: [String], date: String, completion: @escaping (Result<URL, Error>)->Void) {
         guard sourceURL.isFileURL else { fatalError() }
         addLabels(toVideo: sourceURL, labelsText: labels) { (result) in
             switch result {
@@ -40,6 +41,7 @@ class VideoManager {
                 dateMetadata.value = date as NSCopying & NSObjectProtocol
                 
                 exportSession.metadata = [location, dateMetadata]
+                print(exportSession.metadata?.first?.value)
                 
                 exportSession.exportAsynchronously(completionHandler: {() -> Void in
                     switch exportSession.status {

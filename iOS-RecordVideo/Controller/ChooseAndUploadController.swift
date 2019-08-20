@@ -54,12 +54,7 @@ class ChooseAndUploadController: UIViewController, UITableViewDelegate, UITableV
             UIHelper.showError(errorMessage: "You must choose file to upload.", controller: self)
             return
         }
-        prepareFile(url: urlToUpload)
-        SVProgressHUD.show(withStatus: "File to uploaded")
-    }
-    
-    func prepareFile(url: URL) {
-        networkingManager.uploadVideo(videoUrl: url) { result in
+        networkingManager.uploadVideo(videoUrl: urlToUpload) { result in
             
             switch result {
             case let .success(value):
@@ -71,6 +66,7 @@ class ChooseAndUploadController: UIViewController, UITableViewDelegate, UITableV
                 
             }
         }
+        SVProgressHUD.show(withStatus: "File to uploaded")
     }
 }
 

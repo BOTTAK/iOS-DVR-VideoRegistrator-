@@ -174,6 +174,10 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                                     switch result {
                                     case let .success(video):
                                         print(video)
+                                        let asset = AVURLAsset(url: video, options: nil)
+                                        
+                                        guard let metadata = asset.metadata.first?.value?.description else { fatalError() }
+                                        print(asset.metadata.first?.value)
                                     case let .failure(error):
                                         UIHelper.showError(errorMessage: "Error creating video - \(error.localizedDescription)", controller: self)
                                     }

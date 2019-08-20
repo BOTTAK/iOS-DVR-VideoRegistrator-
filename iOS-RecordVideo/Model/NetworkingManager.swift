@@ -49,20 +49,22 @@ final class NetworkingManager {
     }
     
     public func uploadVideo(videoUrl: URL, complitionHandler: @escaping VideoUploadBlock) {
-        let asset = AVURLAsset(url: videoUrl, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
+        let asset = AVURLAsset(url: videoUrl, options: nil)
         
         guard let metadata = asset.metadata.first?.value?.description else { fatalError() }
-        
+        print(asset.metadata.first?.value)
         let parsedMetaDataArray = metadata.components(separatedBy: "+")
+        print(parsedMetaDataArray)
         let latitude = parsedMetaDataArray[1]
-        let longtitude = parsedMetaDataArray[2].dropFirst(1)
-        let speed = parsedMetaDataArray[3].dropLast(5)
+        let longtitude = parsedMetaDataArray[2].dropFirst()
+        let attitude = parsedMetaDataArray[3].dropLast(5)
+        let speed = (asset.metadata.first?.extraAttributes?.values.dropFirst().first as! NSNumber).striOS-RecordVideo/Controller/VideoCapturingPickerController.swiftingValue
+        print("speed - \(speed)")
         
         guard let date = asset.metadata[1].value?.description.dropLast(5) else {fatalError()}
         print(latitude, longtitude, speed, date)
         
         let bearing = "127"
-//        let speed = "10"
         let accuracy = "1"
 
         let latitudeData = latitude.data(using: .utf8)
@@ -76,7 +78,7 @@ final class NetworkingManager {
         let recordedAtData = date.data(using: .utf8)
         let bearingData = bearing.data(using: .utf8)
         let accuracyData = accuracy.data(using: .utf8)
-//        let spedData = speed.data(using: .utf8)
+        let attitudeData = attitude.data(using: .utf8)
         
         let httpHeaders = ["Authorization": "Bearer \(token)", "Cache-Control": "no-cache"]
         
@@ -93,7 +95,7 @@ final class NetworkingManager {
             multipartFormData.append(atTimeStampData!, withName: "location_data[at_timestamp]")
             multipartFormData.append(bearingData!, withName: "location_data[bearing]")
             multipartFormData.append(accuracyData!, withName: "location_data[accuracy]")
-//            multipartFormData.append(speedData!, withName: "location_data[altitude]")
+            multipartFormData.append(attitudeData!, withName: "location_data[altitude]")
             multipartFormData.append(videoUrl, withName: "videoFile", fileName: "secondTry.mp4", mimeType: "video/mp4")
 
         }, to: APIConstants.uploadVideoURL,
