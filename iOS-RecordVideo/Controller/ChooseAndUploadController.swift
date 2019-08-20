@@ -30,6 +30,11 @@ class ChooseAndUploadController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var videoListTableView: UITableView!
     @IBOutlet weak var uploadButton: UIButton!
     
+    @IBAction func backButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -68,6 +73,9 @@ class ChooseAndUploadController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 }
+
+
+
 
 extension ChooseAndUploadController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

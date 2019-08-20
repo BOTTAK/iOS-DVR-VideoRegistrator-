@@ -56,13 +56,13 @@ final class NetworkingManager {
         let parsedMetaDataArray = metadata.components(separatedBy: "+")
         let latitude = parsedMetaDataArray[1]
         let longtitude = parsedMetaDataArray[2].dropFirst(1)
-        let attitude = parsedMetaDataArray[3].dropLast(5)
+        let speed = parsedMetaDataArray[3].dropLast(5)
         
         guard let date = asset.metadata[1].value?.description.dropLast(5) else {fatalError()}
-        print(latitude, longtitude, attitude, date)
+        print(latitude, longtitude, speed, date)
         
         let bearing = "127"
-        let speed = "10"
+//        let speed = "10"
         let accuracy = "1"
 
         let latitudeData = latitude.data(using: .utf8)
@@ -76,7 +76,7 @@ final class NetworkingManager {
         let recordedAtData = date.data(using: .utf8)
         let bearingData = bearing.data(using: .utf8)
         let accuracyData = accuracy.data(using: .utf8)
-        let attitudeData = attitude.data(using: .utf8)
+//        let spedData = speed.data(using: .utf8)
         
         let httpHeaders = ["Authorization": "Bearer \(token)", "Cache-Control": "no-cache"]
         
@@ -93,7 +93,7 @@ final class NetworkingManager {
             multipartFormData.append(atTimeStampData!, withName: "location_data[at_timestamp]")
             multipartFormData.append(bearingData!, withName: "location_data[bearing]")
             multipartFormData.append(accuracyData!, withName: "location_data[accuracy]")
-            multipartFormData.append(attitudeData!, withName: "location_data[altitude]")
+//            multipartFormData.append(speedData!, withName: "location_data[altitude]")
             multipartFormData.append(videoUrl, withName: "videoFile", fileName: "secondTry.mp4", mimeType: "video/mp4")
 
         }, to: APIConstants.uploadVideoURL,
