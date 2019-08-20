@@ -57,6 +57,8 @@ final class MainViewController: UIViewController {
         imagePicker.cameraCaptureMode = .video
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
+//        imagePicker.modalPresentationStyle = .popover
+        
         
         present(imagePicker, animated: false)
     }
