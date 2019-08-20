@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import MediaWatermark
 import CoreLocation
 
 extension UIGestureRecognizer {
@@ -155,6 +154,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         recordingInfoLabel.changeTextAndAnimate(text: "Creating video")
         view.isUserInteractionEnabled = true
         toSave = true
+        
         stopVideoCapture()
     }
     
@@ -168,48 +168,12 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                 return
             }
             locationManager.getGPSFromVideo()
-            print(latitudeLabel.metadata)
             
             videoManager.trimVideo(sourceURL: videoURL, duration: currentDuration,
-                                   location: locationManager.generateMetadata(), date: dateLabel.metadata) { result in
+                                   location: locationManager.generateMetadata(), labels: [latitudeLabel.metadata, longitudeLabel.metadata, speedLabel.metadata, dateLabel.metadata], date: dateLabel.metadata) { result in
                                     switch result {
                                     case let .success(video):
-                                        if let item = MediaItem(url: video) {
-                                            let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
-                                                              NSAttributedString.Key.font: UIFont.systemFont(ofSize: 35)]
-                                            DispatchQueue.main.async {
-                                                let lattitudeattrStr = NSAttributedString(string: self.latitudeLabel.metadata, attributes: attributes)
-                                                let longtitudeattrStr = NSAttributedString(string: self.longitudeLabel.metadata, attributes: attributes)
-                                                let speedattrStr = NSAttributedString(string: self.speedLabel.metadata, attributes: attributes)
-                                                let dateatrStr = NSAttributedString(string: self.dateLabel.metadata, attributes: attributes)
-                                                
-                                                let firstElement = MediaElement(text: lattitudeattrStr)
-                                                firstElement.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
-                                                
-                                                let secondElement = MediaElement(text: longtitudeattrStr)
-                                                secondElement.frame = CGRect(x: 0, y: 50, width: self.view.frame.width, height: 50)
-                                                
-                                                let thirdElement = MediaElement(text: speedattrStr)
-                                                thirdElement.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: 50)
-                                                
-                                                let forthElement = MediaElement(text: dateatrStr)
-                                                thirdElement.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: 50)
-                                                
-                                                item.add(elements: [firstElement, secondElement, thirdElement, forthElement])
-                                                
-                                                let mediaProcessor = MediaProcessor()
-                                                mediaProcessor.processElements(item: item) { [weak self] (result, error) in
-                                                    if error != nil {
-                                                        UIHelper.showError(errorMessage: "Error creating metadata - \(error!.localizedDescription)", controller: self!)
-                                                    } else {
-                                                        UISaveVideoAtPathToSavedPhotosAlbum(result.processedUrl!.path,
-                                                                                            self,
-                                                                                            #selector(self!.video(_:didFinishSavingWithError:contextInfo:)),
-                                                                                            nil)
-                                                    }
-                                                }
-                                            }
-                                        }
+                                        print(video)
                                     case let .failure(error):
                                         UIHelper.showError(errorMessage: "Error creating video - \(error.localizedDescription)", controller: self)
                                     }
