@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import SVProgressHUD
 
 class ChooseAndUploadController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -40,20 +41,27 @@ class ChooseAndUploadController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func uploadPress(_ sender: UIButton) {
+        
         guard let urlToUpload = choosenFile else {
+            
             UIHelper.showError(errorMessage: "You must choose file to upload.", controller: self)
             return
         }
         prepareFile(url: urlToUpload)
+        SVProgressHUD.show(withStatus: "File to uploaded")
     }
     
     func prepareFile(url: URL) {
         networkingManager.uploadVideo(videoUrl: url) { result in
+            
             switch result {
             case let .success(value):
+                SVProgressHUD.showSuccess(withStatus: "File done!")
                 print(value as Any)
             case let .failure(error):
+                SVProgressHUD.showError(withStatus: "File can't uploaded")
                 UIHelper.showError(errorMessage: error.localizedDescription, controller: self)
+                
             }
         }
     }
