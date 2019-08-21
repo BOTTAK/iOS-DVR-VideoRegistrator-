@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36D6493F6005DF14654FB0E6 /* Pods_iOS_RecordVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2959C3D2D8EE9BCCBC959219 /* Pods_iOS_RecordVideo.framework */; };
 		7E16F5E522E388F1008B158C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0A8EE22BA802E004AE55D /* AppDelegate.swift */; };
 		7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */; };
 		7E16F5E922E388F1008B158C /* FileManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */; };
@@ -41,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B2B1B23A10641D9285AEF79 /* Pods-iOS-RecordVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RecordVideo.debug.xcconfig"; path = "Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		2959C3D2D8EE9BCCBC959219 /* Pods_iOS_RecordVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_RecordVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E16F5E122E38762008B158C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerViewController.swift; sourceTree = "<group>"; };
 		7E19173122EDC98D00C4B7AA /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 		7EB0ECF9230ABD9800D6CD98 /* LabelWithMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithMetadata.swift; sourceTree = "<group>"; };
 		7EFC20E222F5F6B7002ABE95 /* ChooseAndUploadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAndUploadController.swift; sourceTree = "<group>"; };
 		7EFC20E422F60E70002ABE95 /* VideoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreview.swift; sourceTree = "<group>"; };
+		BC1A0AEF8A9792D8712620F7 /* Pods-iOS-RecordVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-RecordVideo.release.xcconfig"; path = "Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo.release.xcconfig"; sourceTree = "<group>"; };
 		FA21FF17230B2A5600EFADB1 /* SwipeNotificationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeNotificationLabel.swift; sourceTree = "<group>"; };
 		FA21FF1B230B2A6E00EFADB1 /* VideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		FA32309A22BC119F00725FCA /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36D6493F6005DF14654FB0E6 /* Pods_iOS_RecordVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +95,8 @@
 		2CD2069E4A9BE9C916A06E40 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				1B2B1B23A10641D9285AEF79 /* Pods-iOS-RecordVideo.debug.xcconfig */,
+				BC1A0AEF8A9792D8712620F7 /* Pods-iOS-RecordVideo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -129,6 +136,14 @@
 				FA8E8DCF22DDF72C001B780D /* PhotoAlbum.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DC2BF9779F99AF65977B8621 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2959C3D2D8EE9BCCBC959219 /* Pods_iOS_RecordVideo.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FA32309522BC0F5B00725FCA /* Views */ = {
@@ -172,6 +187,7 @@
 				FAD0A8ED22BA802E004AE55D /* iOS-RecordVideo */,
 				FAD0A8EC22BA802E004AE55D /* Products */,
 				2CD2069E4A9BE9C916A06E40 /* Pods */,
+				DC2BF9779F99AF65977B8621 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -205,10 +221,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAD0A8FD22BA802F004AE55D /* Build configuration list for PBXNativeTarget "iOS-RecordVideo" */;
 			buildPhases = (
+				D24994CDE84D839D2BAF2B59 /* [CP] Check Pods Manifest.lock */,
 				FAD0A8E722BA802E004AE55D /* Sources */,
 				FAD0A8E822BA802E004AE55D /* Frameworks */,
 				FAD0A8E922BA802E004AE55D /* Resources */,
 				FA3B5005230D30BB00E119FB /* ShellScript */,
+				FA309F35DEF9F171951F14EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -266,6 +284,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D24994CDE84D839D2BAF2B59 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-RecordVideo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA309F35DEF9F171951F14EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FA3B5005230D30BB00E119FB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -453,11 +510,12 @@
 		};
 		FAD0A8FE22BA802F004AE55D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B2B1B23A10641D9285AEF79 /* Pods-iOS-RecordVideo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 29UN6WTSCZ;
+				DEVELOPMENT_TEAM = ZZH8QX82PA;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -474,11 +532,12 @@
 		};
 		FAD0A8FF22BA802F004AE55D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC1A0AEF8A9792D8712620F7 /* Pods-iOS-RecordVideo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 29UN6WTSCZ;
+				DEVELOPMENT_TEAM = ZZH8QX82PA;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
