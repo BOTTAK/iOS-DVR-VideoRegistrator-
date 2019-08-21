@@ -14,5 +14,8 @@ target 'iOS-RecordVideo' do
   pod 'SwiftyJSON'
   pod 'MediaWatermark'
   pod 'SVProgressHUD'
+  pod 'Fabric'
+  pod 'Crashlytics'
+  pod 'Firebase/Core'
 
 end

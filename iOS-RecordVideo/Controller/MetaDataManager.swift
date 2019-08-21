@@ -18,6 +18,8 @@ protocol MetaDataDelegate: class {
 
 class MetaDataManager: NSObject {
     
+    var geolocationStorage: GeolocationStorage?
+    
     private var currentLocation: CLLocation!
     private var locManager = CLLocationManager()
     private var library: PHAsset!
@@ -108,10 +110,10 @@ extension MetaDataManager: CLLocationManagerDelegate {
         print("error:: \(error.localizedDescription)")
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.first != nil {
-            print("location:: \(locations)")
+        if let location = locations.first {
+            self.geolocationStorage?.add(record: GeolocationStorage.Record(location: location, timecode: Date()))
+            print("location:: \(location)")
         }
-        
     }
 }
 

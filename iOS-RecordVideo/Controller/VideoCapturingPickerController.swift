@@ -169,15 +169,29 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
             }
             locationManager.getGPSFromVideo()
             
-            videoManager.trimVideo(sourceURL: videoURL, duration: currentDuration,
-                                   location: locationManager.generateMetadata(), labels: [latitudeLabel.metadata, longitudeLabel.metadata, speedLabel.metadata, dateLabel.metadata], date: dateLabel.metadata) { result in
+            let storage = GeolocationStorage()
+            storage.startTime = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 10)
+            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.12, longitude: 5.21), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 9)))
+            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.123, longitude: 5.3452), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 8)))
+            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.234, longitude: 5.2756), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 7)))
+            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.45, longitude: 5.324), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 6)))
+            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.65, longitude: 5.5671), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 5)))
+            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.342, longitude: 5.534), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 4)))
+            
+            videoManager.trimVideo(sourceURL: videoURL,
+                                   duration: currentDuration,
+                                   location: locationManager.generateMetadata(),
+                                   labels: [latitudeLabel.metadata,  longitudeLabel.metadata, speedLabel.metadata, dateLabel.metadata],
+                                   startTime: storage.startTime!,
+                                   geolocationStorage: storage,
+                                   date: dateLabel.metadata) { result in
                                     switch result {
                                     case let .success(video):
                                         print(video)
-                                        let asset = AVURLAsset(url: video, options: nil)
-                                        
-                                        guard let metadata = asset.metadata.first?.value?.description else { fatalError() }
-                                        print(asset.metadata.first?.value)
+//                                        let asset = AVURLAsset(url: video, options: nil)
+//                                        
+//                                        guard let metadata = asset.metadata.first?.value?.description else { fatalError() }
+//                                        print(asset.metadata.first?.value)
                                     case let .failure(error):
                                         UIHelper.showError(errorMessage: "Error creating video - \(error.localizedDescription)", controller: self)
                                     }
