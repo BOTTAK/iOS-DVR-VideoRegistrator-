@@ -23,12 +23,14 @@ class MetaDataManager: NSObject {
     private var currentLocation: CLLocation!
     private var locManager = CLLocationManager()
     private var library: PHAsset!
+    private var dateFormatter = DateFormatter()
     
     weak var delegate: MetaDataDelegate?
     
     override init() {
         super.init()
         locManager.delegate = self
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
     }
     
     func getGPSFromVideo() {
@@ -37,6 +39,14 @@ class MetaDataManager: NSObject {
         currentLocation = locManager.location
         delegate?.metadataDidUpdate(currentLocation)
         locManager.stopUpdatingLocation()
+    }
+    
+    func getLocation() -> (CLLocation, String) {
+        locManager.startUpdatingLocation()
+        locManager.requestLocation()
+        let formatterDate = dateFormatter.string(from: Date())
+        locManager.stopUpdatingLocation()
+        return (locManager.location ?? CLLocation(), formatterDate)
     }
     
     func generateMetadata() -> AVMetadataItem {

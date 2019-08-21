@@ -45,7 +45,8 @@ class VideoOverlayService {
             let titleLayer = CATextLayer()
             titleLayer.string = fixedItem.text
             titleLayer.foregroundColor = UIColor.red.cgColor
-            titleLayer.frame = CGRect(x: 50, y: 50, width: 500, height: 200)
+            titleLayer.isWrapped = true
+            titleLayer.frame = CGRect(x: 50, y: 50, width: 600, height: 200)
             titleLayer.beginTime = 0
             titleLayer.duration = vidAsset.duration.seconds
             titleLayer.display()

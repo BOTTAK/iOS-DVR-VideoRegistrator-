@@ -138,6 +138,17 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     
     // MARK: Location and metadata
     private let locationManager = MetaDataManager()
+    var storedLocationDataArray: [(CLLocation, String)] = []
+    var locationTimer: Timer?
+    func startLocationTimer() {
+        locationTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(locationTimerDidTick), userInfo: nil, repeats: true)
+    }
+    @objc func locationTimerDidTick() {
+        if storedLocationDataArray.count > 300 {
+            storedLocationDataArray.removeFirst()
+        }
+        storedLocationDataArray.append(locationManager.getLocation())
+    }
     func metadataDidUpdate(_ getGPSFromVideo: CLLocation) {
         longitudeLabel.metadata = getGPSFromVideo.coordinate.longitude.description
         latitudeLabel.metadata = getGPSFromVideo.coordinate.latitude.description
@@ -170,35 +181,57 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
             locationManager.getGPSFromVideo()
             
             let storage = GeolocationStorage()
-            storage.startTime = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 10)
-            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.12, longitude: 5.21), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 9)))
-            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.123, longitude: 5.3452), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 8)))
-            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.234, longitude: 5.2756), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 7)))
-            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.45, longitude: 5.324), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 6)))
-            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.65, longitude: 5.5671), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 5)))
-            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.342, longitude: 5.534), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 4)))
-            
-            videoManager.trimVideo(sourceURL: videoURL,
-                                   duration: currentDuration,
-                                   location: locationManager.generateMetadata(),
-                                   labels: [latitudeLabel.metadata,  longitudeLabel.metadata, speedLabel.metadata, dateLabel.metadata],
-                                   startTime: storage.startTime!,
-                                   geolocationStorage: storage,
-                                   date: dateLabel.metadata) { result in
-                                    switch result {
-                                    case let .success(video):
-                                        print(video)
-//                                        let asset = AVURLAsset(url: video, options: nil)
-//                                        
-//                                        guard let metadata = asset.metadata.first?.value?.description else { fatalError() }
-//                                        print(asset.metadata.first?.value)
-                                    case let .failure(error):
-                                        UIHelper.showError(errorMessage: "Error creating video - \(error.localizedDescription)", controller: self)
-                                    }
+            storage.startTime = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - currentDuration)
+            var numberOfIterations = currentDuration
+            let locationArray = storedLocationDataArray
+            var continueIterating = true
+             print(locationArray)
+            while continueIterating {
+                if numberOfIterations > 0 {
+                    numberOfIterations -= 1
+                    print(locationArray.count, numberOfIterations)
+                   
+                    storage.add(record: GeolocationStorage.Record(location: locationArray[locationArray.count - 1 - Int(numberOfIterations)].0, timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - numberOfIterations)))
+                } else {
+                    videoManager.trimVideo(sourceURL: videoURL,
+                                           duration: currentDuration,
+                                           location: locationManager.generateMetadata(),
+                                           labels: [latitudeLabel.metadata,  longitudeLabel.metadata, speedLabel.metadata, dateLabel.metadata],
+                                           startTime: storage.startTime!,
+                                           geolocationStorage: storage,
+                                           date: dateLabel.metadata) { result in
+                                            switch result {
+                                            case let .success(video):
+                                                print(video)
+                                                UISaveVideoAtPathToSavedPhotosAlbum(video.path,
+                                                                                    self,
+                                                                                    #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
+                                                                                    nil)
+                                                //                                        let asset = AVURLAsset(url: video, options: nil)
+                                                //
+                                                //                                        guard let metadata = asset.metadata.first?.value?.description else { fatalError() }
+                                            //                                        print(asset.metadata.first?.value)
+                                            case let .failure(error):
+                                                UIHelper.showError(errorMessage: "Error creating video - \(error.localizedDescription)", controller: self)
+                                            }
+                    }
+                    startVideoCapture()
+                    recordingInfoLabel.text = "Recording"
+                    recordingInfoLabel.alpha = 1.0
+                    continueIterating = false
+                    break
+                }
             }
-            startVideoCapture()
-            recordingInfoLabel.text = "Recording"
-            recordingInfoLabel.alpha = 1.0
+        
+            
+//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.12, longitude: 5.21), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 9)))
+//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.123, longitude: 5.3452), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 8)))
+//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.234, longitude: 5.2756), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 7)))
+//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.45, longitude: 5.324), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 6)))
+//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.65, longitude: 5.5671), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 5)))
+//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.342, longitude: 5.534), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 4)))
+            
+
         }
     }
     @objc func video(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
@@ -249,6 +282,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         
         addRecognizers()
         addLabels()
+        startLocationTimer()
         view.addSubview(settingsButton)
         addDelegates()
     }

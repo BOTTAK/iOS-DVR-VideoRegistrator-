@@ -12,15 +12,16 @@ import MediaWatermark
 
 class VideoManager {
     var service: VideoOverlayService?
+    private var dateFormatter = DateFormatter()
     
     func
         trimVideo(sourceURL: URL, duration: Double, location: AVMetadataItem, labels: [String], startTime: Date, geolocationStorage: GeolocationStorage, date: String, completion completionClosure: @escaping (Result<URL, Error>)->Void) {
         
         let outputUrl = FileManager.createNewFilePath(fileName: videoName)
-        
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
         var itemsForService = [(start: Double, duration: Double, text: String)]()
         for (index, record) in geolocationStorage.records.enumerated() {
-            let text = "\(record.location.coordinate.latitude), \(record.location.coordinate.longitude)"
+            let text = "\(record.location.coordinate.latitude.description.dropLast(8))  \(record.location.coordinate.longitude.description.dropLast(8)) \(record.location.speed), \(dateFormatter.string(from: record.location.timestamp))"
             var duration: Double = 1
             let nextItemIndex = index + 1
             if nextItemIndex < geolocationStorage.records.count {
