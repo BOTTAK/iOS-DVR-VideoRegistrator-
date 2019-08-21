@@ -32,6 +32,8 @@
 		7EFC20E522F60E70002ABE95 /* VideoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFC20E422F60E70002ABE95 /* VideoPreview.swift */; };
 		FA21FF18230B2A5700EFADB1 /* SwipeNotificationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21FF17230B2A5600EFADB1 /* SwipeNotificationLabel.swift */; };
 		FA21FF1C230B2A6E00EFADB1 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21FF1B230B2A6E00EFADB1 /* VideoModel.swift */; };
+		FA3B500A230DB3F000E119FB /* VideoOverlayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B5009230DB3F000E119FB /* VideoOverlayService.swift */; };
+		FA3B500D230DB4EB00E119FB /* GeolocationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B500C230DB4EB00E119FB /* GeolocationStorage.swift */; };
 		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
 		FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
 		FACC768922E5B88E00AC7ED5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC768822E5B88E00AC7ED5 /* SettingsViewController.swift */; };
@@ -57,6 +59,8 @@
 		FA32309A22BC119F00725FCA /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
 		FA32309E22BC120900725FCA /* UIView+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CoreKit.swift"; sourceTree = "<group>"; };
+		FA3B5009230DB3F000E119FB /* VideoOverlayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoOverlayService.swift; sourceTree = "<group>"; };
+		FA3B500C230DB4EB00E119FB /* GeolocationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeolocationStorage.swift; sourceTree = "<group>"; };
 		FA495CF622EE17D600FF3381 /* MetaDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaDataManager.swift; sourceTree = "<group>"; };
 		FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerViewController.swift; sourceTree = "<group>"; };
 		FA8E8DC922DDD080001B780D /* MovieConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieConverter.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 				7E16F5E122E38762008B158C /* MainViewController.swift */,
 				7E936E8022F727A7003846E1 /* FoundationViewController.swift */,
 				7E936E8222F72802003846E1 /* VideoOutputView.swift */,
+				FA3B5009230DB3F000E119FB /* VideoOverlayService.swift */,
 				7E16F5FB22E4521C008B158C /* CustomPickerViewController.swift */,
 				7EB0ECF9230ABD9800D6CD98 /* LabelWithMetadata.swift */,
 				7EB0ECF7230AB4E200D6CD98 /* VideoCapturingPickerController.swift */,
@@ -153,6 +158,14 @@
 			path = Extentions;
 			sourceTree = "<group>";
 		};
+		FA3B500B230DB4DD00E119FB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA3B500C230DB4EB00E119FB /* GeolocationStorage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		FAD0A8E222BA802E004AE55D = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +186,7 @@
 		FAD0A8ED22BA802E004AE55D /* iOS-RecordVideo */ = {
 			isa = PBXGroup;
 			children = (
+				FA3B500B230DB4DD00E119FB /* Models */,
 				FAD0A8FA22BA802F004AE55D /* Info.plist */,
 				FAD0A8EE22BA802E004AE55D /* AppDelegate.swift */,
 				7E16F5F922E3AF10008B158C /* Controller */,
@@ -194,6 +208,8 @@
 				FAD0A8E722BA802E004AE55D /* Sources */,
 				FAD0A8E822BA802E004AE55D /* Frameworks */,
 				FAD0A8E922BA802E004AE55D /* Resources */,
+				EBA21D098C9C5FD28D65C4F7 /* [CP] Embed Pods Frameworks */,
+				FA3B5005230D30BB00E119FB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -250,6 +266,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B20F203D5C8E5337D7EAB9B3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-RecordVideo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBA21D098C9C5FD28D65C4F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-RecordVideo/Pods-iOS-RecordVideo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA3B5005230D30BB00E119FB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FAD0A8E722BA802E004AE55D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -267,6 +342,7 @@
 				FA21FF1C230B2A6E00EFADB1 /* VideoModel.swift in Sources */,
 				7E8E8D9E22E9B50A00707D76 /* VideoManager.swift in Sources */,
 				7E16F5EE22E388F1008B158C /* UIView+CoreKit.swift in Sources */,
+				FA3B500D230DB4EB00E119FB /* GeolocationStorage.swift in Sources */,
 				7E16F5EF22E388F1008B158C /* NetworkingManager.swift in Sources */,
 				7E16F5F222E388F1008B158C /* MovieConverter.swift in Sources */,
 				7E16F5F322E388F1008B158C /* CameraModel.swift in Sources */,
@@ -274,6 +350,7 @@
 				7E9A2F3E22F23999008E2A34 /* CustomLongPress.swift in Sources */,
 				7EB0ECFA230ABD9800D6CD98 /* LabelWithMetadata.swift in Sources */,
 				FACC768922E5B88E00AC7ED5 /* SettingsViewController.swift in Sources */,
+				FA3B500A230DB3F000E119FB /* VideoOverlayService.swift in Sources */,
 				7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */,
 				7EFC20E522F60E70002ABE95 /* VideoPreview.swift in Sources */,
 				7E936E8122F727A7003846E1 /* FoundationViewController.swift in Sources */,
@@ -422,6 +499,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29UN6WTSCZ;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -442,6 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29UN6WTSCZ;
 				INFOPLIST_FILE = "iOS-RecordVideo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
