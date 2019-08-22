@@ -58,7 +58,8 @@ final class NetworkingManager {
         let latitude = parsedMetaDataArray[1]
         let longtitude = parsedMetaDataArray[2].dropFirst()
         let attitude = parsedMetaDataArray[3].dropLast(5)
-        let speed = (asset.metadata.first?.extraAttributes?.values.dropFirst().first as! NSNumber).stringValue
+//        let speed = (asset.metadata.first?.extraAttributes?.values.dropFirst().first as! NSNumber).stringValue
+        let speed = "10"
         print("speed - \(speed)")
         
         guard let date = asset.metadata[1].value?.description.dropLast(5) else {fatalError()}

@@ -33,7 +33,7 @@ class VideoManager {
         }
         
         let service = VideoOverlayService()
-        service.addOverlayToVideo(videoUrl: sourceURL,
+        service.addOverlayToVideo(videoUrl: sourceURL, duration: duration,
                                   outputUrl: outputUrl, type: AVFileType.mp4, meta: (location, date),
                                   texts: itemsForService, progress: { (_ progress: Float) in
             print("progress: \(progress)")
