@@ -58,18 +58,18 @@ final class NetworkingManager {
         let latitude = parsedMetaDataArray[1]
         let longtitude = parsedMetaDataArray[2].dropFirst()
         let attitude = parsedMetaDataArray[3].dropLast(5)
-        let speed = (asset.metadata.first?.extraAttributes?.values.dropFirst().first as! NSNumber).stringValue
-        print("speed - \(speed)")
+//        let speed = (asset.metadata.first?.extraAttributes?.values.dropFirst().first as! NSNumber).stringValue
+//        print("speed - \(speed)")
         
         guard let date = asset.metadata[1].value?.description.dropLast(5) else {fatalError()}
-        print(latitude, longtitude, speed, date)
+        print(latitude, longtitude,  date)
         
         let bearing = "127"
         let accuracy = "1"
 
         let latitudeData = latitude.data(using: .utf8)
         let longtitudeData = longtitude.data(using: .utf8)
-        let speedData = speed.data(using: .utf8)
+//        let speedData = speed.data(using: .utf8)
         //        let violationIDData = APIConstants.violationID.data(using: .utf8)
         //        let regNumberData = APIConstants.regNumber.data(using: .utf8)
         let timeData = APIConstants.time.data(using: .utf8)
@@ -90,7 +90,7 @@ final class NetworkingManager {
             multipartFormData.append(recordedAtData!, withName: "recorded_at")
             multipartFormData.append(latitudeData!, withName: "location_data[latitude]")
             multipartFormData.append(longtitudeData!, withName: "location_data[longitude]")
-            multipartFormData.append(speedData!, withName: "location_data[speed]")
+//            multipartFormData.append(speedData!, withName: "location_data[speed]")
             multipartFormData.append(timeData!, withName: "location_data[time]")
             multipartFormData.append(atTimeStampData!, withName: "location_data[at_timestamp]")
             multipartFormData.append(bearingData!, withName: "location_data[bearing]")

@@ -152,7 +152,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     func metadataDidUpdate(_ getGPSFromVideo: CLLocation) {
         longitudeLabel.metadata = getGPSFromVideo.coordinate.longitude.description
         latitudeLabel.metadata = getGPSFromVideo.coordinate.latitude.description
-        speedLabel.metadata = getGPSFromVideo.speed.description
+        speedLabel.metadata = (getGPSFromVideo.speed * 3.6).description
         dateLabel.metadata = getGPSFromVideo.timestamp.description
     }
     
@@ -169,6 +169,9 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         stopVideoCapture()
     }
     
+    //MARK: - Outlets
+    
+    
     // MARK: Saving
     private var toSave = false
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -178,6 +181,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                 UIHelper.showError(errorMessage: "Error parsing info for an URL", controller: self)
                 return
             }
+            
             locationManager.getGPSFromVideo()
             
             let storage = GeolocationStorage()
@@ -282,6 +286,16 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         
         addRecognizers()
         addLabels()
+        
+        
+//        let overlay : UIView = Bundle.main.loadNibNamed("MainViewXib",
+//                                           owner: self,
+//                                           options: nil)?.first as! UIView
+
+//        overlay.latitudeLabel = latitudeLabel
+//        overlay.lotitudeLabel = longitudeLabel
+//        overlay.speedLabel = speedLabel
+        
         startLocationTimer()
         view.addSubview(settingsButton)
         addDelegates()
@@ -297,3 +311,5 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         locationManager.getGPSFromVideo()
     }
 }
+
+

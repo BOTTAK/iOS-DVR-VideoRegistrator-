@@ -21,7 +21,7 @@ class VideoManager {
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
         var itemsForService = [(start: Double, duration: Double, text: String)]()
         for (index, record) in geolocationStorage.records.enumerated() {
-            let text = "\(record.location.coordinate.latitude.description.dropLast(8))  \(record.location.coordinate.longitude.description.dropLast(8)) \(record.location.speed), \(dateFormatter.string(from: record.location.timestamp))"
+            let text = "\(record.location.coordinate.latitude.description.dropLast(8))  \(record.location.coordinate.longitude.description.dropLast(8)) \(record.location.speed * 3.6), \(dateFormatter.string(from: record.location.timestamp))"
             var duration: Double = 1
             let nextItemIndex = index + 1
             if nextItemIndex < geolocationStorage.records.count {

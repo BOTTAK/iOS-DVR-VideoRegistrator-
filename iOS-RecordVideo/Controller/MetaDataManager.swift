@@ -31,6 +31,7 @@ class MetaDataManager: NSObject {
         super.init()
         locManager.delegate = self
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
+        getGPSFromVideo()
     }
     
     func getGPSFromVideo() {
@@ -47,6 +48,12 @@ class MetaDataManager: NSObject {
         let formatterDate = dateFormatter.string(from: Date())
         locManager.stopUpdatingLocation()
         return (locManager.location ?? CLLocation(), formatterDate)
+    }
+    
+    func convertMStoKH() {
+        getGPSFromVideo()
+        let mySpeed = currentLocation.speed
+        let kMH = mySpeed * 3.6
     }
     
     func generateMetadata() -> AVMetadataItem {
