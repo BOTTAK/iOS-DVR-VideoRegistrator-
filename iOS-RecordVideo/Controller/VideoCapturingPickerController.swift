@@ -287,14 +287,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         addRecognizers()
         addLabels()
         
-        
-//        let overlay : UIView = Bundle.main.loadNibNamed("MainViewXib",
-//                                           owner: self,
-//                                           options: nil)?.first as! UIView
-
-//        overlay.latitudeLabel = latitudeLabel
-//        overlay.lotitudeLabel = longitudeLabel
-//        overlay.speedLabel = speedLabel
+//        UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
         
         startLocationTimer()
         view.addSubview(settingsButton)
@@ -310,6 +303,21 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         }
         locationManager.getGPSFromVideo()
     }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscapeLeft
+        
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .landscapeLeft
+        
+    }
 }
+
 
 
