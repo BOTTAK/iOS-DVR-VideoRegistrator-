@@ -79,7 +79,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         case .down:
             view.isUserInteractionEnabled = false
             recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
-            recordingWaitingTimerLabel.showTimer(seconds: Int(self.currentDuration / 2))
+            recordingWaitingTimerLabel.showTimer(seconds: Int(currentDuration / 2))
             Timer.scheduledTimer(withTimeInterval: currentDuration / 2, repeats: false) { (timer) in
                 self.stopCaptureAndTrim()
             }
@@ -158,14 +158,13 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     
     // MARK: Video
     private let videoManager = VideoManager()
-    open var maximumDuration = 120.0
+    open var maximumDuration = 600.0
     open var currentDuration = 16.0
-    private var firstTimeCapture = true
     private func stopCaptureAndTrim() {
         recordingInfoLabel.changeTextAndAnimate(text: "Creating video")
         view.isUserInteractionEnabled = true
         toSave = true
-        
+        print(currentDuration)
         stopVideoCapture()
     }
     
@@ -185,7 +184,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
             locationManager.getGPSFromVideo()
             
             let storage = GeolocationStorage()
-            storage.startTime = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - currentDuration)
+            storage.startTime = Date(timeIntervalSinceNow: -currentDuration)
             var numberOfIterations = currentDuration
             let locationArray = storedLocationDataArray
             var continueIterating = true
@@ -195,7 +194,8 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                     numberOfIterations -= 1
                     print(locationArray.count, numberOfIterations)
                    
-                    storage.add(record: GeolocationStorage.Record(location: locationArray[locationArray.count - 1 - Int(numberOfIterations)].0, timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - numberOfIterations)))
+                    storage.add(record: GeolocationStorage.Record(location: locationArray[locationArray.count - 1 - Int(numberOfIterations)].0,
+                                                                  timecode: Date(timeIntervalSinceNow: -numberOfIterations)))
                 } else {
                     videoManager.trimVideo(sourceURL: videoURL,
                                            duration: currentDuration,
@@ -206,18 +206,43 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                                            date: dateLabel.metadata) { result in
                                             switch result {
                                             case let .success(video):
-                                                print(video)
-                                                UISaveVideoAtPathToSavedPhotosAlbum(video.path,
-                                                                                    self,
-                                                                                    #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
-                                                                                    nil)
-                                                //                                        let asset = AVURLAsset(url: video, options: nil)
-                                                //
-                                                //                                        guard let metadata = asset.metadata.first?.value?.description else { fatalError() }
-                                            //                                        print(asset.metadata.first?.value)
+                                                let asset = AVURLAsset(url: video, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
+                                                guard let exportSession = AVAssetExportSession(asset: asset,
+                                                                                               presetName: AVAssetExportPresetPassthrough) else { fatalError() }
+                                                
+                                                exportSession.timeRange = self.generateRange(startTime: asset.duration.seconds - self.currentDuration,
+                                                                                             endTime: asset.duration.seconds)
+                                                print("duration -\(self.currentDuration)")
+                                                exportSession.outputURL = FileManager.createNewFilePath(fileName: videoName)
+                                                exportSession.outputFileType = AVFileType.mp4
+                                                exportSession.shouldOptimizeForNetworkUse = true
+                                                
+                                                exportSession.exportAsynchronously(completionHandler: {() -> Void in
+                                                    switch exportSession.status {
+                                                    case .failed:
+                                                        print(exportSession.error ?? "No error")
+                                                    case .cancelled:
+                                                        let error = NSError(domain: "VideoApp", code: 00, userInfo: ["Message": "Export cancelled"])
+                                                        print(error.localizedDescription)
+                                                    case .completed:
+                                                        guard let correctURL = exportSession.outputURL
+                                                            else {
+                                                                print("error getting url")
+                                                                return
+                                                        }
+                                                        UISaveVideoAtPathToSavedPhotosAlbum(correctURL.path,
+                                                                                            self,
+                                                                                            #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
+                                                                                            nil)
+                                                        print("Successful! \(correctURL)")
+                                                    default:
+                                                        fatalError()
+                                                    }
+                                                })
                                             case let .failure(error):
                                                 UIHelper.showError(errorMessage: "Error creating video - \(error.localizedDescription)", controller: self)
                                             }
+                                            self.currentDuration = self.settingsViewController.settingPickerDuration
                     }
                     startVideoCapture()
                     recordingInfoLabel.text = "Recording"
@@ -226,16 +251,6 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                     break
                 }
             }
-        
-            
-//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.12, longitude: 5.21), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 9)))
-//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.123, longitude: 5.3452), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 8)))
-//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.234, longitude: 5.2756), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 7)))
-//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.45, longitude: 5.324), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 6)))
-//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.65, longitude: 5.5671), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 5)))
-//            storage.add(record: GeolocationStorage.Record(location: CLLocation(latitude: 1.342, longitude: 5.534), timecode: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 4)))
-            
-
         }
     }
     @objc func video(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
@@ -243,6 +258,13 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
             ? ("Success", "Video saved!")
             : (nil, error!.localizedDescription)
         UIHelper.showError(errorMessage: message, customTitle: title, action: nil, controller: self)
+    }
+    
+    private func generateRange(startTime: Double, endTime: Double) -> CMTimeRange {
+        let defaultTimeScale: CMTimeScale = 600
+        let rangeStart = CMTime(seconds: startTime, preferredTimescale: defaultTimeScale)
+        let rangeEnd = CMTime(seconds: endTime, preferredTimescale: defaultTimeScale)
+        return CMTimeRangeMake(start: rangeStart, duration: rangeEnd)
     }
     
     // MARK: Settings
@@ -268,9 +290,6 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                            _ settingPickerDuration: TimeInterval, _ settingMicrophone: String) {
         currentDuration = settingPickerDuration
         videoQuality = settingPickerQuility
-        startVideoCapture()
-        recordingInfoLabel.text = "Recording"
-        recordingInfoLabel.alpha = 1.0
     }
     
     // MARK: Delegates
@@ -287,7 +306,14 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         addRecognizers()
         addLabels()
         
-//        UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+        func shouldAutorotate() -> Bool {
+            return false
+        }
+        
+        func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+            return UIInterfaceOrientationMask.landscape
+        }
+        
         
         startLocationTimer()
         view.addSubview(settingsButton)
@@ -296,11 +322,10 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if firstTimeCapture {
-            startVideoCapture()
-            recordingInfoLabel.text = "Recording"
-            recordingInfoLabel.alpha = 1.0
-        }
+        currentDuration = settingsViewController.settingPickerDuration
+        startVideoCapture()
+        recordingInfoLabel.text = "Recording"
+        recordingInfoLabel.alpha = 1.0
         locationManager.getGPSFromVideo()
     }
     

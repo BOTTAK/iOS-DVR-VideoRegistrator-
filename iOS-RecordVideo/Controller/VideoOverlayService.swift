@@ -12,10 +12,10 @@ import AVFoundation
 
 class VideoOverlayService {
     
-    func addOverlayToVideo(videoUrl: URL, outputUrl: URL, type: AVFileType, meta: (AVMetadataItem, String), texts: [(start: Double, duration: Double, text: String)], progress progressClosure: @escaping (_ progress: Float) -> (), completion: @escaping (_ url: URL?) -> (), failure: @escaping (_ error: Swift.Error?) -> ()) {
+    func addOverlayToVideo(videoUrl: URL, duration: Double, outputUrl: URL, type: AVFileType, meta: (AVMetadataItem, String), texts: [(start: Double, duration: Double, text: String)], progress progressClosure: @escaping (_ progress: Float) -> (), completion: @escaping (_ url: URL?) -> (), failure: @escaping (_ error: Swift.Error?) -> ()) {
         let composition = AVMutableComposition()
         
-        let vidAsset = AVURLAsset(url: videoUrl as URL, options: nil)
+        let vidAsset = AVURLAsset(url: videoUrl as URL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
         // get video track from asset
         let videoTrack: AVAssetTrack = vidAsset.tracks(withMediaType: AVMediaType.video).first!
         let vid_timerange = CMTimeRangeMake(start: CMTime.zero, duration: vidAsset.duration)
@@ -47,7 +47,7 @@ class VideoOverlayService {
             titleLayer.foregroundColor = UIColor.red.cgColor
             titleLayer.isWrapped = true
             titleLayer.frame = CGRect(x: 50, y: 50, width: 600, height: 200)
-            titleLayer.beginTime = 0
+            titleLayer.beginTime = vidAsset.duration.seconds - duration
             titleLayer.duration = vidAsset.duration.seconds
             titleLayer.display()
             let animation = self.createShowHideAnimation(duration: fixedItem.duration, startTime: fixedItem.start)
@@ -128,5 +128,12 @@ class VideoOverlayService {
         animation.fillMode = CAMediaTimingFillMode.both
         animation.beginTime = AVCoreAnimationBeginTimeAtZero + startTime
         return animation
+    }
+    
+    private func generateRange(startTime: Double, endTime: Double) -> CMTimeRange {
+        let defaultTimeScale: CMTimeScale = 25
+        let rangeStart = CMTime(seconds: startTime, preferredTimescale: defaultTimeScale)
+        let rangeEnd = CMTime(seconds: endTime, preferredTimescale: defaultTimeScale)
+        return CMTimeRangeMake(start: rangeStart, duration: rangeEnd)
     }
 }
