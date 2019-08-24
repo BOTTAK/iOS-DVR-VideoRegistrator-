@@ -16,7 +16,7 @@ class VideoManager {
     func
         trimVideo(sourceURL: URL, duration: Double, location: AVMetadataItem, labels: [String], startTime: Date, geolocationStorage: GeolocationStorage, date: String, completion completionClosure: @escaping (Result<URL, Error>)->Void) {
         
-        let outputUrl = FileManager.createNewFilePath(fileName: videoName)
+        let outputUrl = FileManager.createNewFilePathOutsideFolder(fileName: videoName)
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
         var itemsForService = [(start: Double, duration: Double, text: String)]()
         for (index, record) in geolocationStorage.records.enumerated() {
@@ -122,6 +122,13 @@ extension FileManager {
 extension FileManager {
     class func createNewFilePath(fileName: String) -> URL {
         guard let filePath = URL.createFolder(folderName: "temp")?.appendingPathComponent("\(fileName).mp4") else { fatalError("couldnt create file")}
+        guard filePath.isFileURL else { fatalError() }
+        removeFileAtURLIfExists(url: filePath)
+        return filePath
+    }
+    
+    class func createNewFilePathOutsideFolder(fileName: String) -> URL {
+        guard let filePath = URL.createFolder(folderName: "fullduration")?.appendingPathComponent("\(fileName).mp4") else { fatalError("couldnt create file")}
         guard filePath.isFileURL else { fatalError() }
         removeFileAtURLIfExists(url: filePath)
         return filePath
