@@ -271,9 +271,9 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     // Settings button
     private var settingsButton: UIButton {
         let button = UIButton(frame: CGRect(x: 0,
-                                            y: view.frame.height - view.frame.height / 10 - additionalSafeAreaInsets.bottom,
+                                            y: view.frame.height - view.frame.height / 7,
                                             width: view.frame.width,
-                                            height: (view.frame.height / 10)))
+                                            height: (view.frame.height / 7)))
         button.center.x = view.center.x
         button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .highlighted)
