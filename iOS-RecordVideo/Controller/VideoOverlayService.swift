@@ -86,7 +86,6 @@ class VideoOverlayService {
         dateMetadata.value = meta.1 as NSCopying & NSObjectProtocol
         
         assetExport?.metadata = [meta.0, dateMetadata]
-//        let startExportingTime = Date()
         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timer: Timer) in
             if let progress = assetExport?.progress {
                 progressClosure(progress)
@@ -94,8 +93,6 @@ class VideoOverlayService {
         }
         assetExport?.exportAsynchronously(completionHandler: {
             timer.invalidate()
-//            let time = Date().timeIntervalSince(startExportingTime)
-//            print("time in seconds: \(time)")
             switch assetExport?.status {
             case .failed? :
                 failure(assetExport?.error)

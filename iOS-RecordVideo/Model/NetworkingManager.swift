@@ -41,9 +41,7 @@ final class NetworkingManager {
         Alamofire.request(APIConstants.tokensURL,
                           method: .post,
                           parameters: APIConstants.parameters).responseJSON { response in
-                            
-                            let json = JSON(response.result.value!)
-                            guard let validToken = json["token"].string else { fatalError() }
+                            guard let validToken = JSON(response.result.value)["token"].string else { return }
                             complition(validToken)
         }
     }
@@ -58,9 +56,13 @@ final class NetworkingManager {
         let latitude = parsedMetaDataArray[1]
         let longtitude = parsedMetaDataArray[2].dropFirst()
         let attitude = parsedMetaDataArray[3].dropLast(5)
+
 //        let speed = (asset.metadata.first?.extraAttributes?.values.dropFirst().first as! NSNumber).stringValue
 
 //        print("speed - \(speed)")
+
+
+        //        let speed = (asset.metadata.first?.extraAttributes?.values.dropFirst().first as! NSNumber).stringValue // TODO: hardcoded
 
         let speed = "10"
         print("speed - \(speed)")

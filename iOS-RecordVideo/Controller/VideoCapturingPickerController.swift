@@ -111,6 +111,14 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     var swipeSide = SwipeSide.none
     
     // MARK: Labels && Buttons
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscape
+    }
+    
+//    override open var shouldAutorotate: Bool {
+//        return false
+//    }
+    
     private let longitudeLabel = LabelWithMetadata()
     private let latitudeLabel = LabelWithMetadata()
     private let speedLabel = LabelWithMetadata()
@@ -120,19 +128,19 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     private var recordingInfoLabel = SwipeNotificationLabel()
     // Setup
     fileprivate func addLabels() {
-        longitudeLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
+        longitudeLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 15)
         view.addSubview(longitudeLabel)
-        latitudeLabel.frame = CGRect(x: 0, y: 40, width: view.frame.width, height: 40)
+        latitudeLabel.frame = CGRect(x: 0, y: view.frame.height / 15, width: view.frame.width, height: view.frame.height / 15)
         view.addSubview(latitudeLabel)
-        speedLabel.frame = CGRect(x: 0, y: 80, width: view.frame.width, height: 40)
+        speedLabel.frame = CGRect(x: 0, y: 2 * (view.frame.height / 15), width: view.frame.width, height: view.frame.height / 15)
         view.addSubview(speedLabel)
-        dateLabel.frame = CGRect(x: 0, y: 120, width: view.frame.width, height: 40)
+        dateLabel.frame = CGRect(x: 0, y: 3 * (view.frame.height / 15), width: view.frame.width, height: view.frame.height / 15)
         view.addSubview(dateLabel)
-        mainInfoLabel.frame = CGRect(x: 0, y: 200, width: view.frame.width, height: 40)
+        mainInfoLabel.frame = CGRect(x: 0, y: 4 * (view.frame.height / 15), width: view.frame.width, height: view.frame.height / 15)
         view.addSubview(mainInfoLabel)
-        recordingWaitingTimerLabel.frame = CGRect(x: 0, y: 250, width: view.frame.width, height: 40)
+        recordingWaitingTimerLabel.frame = CGRect(x: 0, y: 5 * (view.frame.height / 15), width: view.frame.width, height: view.frame.height / 15)
         view.addSubview(recordingWaitingTimerLabel)
-        recordingInfoLabel.frame = CGRect(x: 0, y: 300, width: view.frame.width, height: 40)
+        recordingInfoLabel.frame = CGRect(x: 0, y: 6 * (view.frame.height / 15), width: view.frame.width, height: view.frame.height / 15)
         view.addSubview(recordingInfoLabel)
     }
     
@@ -143,6 +151,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     func startLocationTimer() {
         locationTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(locationTimerDidTick), userInfo: nil, repeats: true)
     }
+    
     @objc func locationTimerDidTick() {
         if storedLocationDataArray.count > 300 {
             storedLocationDataArray.removeFirst()
@@ -270,8 +279,10 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     // MARK: Settings
     // Settings button
     private var settingsButton: UIButton {
-        let button = UIButton(frame: CGRect(x: 0, y: view.frame.height - 50,
-                                            width: view.frame.width, height: 50))
+        let button = UIButton(frame: CGRect(x: 0,
+                                            y: view.frame.height - view.frame.height / 10 - additionalSafeAreaInsets.bottom,
+                                            width: view.frame.width,
+                                            height: (view.frame.height / 10)))
         button.center.x = view.center.x
         button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .highlighted)
@@ -310,9 +321,9 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
             return false
         }
         
-        func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-            return UIInterfaceOrientationMask.landscape
-        }
+//        func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//            return UIInterfaceOrientationMask.landscape
+//        }
         
         
         startLocationTimer()
@@ -329,14 +340,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         locationManager.getGPSFromVideo()
     }
     
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscapeLeft
-        
-    }
+
     
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return .landscapeLeft
