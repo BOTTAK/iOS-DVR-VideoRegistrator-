@@ -167,7 +167,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     
     // MARK: Video
     private let videoManager = VideoManager()
-    open var maximumDuration = 600.0
+    open var maximumDuration = 2400.0
     open var currentDuration = 16.0
     private func stopCaptureAndTrim() {
         recordingInfoLabel.changeTextAndAnimate(text: "Creating video")
