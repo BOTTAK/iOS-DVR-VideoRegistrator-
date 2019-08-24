@@ -12,7 +12,6 @@ target 'iOS-RecordVideo' do
   pod 'Kingfisher'
   pod 'LFLiveKit'
   pod 'SwiftyJSON'
-  pod 'MediaWatermark'
   pod 'SVProgressHUD'
   pod 'Fabric'
   pod 'Crashlytics'

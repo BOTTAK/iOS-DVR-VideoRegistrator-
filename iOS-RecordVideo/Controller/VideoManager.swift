@@ -8,7 +8,6 @@
 
 import AVFoundation
 import UIKit
-import MediaWatermark
 
 class VideoManager {
     var service: VideoOverlayService?
@@ -104,43 +103,6 @@ class VideoManager {
         let rangeStart = CMTime(seconds: startTime, preferredTimescale: defaultTimeScale)
         let rangeEnd = CMTime(seconds: endTime, preferredTimescale: defaultTimeScale)
         return CMTimeRangeMake(start: rangeStart, duration: rangeEnd)
-    }
-    
-    private func addLabels(toVideo url: URL, labelsText: [String], completion: @escaping (Result<URL, Error>) -> Void) {
-        if let item = MediaItem(url: url) {
-            let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
-                              NSAttributedString.Key.font: UIFont.systemFont(ofSize: 35)]
-            
-            DispatchQueue.main.async {
-                let lattitudeattrStr = NSAttributedString(string: labelsText[0], attributes: attributes)
-                let longtitudeattrStr = NSAttributedString(string: labelsText[1], attributes: attributes)
-                let speedattrStr = NSAttributedString(string: labelsText[2], attributes: attributes)
-                let dateatrStr = NSAttributedString(string: labelsText[3], attributes: attributes)
-                
-                let firstElement = MediaElement(text: lattitudeattrStr)
-                firstElement.frame = CGRect(x: 0, y: 0, width: item.size.width, height: 50)
-                
-                let secondElement = MediaElement(text: longtitudeattrStr)
-                secondElement.frame = CGRect(x: 0, y: 50, width: item.size.width, height: 50)
-                
-                let thirdElement = MediaElement(text: speedattrStr)
-                thirdElement.frame = CGRect(x: 0, y: 100, width: item.size.width, height: 50)
-                
-                let forthElement = MediaElement(text: dateatrStr)
-                thirdElement.frame = CGRect(x: 0, y: 150, width: item.size.width, height: 50)
-                
-                item.add(elements: [firstElement, secondElement, thirdElement, forthElement])
-                
-                let mediaProcessor = MediaProcessor()
-                mediaProcessor.processElements(item: item) { (result, error) in
-                    if error != nil {
-                        completion(.failure(error!))
-                    } else {
-                        completion(.success(result.processedUrl!))
-                    }
-                }
-            }
-        }
     }
 }
 
