@@ -2,8 +2,8 @@
 //  VideoModel.swift
 //  iOS-RecordVideo
 //
-//  Created by Владимир Королев on 27/07/2019.
-//  Copyright © 2019 VladimirBrejcha. All rights reserved.
+//  Created by BOTTAK on 27/07/2019.
+//  Copyright © 2019 BOTTAK. All rights reserved.
 //
 
 import Foundation

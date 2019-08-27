@@ -2,8 +2,8 @@
 //  MainViewController.swift
 //  iOS-RecordVideo
 //
-//  Created by Владимир Королев on 20/07/2019.
-//  Copyright © 2019 VladimirBrejcha. All rights reserved.
+//  Created by BOTTAK on 20/07/2019.
+//  Copyright © 2019 BOTTAK. All rights reserved.
 //
 
 import UIKit
@@ -57,6 +57,7 @@ final class MainViewController: UIViewController {
         imagePicker.cameraCaptureMode = .video
         imagePicker.cameraFlashMode = .off
         imagePicker.showsCameraControls = false
+        imagePicker.videoMaximumDuration = 2400.0
 //        imagePicker.modalPresentationStyle = .popover
         
         

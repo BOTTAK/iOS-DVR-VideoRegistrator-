@@ -3,7 +3,7 @@
 //  iOS-RecordVideo
 //
 //  Created by BOTTAK on 8/22/19.
-//  Copyright © 2019 VladimirBrejcha. All rights reserved.
+//  Copyright © 2019 BOTTAK. All rights reserved.
 //
 
 import UIKit

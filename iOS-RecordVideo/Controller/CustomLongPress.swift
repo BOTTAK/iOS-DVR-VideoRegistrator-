@@ -2,8 +2,8 @@
 //  CustomLongPress.swift
 //  iOS-RecordVideo
 //
-//  Created by Владимир Королев on 01/08/2019.
-//  Copyright © 2019 VladimirBrejcha. All rights reserved.
+//  Created by BOTTAK on 01/08/2019.
+//  Copyright © 2019 BOTTAK. All rights reserved.
 //
 
 import UIKit

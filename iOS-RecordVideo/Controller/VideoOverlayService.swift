@@ -2,7 +2,7 @@
 //  VideoOverlayService.swift
 //  TestAVMutableVideoComposition
 //
-//  Created by Alexey on 21/08/2019.
+//  Created by BOTTAK on 21/08/2019.
 //  Copyright © 2019 BOTTAK. All rights reserved.
 //
 

@@ -2,8 +2,8 @@
 //  VideoPreview.swift
 //  iOS-RecordVideo
 //
-//  Created by Владимир Королев on 03/08/2019.
-//  Copyright © 2019 VladimirBrejcha. All rights reserved.
+//  Created by BOTTAK on 03/08/2019.
+//  Copyright © 2019 BOTTAK. All rights reserved.
 //
 
 import UIKit
