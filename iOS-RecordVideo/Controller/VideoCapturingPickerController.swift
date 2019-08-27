@@ -342,10 +342,10 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     
 
     
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .landscapeLeft
-        
-    }
+//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+//        return .landscapeLeft
+//        
+//    }
     
     
     
