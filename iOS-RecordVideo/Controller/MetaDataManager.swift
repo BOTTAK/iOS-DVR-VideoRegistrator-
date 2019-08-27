@@ -54,10 +54,11 @@ class MetaDataManager: NSObject {
         metadata.keySpace = AVMetadataKeySpace.quickTimeMetadata
         metadata.key = AVMetadataKey.quickTimeMetadataKeyLocationISO6709 as NSString
         metadata.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
-        metadata.extraAttributes = [AVMetadataExtraAttributeKey.info: currentLocation.speed.description]
+        let kmSpeed = currentLocation.speed * 3.6
+        metadata.extraAttributes = [AVMetadataExtraAttributeKey.info: kmSpeed.description]
         metadata.value = "\(currentLocation.coordinate.latitude)+\(currentLocation.coordinate.longitude)+\(currentLocation.altitude)" as NSString
         print(metadata.value)
-        print(metadata.extraAttributes)
+        print("SPEED \(metadata.extraAttributes)")
         return metadata
     }
     
