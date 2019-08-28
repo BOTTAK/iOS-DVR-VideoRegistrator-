@@ -12,7 +12,7 @@ import AVFoundation
 
 class VideoOverlayService {
     
-    func addOverlayToVideo(videoUrl: URL, duration: Double, outputUrl: URL, type: AVFileType, meta: (AVMetadataItem, String), texts: [(start: Double, duration: Double, text: String)], progress progressClosure: @escaping (_ progress: Float) -> (), completion: @escaping (_ url: URL?) -> (), failure: @escaping (_ error: Swift.Error?) -> ()) {
+    func addOverlayToVideo(videoUrl: URL, duration: Double, outputUrl: URL, type: AVFileType, meta: [AVMetadataItem], texts: [(start: Double, duration: Double, text: String)], progress progressClosure: @escaping (_ progress: Float) -> (), completion: @escaping (_ url: URL?) -> (), failure: @escaping (_ error: Swift.Error?) -> ()) {
         let composition = AVMutableComposition()
         
         let vidAsset = AVURLAsset(url: videoUrl as URL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
@@ -78,14 +78,7 @@ class VideoOverlayService {
         assetExport?.videoComposition = layerComposition
         assetExport?.outputFileType = type
         assetExport?.outputURL = outputUrl
-        
-        let dateMetadata = AVMutableMetadataItem()
-        dateMetadata.keySpace = AVMetadataKeySpace.quickTimeMetadata
-        dateMetadata.key = AVMetadataKey.quickTimeMetadataKeyCreationDate as NSCopying & NSObjectProtocol
-        dateMetadata.identifier = AVMetadataIdentifier.quickTimeMetadataCreationDate
-        dateMetadata.value = meta.1 as NSCopying & NSObjectProtocol
-        
-        assetExport?.metadata = [meta.0, dateMetadata]
+        assetExport?.metadata = meta
         let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timer: Timer) in
             if let progress = assetExport?.progress {
                 progressClosure(progress)

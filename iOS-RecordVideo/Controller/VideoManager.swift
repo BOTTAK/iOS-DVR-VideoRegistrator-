@@ -14,7 +14,7 @@ class VideoManager {
     private var dateFormatter = DateFormatter()
     
     func
-        trimVideo(sourceURL: URL, duration: Double, location: AVMetadataItem, labels: [String], startTime: Date, geolocationStorage: GeolocationStorage, date: String, completion completionClosure: @escaping (Result<URL, Error>)->Void) {
+        trimVideo(sourceURL: URL, duration: Double, location: [AVMetadataItem], labels: [String], startTime: Date, geolocationStorage: GeolocationStorage, date: String, completion completionClosure: @escaping (Result<URL, Error>)->Void) {
         
         let outputUrl = FileManager.createNewFilePathOutsideFolder(fileName: videoName)
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
@@ -33,7 +33,7 @@ class VideoManager {
         
         let service = VideoOverlayService()
         service.addOverlayToVideo(videoUrl: sourceURL, duration: duration,
-                                  outputUrl: outputUrl, type: AVFileType.mp4, meta: (location, date),
+                                  outputUrl: outputUrl, type: AVFileType.mp4, meta: location,
                                   texts: itemsForService, progress: { (_ progress: Float) in
             print("progress: \(progress)")
         }, completion: {[weak self] (_ url: URL?) in
