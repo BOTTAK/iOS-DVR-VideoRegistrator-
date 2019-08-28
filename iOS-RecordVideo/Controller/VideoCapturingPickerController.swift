@@ -161,7 +161,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     func metadataDidUpdate(_ getGPSFromVideo: CLLocation) {
         longitudeLabel.metadata = getGPSFromVideo.coordinate.longitude.description
         latitudeLabel.metadata = getGPSFromVideo.coordinate.latitude.description
-        speedLabel.metadata = (getGPSFromVideo.speed * 3.6).description
+        speedLabel.metadata = getGPSFromVideo.speed.description
         dateLabel.metadata = getGPSFromVideo.timestamp.description
     }
     
@@ -344,7 +344,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     
 //    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
 //        return .landscapeLeft
-//        
+//
 //    }
     
     

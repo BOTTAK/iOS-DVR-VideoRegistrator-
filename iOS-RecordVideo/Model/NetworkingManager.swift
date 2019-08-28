@@ -64,19 +64,33 @@ final class NetworkingManager {
 
         //        let speed = (asset.metadata.first?.extraAttributes?.values.dropFirst().first as! NSNumber).stringValue // TODO: hardcoded
 
-        let speed = "10"
+
+//        let speed = "10"
+
+        let speed = asset.metadata.first?.extraAttributes?[AVMetadataExtraAttributeKey.init(rawValue: "dataType")] as! NSNumber
+//        let speed = "10"
+
         print("speed - \(speed)")
 
         
         guard let date = asset.metadata[1].value?.description.dropLast(5) else {fatalError()}
+
         print(latitude, longtitude,  date)
         
+
+        print(latitude, longtitude, speed, date)
+
+
         let bearing = "127"
         let accuracy = "1"
 
         let latitudeData = latitude.data(using: .utf8)
         let longtitudeData = longtitude.data(using: .utf8)
+
 //        let speedData = speed.data(using: .utf8)
+
+        let speedData = speed.description.data(using: .utf8)
+
         //        let violationIDData = APIConstants.violationID.data(using: .utf8)
         //        let regNumberData = APIConstants.regNumber.data(using: .utf8)
         let timeData = APIConstants.time.data(using: .utf8)
@@ -86,11 +100,11 @@ final class NetworkingManager {
         let bearingData = bearing.data(using: .utf8)
         let accuracyData = accuracy.data(using: .utf8)
         let attitudeData = attitude.data(using: .utf8)
-        
+
         let httpHeaders = ["Authorization": "Bearer \(token)", "Cache-Control": "no-cache"]
-        
+
         upload(multipartFormData: { (multipartFormData) in
-            
+
             //            multipartFormData.append(violationIDData!, withName: "violations[0][violation_id]")
             //            multipartFormData.append(regNumberData!, withName: "violations[0][reg_number]")
             multipartFormData.append(streetSideData!, withName: "street_side")
@@ -107,16 +121,16 @@ final class NetworkingManager {
 
         }, to: APIConstants.uploadVideoURL,
            headers: httpHeaders) { (encodingCompletion) in
-            
+
             switch encodingCompletion {
-                
+
             case .success(request: let uploadRequest,
                           streamingFromDisk: let streamingFromDisk,
                           streamFileURL: let streamFileURL):
                 uploadRequest.responseJSON(completionHandler: { (response) in
                     complitionHandler(.success(response))
                 })
-                
+
             case .failure(let error):
                 complitionHandler(.failure(error))
                 
