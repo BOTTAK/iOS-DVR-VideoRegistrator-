@@ -50,6 +50,7 @@ class MetaDataManager: NSObject {
         return (locManager.location ?? CLLocation(), formatterDate)
     }
     
+
     func convertMStoKH() {
         getGPSFromVideo()
         let mySpeed = currentLocation.speed
@@ -57,10 +58,14 @@ class MetaDataManager: NSObject {
     }
     
     func generateMetadata() -> AVMetadataItem {
+
+    func generateMetadata() -> [AVMetadataItem] {
+
         let metadata = AVMutableMetadataItem()
         metadata.keySpace = AVMetadataKeySpace.quickTimeMetadata
         metadata.key = AVMetadataKey.quickTimeMetadataKeyLocationISO6709 as NSString
         metadata.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
+
         var kmSpeed = currentLocation.speed
         metadata.extraAttributes = [AVMetadataExtraAttributeKey.info: kmSpeed.description]
         
@@ -68,10 +73,27 @@ class MetaDataManager: NSObject {
             kmSpeed = 0
         }
        
+
         metadata.value = "\(currentLocation.coordinate.latitude)+\(currentLocation.coordinate.longitude)+\(currentLocation.altitude)" as NSString
         print(metadata.value)
-        print("SPEED \(metadata.extraAttributes)")
-        return metadata
+        
+        let metadataSpeed = AVMutableMetadataItem()
+        metadataSpeed.keySpace = .quickTimeMetadata
+        metadataSpeed.key = AVMetadataKey.quickTimeMetadataKeyTitle as NSString
+        metadataSpeed.identifier = AVMetadataIdentifier.quickTimeMetadataTitle
+//        let kmSpeed = (currentLocation.speed * 3.6)
+        metadataSpeed.value = "\(kmSpeed)" as NSString
+        print(metadataSpeed.value)
+        
+        let dateMetadata = AVMutableMetadataItem()
+        dateMetadata.keySpace = AVMetadataKeySpace.quickTimeMetadata
+        dateMetadata.key = AVMetadataKey.quickTimeMetadataKeyCreationDate as NSString
+        dateMetadata.identifier = AVMetadataIdentifier.quickTimeMetadataCreationDate
+        dateMetadata.value = currentLocation.timestamp.description as NSString
+        print(dateMetadata.value)
+        
+        let metadataArray = [metadata, metadataSpeed, dateMetadata]
+        return metadataArray
     }
     
     
@@ -140,3 +162,4 @@ extension MetaDataManager: CLLocationManagerDelegate {
     }
 }
 
+}
