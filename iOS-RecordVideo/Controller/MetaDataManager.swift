@@ -61,7 +61,9 @@ class MetaDataManager: NSObject {
         metadataSpeed.keySpace = .quickTimeMetadata
         metadataSpeed.key = AVMetadataKey.quickTimeMetadataKeyTitle as NSString
         metadataSpeed.identifier = AVMetadataIdentifier.quickTimeMetadataTitle
-        let kmSpeed = (currentLocation.speed * 3.6)
+        var speed = currentLocation.speed
+        if speed < 0 { speed = 0 }
+        let kmSpeed = (speed * 3.6)
         metadataSpeed.value = "\(kmSpeed)" as NSString
         print(metadataSpeed.value)
         
