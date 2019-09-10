@@ -79,9 +79,9 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
             recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
             recordingWaitingTimerLabel.showTimer(seconds: Int(currentDuration))
             DispatchQueue.main.asyncAfter(deadline: .now()) {
-                let play = Sound()
-                play.playSound()
-                print(play)
+//                let play = Sound()
+//                play.playSound()
+//                print(play)
             }
             Timer.scheduledTimer(withTimeInterval: currentDuration, repeats: false) { (timer) in
                 self.stopCaptureAndTrim()

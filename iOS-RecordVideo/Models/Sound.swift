@@ -8,6 +8,7 @@
 
 import Foundation
 import AudioToolbox
+import AVFoundation
 
 enum SoundExtension : String{
     case caf
@@ -15,13 +16,39 @@ enum SoundExtension : String{
     case wav
 }
 
-let  shortRing = "reload4"
+
+
+
 
 class Sound {
     
+    
+    //MARK: - Outlets
+    let  shortRing = "reload4"
     var notificationSoundLookupTable = [String: SystemSoundID]()
     var shouldPlaySoundEffects = true
+    var audioPlayer: AVPlayer?
+    var bombSoundEffect: AVAudioPlayer?
     
+    
+    //MARK: - Play function
+    
+    func playNotificationSound() {
+        guard let soundURL = Bundle.main.url(forResource: shortRing, withExtension: "wav") else { return }
+        audioPlayer = AVPlayer(url: soundURL as URL)
+        audioPlayer?.play()
+    }
+    
+    func prepareAudio() {
+        let path = Bundle.main.path(forResource: "reload4", ofType: "wav")
+        let url = URL(fileURLWithPath: path!)
+        do {
+            bombSoundEffect = try? AVAudioPlayer(contentsOf: url)
+            bombSoundEffect?.play()
+        } catch {
+            print("error \(error)")
+        }
+    }
     
     func playSound() {
         play(sound: shortRing, ofType: .wav)
@@ -71,5 +98,8 @@ class Sound {
     deinit {
         self.disposeSoundIDs()
     }
+    
+    
+    
 }
 

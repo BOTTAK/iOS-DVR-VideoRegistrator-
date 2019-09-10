@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "iconfinder_f-check_256_282474-1.png",
       "scale" : "1x"
     },
     {
@@ -11,6 +12,7 @@
     },
     {
       "idiom" : "universal",
+      "filename" : "iconfinder_f-check_256_282474-2.png",
       "scale" : "3x"
     }
   ],
