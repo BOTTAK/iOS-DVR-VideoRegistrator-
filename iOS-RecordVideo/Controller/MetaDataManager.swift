@@ -56,8 +56,7 @@ class MetaDataManager: NSObject {
         let mySpeed = currentLocation.speed
         let kMH = mySpeed * 3.6
     }
-    
-    func generateMetadata() -> AVMetadataItem {
+
 
     func generateMetadata() -> [AVMetadataItem] {
 
@@ -66,12 +65,12 @@ class MetaDataManager: NSObject {
         metadata.key = AVMetadataKey.quickTimeMetadataKeyLocationISO6709 as NSString
         metadata.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
 
-        var kmSpeed = currentLocation.speed
-        metadata.extraAttributes = [AVMetadataExtraAttributeKey.info: kmSpeed.description]
+//        var kmSpeed = currentLocation.speed
+//        metadata.extraAttributes = [AVMetadataExtraAttributeKey.info: kmSpeed.description]
         
-        if kmSpeed < 0 {
-            kmSpeed = 0
-        }
+//        if kmSpeed < 0 {
+//            kmSpeed = 0
+//        }
        
 
         metadata.value = "\(currentLocation.coordinate.latitude)+\(currentLocation.coordinate.longitude)+\(currentLocation.altitude)" as NSString
@@ -81,7 +80,13 @@ class MetaDataManager: NSObject {
         metadataSpeed.keySpace = .quickTimeMetadata
         metadataSpeed.key = AVMetadataKey.quickTimeMetadataKeyTitle as NSString
         metadataSpeed.identifier = AVMetadataIdentifier.quickTimeMetadataTitle
+
 //        let kmSpeed = (currentLocation.speed * 3.6)
+
+        var speed = currentLocation.speed
+        if speed < 0 { speed = 0 }
+        let kmSpeed = (speed * 3.6)
+
         metadataSpeed.value = "\(kmSpeed)" as NSString
         print(metadataSpeed.value)
         
@@ -139,8 +144,10 @@ class MetaDataManager: NSObject {
     }
     
     
-    
+
 }
+    
+    
 extension MetaDataManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
@@ -162,4 +169,4 @@ extension MetaDataManager: CLLocationManagerDelegate {
     }
 }
 
-}
+

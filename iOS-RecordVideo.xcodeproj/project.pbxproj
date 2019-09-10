@@ -36,6 +36,9 @@
 		FA3B500A230DB3F000E119FB /* VideoOverlayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B5009230DB3F000E119FB /* VideoOverlayService.swift */; };
 		FA3B500D230DB4EB00E119FB /* GeolocationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B500C230DB4EB00E119FB /* GeolocationStorage.swift */; };
 		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
+		FA6FB0E023181CD20069A91F /* notification 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA6FB0DF23181CD20069A91F /* notification 1.wav */; };
+		FA6FB0E223181E5C0069A91F /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FB0E123181E5C0069A91F /* Sound.swift */; };
+		FA6FB0E4231823DC0069A91F /* reload4.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA6FB0E3231823DC0069A91F /* reload4.wav */; };
 		FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */; };
 		FAB75DB1230EA598002CBE87 /* MainPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAB75DB0230EA598002CBE87 /* MainPicker.xib */; };
 		FAB75DB3230EA7D4002CBE87 /* MainViewXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75DB2230EA7D4002CBE87 /* MainViewXib.swift */; };
@@ -69,6 +72,9 @@
 		FA3B500C230DB4EB00E119FB /* GeolocationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeolocationStorage.swift; sourceTree = "<group>"; };
 		FA495CF622EE17D600FF3381 /* MetaDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaDataManager.swift; sourceTree = "<group>"; };
 		FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerViewController.swift; sourceTree = "<group>"; };
+		FA6FB0DF23181CD20069A91F /* notification 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "notification 1.wav"; sourceTree = "<group>"; };
+		FA6FB0E123181E5C0069A91F /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		FA6FB0E3231823DC0069A91F /* reload4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = reload4.wav; sourceTree = "<group>"; };
 		FA8E8DC922DDD080001B780D /* MovieConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieConverter.swift; sourceTree = "<group>"; };
 		FA8E8DCB22DDE12E001B780D /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		FA8E8DCD22DDF3FA001B780D /* CVPixelBuffer+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Copy.swift"; sourceTree = "<group>"; };
@@ -164,6 +170,7 @@
 		FA32309822BC10F500725FCA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FA6FB0DE23181C920069A91F /* Sounds */,
 				FAD0A8F522BA802F004AE55D /* Assets.xcassets */,
 				FAD0A8F722BA802F004AE55D /* LaunchScreen.storyboard */,
 			);
@@ -183,8 +190,18 @@
 			isa = PBXGroup;
 			children = (
 				FA3B500C230DB4EB00E119FB /* GeolocationStorage.swift */,
+				FA6FB0E123181E5C0069A91F /* Sound.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FA6FB0DE23181C920069A91F /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				FA6FB0E3231823DC0069A91F /* reload4.wav */,
+				FA6FB0DF23181CD20069A91F /* notification 1.wav */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 		FAD0A8E222BA802E004AE55D = {
@@ -281,8 +298,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA6FB0E4231823DC0069A91F /* reload4.wav in Resources */,
 				FA75427722EC3A2C00CEEE96 /* LaunchScreen.storyboard in Resources */,
 				FAD0A8F622BA802F004AE55D /* Assets.xcassets in Resources */,
+				FA6FB0E023181CD20069A91F /* notification 1.wav in Resources */,
 				FAB75DB1230EA598002CBE87 /* MainPicker.xib in Resources */,
 				7E95E26922EF7EDF002248F1 /* Main.storyboard in Resources */,
 			);
@@ -379,6 +398,7 @@
 				7E16F5F422E388F1008B158C /* PhotoAlbum.swift in Sources */,
 				7EFC20E522F60E70002ABE95 /* VideoPreview.swift in Sources */,
 				7E936E8122F727A7003846E1 /* FoundationViewController.swift in Sources */,
+				FA6FB0E223181E5C0069A91F /* Sound.swift in Sources */,
 				7E16F5F722E388F1008B158C /* UIViewController+CoreKit.swift in Sources */,
 				7E16F5FC22E4521C008B158C /* CustomPickerViewController.swift in Sources */,
 				7E16F5F822E388F1008B158C /* CVPixelBuffer+Copy.swift in Sources */,

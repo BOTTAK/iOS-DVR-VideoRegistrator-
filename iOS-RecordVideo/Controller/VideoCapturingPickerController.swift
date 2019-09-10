@@ -67,12 +67,22 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         case .left:
             recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
             recordingWaitingTimerLabel.showTimer(seconds: 3)
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                let play = Sound()
+                play.playSound()
+                print(play.playSound())
+            }
             view.isUserInteractionEnabled = false
             self.stopCaptureAndTrim()
         case .right:
             view.isUserInteractionEnabled = false
             recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
             recordingWaitingTimerLabel.showTimer(seconds: Int(currentDuration))
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                let play = Sound()
+                play.playSound()
+                print(play)
+            }
             Timer.scheduledTimer(withTimeInterval: currentDuration, repeats: false) { (timer) in
                 self.stopCaptureAndTrim()
             }
@@ -161,7 +171,12 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     func metadataDidUpdate(_ getGPSFromVideo: CLLocation) {
         longitudeLabel.metadata = getGPSFromVideo.coordinate.longitude.description
         latitudeLabel.metadata = getGPSFromVideo.coordinate.latitude.description
-        speedLabel.metadata = getGPSFromVideo.speed.description
+        var speedKmH = getGPSFromVideo.speed * 3.6
+        if speedKmH < 0 {
+            speedKmH = 0
+        }
+        speedLabel.metadata = speedKmH.description
+//        speedLabel.metadata = getGPSFromVideo.speed.description
         dateLabel.metadata = getGPSFromVideo.timestamp.description
     }
     
@@ -202,7 +217,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                 if numberOfIterations > 0 {
                     numberOfIterations -= 1
                     print(locationArray.count, numberOfIterations)
-                   
+
                     storage.add(record: GeolocationStorage.Record(location: locationArray[locationArray.count - 1 - Int(numberOfIterations)].0,
                                                                   timecode: Date(timeIntervalSinceNow: -numberOfIterations)))
                 } else {
@@ -338,8 +353,12 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         recordingInfoLabel.text = "Recording"
         recordingInfoLabel.alpha = 1.0
         locationManager.getGPSFromVideo()
+
     }
     
+    
+    
+
 
     
 //    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
