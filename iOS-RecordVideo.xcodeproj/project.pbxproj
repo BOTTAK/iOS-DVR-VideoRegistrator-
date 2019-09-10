@@ -33,6 +33,7 @@
 		7EFC20E522F60E70002ABE95 /* VideoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFC20E422F60E70002ABE95 /* VideoPreview.swift */; };
 		FA21FF18230B2A5700EFADB1 /* SwipeNotificationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21FF17230B2A5600EFADB1 /* SwipeNotificationLabel.swift */; };
 		FA21FF1C230B2A6E00EFADB1 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA21FF1B230B2A6E00EFADB1 /* VideoModel.swift */; };
+		FA382F7C232809E900CA153D /* FirstScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA382F7B232809E900CA153D /* FirstScreenViewController.swift */; };
 		FA3B500A230DB3F000E119FB /* VideoOverlayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B5009230DB3F000E119FB /* VideoOverlayService.swift */; };
 		FA3B500D230DB4EB00E119FB /* GeolocationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B500C230DB4EB00E119FB /* GeolocationStorage.swift */; };
 		FA495CF722EE17D600FF3381 /* MetaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA495CF622EE17D600FF3381 /* MetaDataManager.swift */; };
@@ -68,6 +69,7 @@
 		FA32309A22BC119F00725FCA /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		FA32309C22BC11C700725FCA /* UIViewController+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreKit.swift"; sourceTree = "<group>"; };
 		FA32309E22BC120900725FCA /* UIView+CoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CoreKit.swift"; sourceTree = "<group>"; };
+		FA382F7B232809E900CA153D /* FirstScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenViewController.swift; sourceTree = "<group>"; };
 		FA3B5009230DB3F000E119FB /* VideoOverlayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoOverlayService.swift; sourceTree = "<group>"; };
 		FA3B500C230DB4EB00E119FB /* GeolocationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeolocationStorage.swift; sourceTree = "<group>"; };
 		FA495CF622EE17D600FF3381 /* MetaDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaDataManager.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				FA21FF17230B2A5600EFADB1 /* SwipeNotificationLabel.swift */,
 				FAD0A8F022BA802E004AE55D /* RecordVideoViewController.swift */,
 				FA62FCD222BD1F8400F5D4EB /* FileManagerViewController.swift */,
+				FA382F7B232809E900CA153D /* FirstScreenViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				FA21FF18230B2A5700EFADB1 /* SwipeNotificationLabel.swift in Sources */,
 				7E16F5E522E388F1008B158C /* AppDelegate.swift in Sources */,
 				7E16F5E722E388F1008B158C /* RecordVideoViewController.swift in Sources */,
+				FA382F7C232809E900CA153D /* FirstScreenViewController.swift in Sources */,
 				7E8E8DA022E9B64000707D76 /* NameGenerator.swift in Sources */,
 				7E16F5E922E388F1008B158C /* FileManagerViewController.swift in Sources */,
 				7E16F5EC22E388F1008B158C /* MainViewController.swift in Sources */,
