@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import CoreLocation
+import AudioToolbox
 
 extension UIGestureRecognizer {
     class func createSwipeGesture(target: UIViewController, action: Selector, direction: UISwipeGestureRecognizer.Direction) -> UISwipeGestureRecognizer {
@@ -39,10 +40,24 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     }
     // Right
     private var swipeRightRecognizer: UISwipeGestureRecognizer!
-    @objc func swipeRight() {
+    @objc func swipeRight(_ sender: UISwipeGestureRecognizer) {
+//        switch sender.state {
+//        case .began:
+//            print("began")
+//        case .changed:
+//            print("changed")
+//        case .ended:
+//            print("ended")
+//        case .failed, .cancelled:
+//            print("failed")
+//        default:
+//            break
+//        }
+        
         mainInfoLabel.changeTextAndAnimate(text: "Right")
         swipeEnded = true
         swipeSide = .right
+//        AudioServicesPlaySystemSound(1003)
     }
     // Down
     private var swipeDownRecognizer: UISwipeGestureRecognizer!
@@ -73,15 +88,21 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                 print(play.playSound())
             }
             view.isUserInteractionEnabled = false
+            AudioPlayer.shared.playSound(AudioPlayer.Sound.reload)
             self.stopCaptureAndTrim()
         case .right:
             view.isUserInteractionEnabled = false
             recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
             recordingWaitingTimerLabel.showTimer(seconds: Int(currentDuration))
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-//                let play = Sound()
-//                play.playSound()
-//                print(play)
+//            DispatchQueue.main.async {
+                let play = Sound()
+                play.playNotificationSound()
+                print(play.audioPlayer as Any)
+//            }
+
+            Timer.scheduledTimer(withTimeInterval: currentDuration - 3, repeats: false) { (_ timer: Timer) in
+                AudioPlayer.shared.playSound(AudioPlayer.Sound.reload)
+                
             }
             Timer.scheduledTimer(withTimeInterval: currentDuration, repeats: false) { (timer) in
                 self.stopCaptureAndTrim()
@@ -90,6 +111,9 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
             view.isUserInteractionEnabled = false
             recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
             recordingWaitingTimerLabel.showTimer(seconds: Int(currentDuration / 2))
+            Timer.scheduledTimer(withTimeInterval: currentDuration / 2 - 3, repeats: false) { (_ timer: Timer) in
+                AudioPlayer.shared.playSound(AudioPlayer.Sound.reload)
+            }
             Timer.scheduledTimer(withTimeInterval: currentDuration / 2, repeats: false) { (timer) in
                 self.stopCaptureAndTrim()
             }

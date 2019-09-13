@@ -34,7 +34,7 @@ class Sound {
     //MARK: - Play function
     
     func playNotificationSound() {
-        guard let soundURL = Bundle.main.url(forResource: shortRing, withExtension: "wav") else { return }
+        guard let soundURL = Bundle.main.url(forResource: "reload4", withExtension: "wav") else { return }
         audioPlayer = AVPlayer(url: soundURL as URL)
         audioPlayer?.play()
     }

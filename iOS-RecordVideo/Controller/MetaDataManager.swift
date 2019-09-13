@@ -30,6 +30,7 @@ class MetaDataManager: NSObject {
     override init() {
         super.init()
         locManager.delegate = self
+//        locManager.desiredAccuracy = kCLLocationAccuracyBest
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
         getGPSFromVideo()
     }
@@ -163,6 +164,8 @@ extension MetaDataManager: CLLocationManagerDelegate {
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
+//            let accuracy = location.horizontalAccuracy
+//            guard accuracy < 3 else { return }
             self.geolocationStorage?.add(record: GeolocationStorage.Record(location: location, timecode: Date()))
             print("location:: \(location)")
         }
