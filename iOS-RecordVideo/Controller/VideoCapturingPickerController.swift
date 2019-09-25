@@ -24,6 +24,13 @@ extension UIGestureRecognizer {
 // MARK: Controller
 class VideoCapturingPickerController: UIImagePickerController, UIGestureRecognizerDelegate, LongPressDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SettingsDelegate, MetaDataDelegate {
     
+   
+    
+    
+    
+    
+    var isRecording = false
+    var start = Date()
     // MARK: Gesture recognizers
     enum SwipeSide {
         case left
@@ -77,19 +84,25 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     }
     // LongPressDelegate
     func gestureDidEnd() {
+        let recordingTime = start.timeIntervalSinceNow
         recordingWaitingTimerLabel.changeTextAndAnimate(text: "Stop")
+        
         switch swipeSide {
         case .left:
-            recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
-            recordingWaitingTimerLabel.showTimer(seconds: 3)
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                let play = Sound()
-                play.playSound()
-                print(play.playSound())
+            if recordingTime < -currentDuration {
+                recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
+                recordingWaitingTimerLabel.showTimer(seconds: 3)
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    let play = Sound()
+                    play.playSound()
+                    print(play.playSound())
+                }
+                view.isUserInteractionEnabled = false
+                AudioPlayer.shared.playSound(AudioPlayer.Sound.reload)
+                self.stopCaptureAndTrim()
+                start = Date()
+                isRecording = true
             }
-            view.isUserInteractionEnabled = false
-            AudioPlayer.shared.playSound(AudioPlayer.Sound.reload)
-            self.stopCaptureAndTrim()
         case .right:
             view.isUserInteractionEnabled = false
             recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
@@ -108,6 +121,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                 self.stopCaptureAndTrim()
             }
         case .down:
+            if recordingTime < -2 * currentDuration {
             view.isUserInteractionEnabled = false
             recordingInfoLabel.changeTextAndAnimate(text: "Please wait")
             recordingWaitingTimerLabel.showTimer(seconds: Int(currentDuration / 2))
@@ -116,6 +130,9 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
             }
             Timer.scheduledTimer(withTimeInterval: currentDuration / 2, repeats: false) { (timer) in
                 self.stopCaptureAndTrim()
+                }
+            start = Date()
+               isRecording = true
             }
         case .none:
             return
@@ -160,6 +177,8 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     private var mainInfoLabel = SwipeNotificationLabel()
     private var recordingWaitingTimerLabel = SwipeNotificationLabel()
     private var recordingInfoLabel = SwipeNotificationLabel()
+    
+    
     // Setup
     fileprivate func addLabels() {
         longitudeLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 15)
@@ -176,12 +195,17 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         view.addSubview(recordingWaitingTimerLabel)
         recordingInfoLabel.frame = CGRect(x: 0, y: 6 * (view.frame.height / 15), width: view.frame.width, height: view.frame.height / 15)
         view.addSubview(recordingInfoLabel)
+        
+        
+        view.addSubview(settingsButton)
+        
     }
     
     // MARK: Location and metadata
     private let locationManager = MetaDataManager()
     var storedLocationDataArray: [(CLLocation, String)] = []
     var locationTimer: Timer?
+    
     func startLocationTimer() {
         locationTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(locationTimerDidTick), userInfo: nil, repeats: true)
     }
@@ -191,6 +215,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
             storedLocationDataArray.removeFirst()
         }
         storedLocationDataArray.append(locationManager.getLocation())
+        metadataDidUpdate(locationManager.getLocation().0)
     }
     func metadataDidUpdate(_ getGPSFromVideo: CLLocation) {
         longitudeLabel.metadata = getGPSFromVideo.coordinate.longitude.description
@@ -213,7 +238,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         view.isUserInteractionEnabled = true
         toSave = true
         print(currentDuration)
-        stopVideoCapture()
+//        stopVideoCapture()
     }
     
     //MARK: - Outlets
@@ -223,6 +248,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     private var toSave = false
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         view.isUserInteractionEnabled = true
+        
         if toSave {
             guard let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL else {
                 UIHelper.showError(errorMessage: "Error parsing info for an URL", controller: self)
@@ -254,6 +280,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                                            date: dateLabel.metadata) { result in
                                             switch result {
                                             case let .success(video):
+                                                
                                                 let asset = AVURLAsset(url: video, options: [AVURLAssetPreferPreciseDurationAndTimingKey: true])
                                                 guard let exportSession = AVAssetExportSession(asset: asset,
                                                                                                presetName: AVAssetExportPresetPassthrough) else { fatalError() }
@@ -283,6 +310,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                                                                                             #selector(self.video(_:didFinishSavingWithError:contextInfo:)),
                                                                                             nil)
                                                         print("Successful! \(correctURL)")
+                                                        self.currentDuration = self.settingDuration
                                                     default:
                                                         fatalError()
                                                     }
@@ -291,6 +319,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
                                                 UIHelper.showError(errorMessage: "Error creating video - \(error.localizedDescription)", controller: self)
                                             }
                                             self.currentDuration = self.settingsViewController.settingPickerDuration
+                                            
                     }
                     startVideoCapture()
                     recordingInfoLabel.text = "Recording"
@@ -318,10 +347,7 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
     // MARK: Settings
     // Settings button
     private var settingsButton: UIButton {
-        let button = UIButton(frame: CGRect(x: 0,
-                                            y: view.frame.height - view.frame.height / 7,
-                                            width: view.frame.width,
-                                            height: (view.frame.height / 7)))
+        let button = UIButton(frame: CGRect(x: view.frame.width - 50, y: 4 * (view.frame.height / 15), width: 70, height: 30))
         button.center.x = view.center.x
         button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040768046)
         button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .highlighted)
@@ -335,11 +361,60 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         let settingsController = settingsViewController
         present(settingsController, animated: true, completion: nil)
     }
+    
+    var settingDuration: Double = 0
+    
     private let settingsViewController = UIHelper.storyboard.instantiateViewController(withIdentifier: SettingsViewController.self) as! SettingsViewController
     func settingsDidChange(_ settingPickerQuility: UIImagePickerController.QualityType,
                            _ settingPickerDuration: TimeInterval, _ settingMicrophone: String) {
         currentDuration = settingPickerDuration
+        settingDuration = settingPickerDuration
         videoQuality = settingPickerQuility
+    }
+    var timer: Timer?
+    var timerSound: Timer?
+    var record = false {
+        didSet {
+            if self.record {
+                currentDuration += 20
+//                timer.invalidate()
+                setTimer()
+            }
+        }
+    }
+    func setTimer() {
+        if timer == nil {
+            view.isUserInteractionEnabled = false
+            timerSound = Timer.scheduledTimer(timeInterval: 17, target: self, selector: #selector(sound), userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(stopCapture), userInfo: nil, repeats: false)
+            
+            
+        } else {
+            timer?.invalidate()
+            timerSound?.invalidate()
+            view.isUserInteractionEnabled = false
+            timerSound = Timer.scheduledTimer(timeInterval: 17, target: self, selector: #selector(sound), userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(stopCapture), userInfo: nil, repeats: false)
+            
+        }
+    }
+    
+    @objc func stopCapture() {
+        
+        stopVideoCapture()
+//
+    }
+    
+    @objc func sound() {
+        view.isUserInteractionEnabled = true
+        self.recordingWaitingTimerLabel.showTimer(seconds: 3)
+//        DispatchQueue.main.asyncAfter(deadline: .now()) {
+//            let play = Sound()
+//            play.playSound()
+//            print(play.playSound())
+//        }
+        AudioPlayer.shared.playSound(AudioPlayer.Sound.reload)
+        //
     }
     
     // MARK: Delegates
@@ -366,9 +441,12 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
         
         
         startLocationTimer()
-        view.addSubview(settingsButton)
+//        view.addSubview(settingsButton)
+//        view.bringSubviewToFront(settingsButton)
         addDelegates()
     }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -380,7 +458,14 @@ class VideoCapturingPickerController: UIImagePickerController, UIGestureRecogniz
 
     }
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isRecording {
+            record = true
+        }
+        
+        
+
+    }
     
 
 
