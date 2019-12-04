@@ -10,3 +10,12 @@ There are also settings in which you can set the duration of the recorded video,
 
 The main thing that is interesting here in terms of development is the overlay of dynamic data on the final visible file. In particular, mutable text.
 
+
+To work, do the following:
+
+Open Terminal
+
+cd PATH_TO_YOUR_PROJECT_FOLDER
+pod init
+pod install
+Double click on the Xcode workspace to open the project
